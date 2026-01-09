@@ -1,0 +1,105 @@
+% !TeX root = main.tex
+\mode<presentation>
+
+%% Layout Options 
+% Outer Theme Options
+\DeclareOptionBeamer{frametitlemargin}{\PassOptionsToPackage{frametitlemargin={#1}}{beamerouterthemegoethe}}
+\DeclareOptionBeamer{framefootermargin}{\PassOptionsToPackage{framefootermargin={#1}}{beamerouterthemegoethe}}
+
+% Inner Theme Options
+\DeclareOptionBeamer{titleheight}{\PassOptionsToPackage{titleheight=#1}{beamerinnerthemegoethe}}
+\DeclareOptionBeamer{titledepth}{\PassOptionsToPackage{titledepth=#1}{beamerinnerthemegoethe}}
+\DeclareOptionBeamer{titlemargin}{\PassOptionsToPackage{titlemargin=#1}{beamerinnerthemegoethe}}
+\DeclareOptionBeamer{centertitle}{\PassOptionsToPackage{centertitle}{beamerinnerthemegoethe}}
+\DeclareOptionBeamer{sectionheight}{\PassOptionsToPackage{sectionheight=#1}{beamerinnerthemegoethe}}
+\DeclareOptionBeamer{logo}{\PassOptionsToPackage{logo={#1}}{beamerinnerthemegoethe}}
+\DeclareOptionBeamer{nologo}{\PassOptionsToPackage{nologo}{beamerinnerthemegoethe}}
+\DeclareOptionBeamer{logowidth}{\PassOptionsToPackage{logowidth=#1}{beamerinnerthemegoethe}}
+\DeclareOptionBeamer{centerlogo}{\PassOptionsToPackage{centerlogo}{beamerinnerthemegoethe}}
+
+% Color Theme Options
+\DeclareOptionBeamer{ttlabcolors}{\PassOptionsToPackage{ttlabcolors}{beamercolorthemegoethe}}
+\DeclareOptionBeamer{materialcolors}{\PassOptionsToPackage{materialcolors}{beamercolorthemegoethe}}
+\DeclareOptionBeamer{alphabetcolors}{\PassOptionsToPackage{alphabetcolors}{beamercolorthemegoethe}}
+\DeclareOptionBeamer{greenarmytagecolors}{\PassOptionsToPackage{greenarmytagecolors}{beamercolorthemegoethe}}
+
+% Layout Options
+\DeclareOptionBeamer{nonavigation}{\setbeamertemplate{navigation symbols}{}}
+
+% Import Options%% Common Options
+\newcommand{\polyglossiaLang}{english}
+\DeclareOptionBeamer{english}{
+    \PassOptionsToPackage{english}{babel}%
+    \renewcommand{\polyglossiaLang}{english}%
+}
+\DeclareOptionBeamer{german}{
+    \PassOptionsToPackage{ngerman}{babel}%
+    \renewcommand{\polyglossiaLang}{german}%
+}
+\DeclareOptionBeamer{ngerman}{
+    \PassOptionsToPackage{ngerman}{babel}%
+    \renewcommand{\polyglossiaLang}{german}%
+}
+\ExecuteOptionsBeamer{english}
+
+\RequirePackage{ifthen}
+\DeclareOptionBeamer{localization}{
+    \ifthenelse{\equal{#1}{babel}}
+    {\usepackage{babel}}
+    {\ifthenelse{\equal{#1}{polyglossia}}
+        {
+            \RequirePackage{polyglossia}
+            \setdefaultlanguage[]{\polyglossiaLang}
+        }
+        {\ifthenelse{\equal{#1}{none}}
+            {}
+            {\ClassWarning{beamerthemegoethe}{No valid localization engine was chosen, is this intended? If yes, pass none to disable this warning.}}}
+    }
+}
+\ExecuteOptionsBeamer{localization=babel}
+
+\DeclareOptionBeamer{biblatexbackend}{\PassOptionsToPackage{backend=#1}{biblatex}}
+% \ExecuteOptionsBeamer{biblatexbackend=bibtex}
+
+\DeclareOptionBeamer{minted}{\PassOptionsToPackage{minted}{beamerinnerthemegoetheimports}}
+
+\DeclareOptionBeamer{algorithm}{\PassOptionsToPackage{algorithmicx}{beamerinnerthemegoetheimports}}
+\DeclareOptionBeamer{algorithmicx}{\PassOptionsToPackage{algorithmicx}{beamerinnerthemegoetheimports}}
+
+\DeclareOptionBeamer{tikz}{\PassOptionsToPackage{tikz}{beamerinnerthemegoetheimports}}
+
+\DeclareOptionBeamer{cleveref}{\PassOptionsToPackage{cleveref}{beamerinnerthemegoetheimports}}
+
+\DeclareOptionBeamer{linkref}{\PassOptionsToPackage{linkref}{beamerinnerthemegoetheimports}}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\ProcessOptionsBeamer\relax
+%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\usecolortheme{goethe}
+\usefonttheme{goethe}
+\useoutertheme{goethe}
+\useinnertheme{goethe,goetheimports}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\RequirePackage{fontawesome5} % Font Awesome symbols
+\setbeamertemplate{itemize item}{\adjustbox{max width=\labelwidth}{\faAngleRight}}
+\setbeamertemplate{itemize subitem}{\adjustbox{max width=\labelwidth}{\faAngleRight\hspace*{-1pt}\faAngleRight}}
+\setbeamertemplate{itemize subsubitem}{\adjustbox{max width=\labelwidth}{\faAngleRight\hspace*{-1pt}\faAngleRight\hspace*{-1pt}\faAngleRight}}
+
+% \setbeamertemplate{bibliography item}{\insertbiblabel}
+\setbeamertemplate{bibliography item}{}
+
+\setbeamertemplate{sections/subsections in toc}[sections numbered]
+\setbeamertemplate{sections/subsections in toc shaded}[goethe][60]
+
+\setbeamertemplate{caption}[numbered]
+
+\renewcommand{\And}{\texorpdfstring{\\}{, }}
+
+% No paragraph indent
+\setlength\parindent{0pt}
+\addtolength\parskip{6pt}
+
+\mode<all>

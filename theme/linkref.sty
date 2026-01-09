@@ -1,0 +1,42 @@
+\NeedsTeXFormat{LaTeX2e}
+\ProvidesPackage{linkref}[2024/11/12 v1.0 Link leferences]
+
+\RequirePackage{expl3}
+\RequirePackage{cleveref}
+
+\makeatletter
+\ExplSyntaxOn
+\newcommand{\@linkref}[2][c]{%
+    \ifx#1c%
+        \let\@namecref\namecref%
+        \let\@namecrefs\namecrefs%
+    \else%
+        \let\@namecref\nameCref%
+        \let\@namecrefs\nameCrefs%
+    \fi%
+
+    \tl_set:Nx \l_tmpa_num_refs { \clist_count:n { #2 } }
+    \ifnum\l_tmpa_num_refs=1%
+        \@namecref{#2}~\ref{#2}%
+    \else%
+        \regex_split:nnN {,} {#2} \l_tmpa_ref_split
+        \seq_get_left:NN \l_tmpa_ref_split \l_tmpa_ref_type
+        \@namecrefs{\l_tmpa_ref_type}~\foreach\r [count=\i from 1] in {#2} {%
+            \ref{\r}%
+            \ifnum\i<\l_tmpa_num_refs%
+                ,~%
+            \fi%
+        }%
+    \fi%
+}
+\ExplSyntaxOff
+
+\newcommand{\linkref}[1]{%
+    \@linkref[c]{#1}%
+}
+\newcommand{\Linkref}[1]{%
+    \@linkref[C]{#1}%
+}
+\makeatother
+
+\endinput

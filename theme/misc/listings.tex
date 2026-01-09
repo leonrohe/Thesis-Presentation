@@ -1,0 +1,120 @@
+% !TeX root = ../main.tex
+
+%% NOTE:
+% Using minted inside a frame requires the [fragile] option!
+
+\begin{frame}[fragile]{Code Listing with \texttt{minted}}
+    \noindent\texttt{minted} makes a nice job of typesetting \Linkref{listing:1,listing:2,listing:3,listing:4}, and \Linkref{query:1}.
+
+    \begin{listing}
+        \caption{Example using default \texttt{minted}}
+        \begin{minted}[
+            frame=lines,
+            framesep=2mm,
+        ]{json}
+            {
+                "key": "value"
+            }
+        \end{minted}
+        \begin{minted}[
+            frame=lines,
+            framesep=2mm,
+        ]{C}
+            int main() {
+                printf("hello, world");
+                return 0;
+            }
+        \end{minted}
+        \label{listing:1}
+    \end{listing}
+\end{frame}
+
+\begin{frame}[fragile]{Code Listing with \texttt{minted}}
+    % defines new "Ccode" environment
+    \newminted{C}{autogobble,linenos}
+
+    % Use novalidate to silence Overleaf's syntax check
+    %%begin novalidate
+    %%\begin{noindent}
+    \BeforeBeginEnvironment{Ccode}{%
+        \begin{mdframed}[rightline=false,leftline=false,linewidth=0.6pt,skipabove=4pt]\bgroup%
+    }
+    \AfterEndEnvironment{Ccode}{\egroup\end{mdframed}}
+    %%\end{noindent}
+    %%end novalidate
+
+    \begin{listing}
+        \caption{Example using \texttt{mdframed}}
+        \begin{Ccode}
+int main() {
+    printf("hello, world");
+    return 0;
+}
+        \end{Ccode}
+        \label{listing:2}
+    \end{listing}
+\end{frame}
+
+\begin{frame}[fragile]{Code Listing with \texttt{minted}}
+    % Define an environment for C code
+    \newtcblisting{tcbC}[1][]{
+        % the colors are only for demonstration, not required
+        colback=blue!5!white,
+        colframe=blue!75!black,
+        listing only,
+        left=5mm,
+        enhanced,
+        overlay={\begin{tcbclipinterior}\fill[red!20!blue!20!white] (frame.south west)
+                rectangle ([xshift=5mm]frame.north west);\end{tcbclipinterior}},
+        minted language=C,
+        minted options={numbersep=3mm,autogobble},
+        #1
+    }
+
+    \begin{listing}
+        \caption{Example using \texttt{tcolorbox}}
+        \begin{tcbC}
+            int main() {
+                printf("hello, world");
+                return 0;
+            }
+        \end{tcbC}
+        \label{listing:3}
+    \end{listing}
+\end{frame}
+
+\begin{frame}[fragile]{Code Listing with \texttt{minted}}{Inside a \texttt{tcolorbox}}
+    \begin{listing}
+        \caption{Example using \texttt{tcolorbox}}
+        \inputmintedTcbRed{json}{theme/misc/some.json}
+        \label{listing:4}
+    \end{listing}
+\end{frame}
+
+\begin{frame}[fragile]{Code Listing with \texttt{minted}}{Highlighting Queries}
+    % Define an environment for SQL queries
+    \newtcblisting{tcbSQL}[1][]{
+        % the colors are only for demonstration, not required
+        colback=red!5!white,
+        colframe=red!75!black,
+        listing only,
+        left=5mm,
+        enhanced,
+        sharp corners,
+        leftrule=0pt,
+        rightrule=0pt,
+        overlay={\begin{tcbclipinterior}\fill[red!20!white] (frame.south west)
+                rectangle ([xshift=5mm]frame.north west);\end{tcbclipinterior}},
+        minted language=sql,
+        minted options={numbersep=3mm},
+        #1
+    }
+
+    \begin{query}
+        \caption{Example using \texttt{tcolorbox}}
+        \begin{tcbSQL}
+            FROM table SELECT *;
+        \end{tcbSQL}
+        \label{query:1}
+    \end{query}
+\end{frame}

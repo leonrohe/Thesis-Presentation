@@ -1,0 +1,320 @@
+% !TeX root = main.tex
+\mode<presentation>
+
+\DeclareOptionBeamer{tikz}{
+    %% TikZ und Co. %%
+    \RequirePackage{tikz}
+    \usetikzlibrary{arrows.meta}
+    \usetikzlibrary{arrows}
+    \usetikzlibrary{automata}
+    \usetikzlibrary{babel}
+    \usetikzlibrary{backgrounds}
+    \usetikzlibrary{calc}
+    \usetikzlibrary{calendar}
+    \usetikzlibrary{chains}
+    \usetikzlibrary{decorations.pathmorphing}
+    \usetikzlibrary{decorations.pathreplacing}
+    \usetikzlibrary{er}
+    \usetikzlibrary{fit}
+    \usetikzlibrary{matrix}
+    \usetikzlibrary{mindmap}
+    \usetikzlibrary{patterns.meta}
+    \usetikzlibrary{patterns}
+    \usetikzlibrary{positioning}
+    \usetikzlibrary{scopes}
+    \usetikzlibrary{shadings}
+    \usetikzlibrary{shadows}
+    \usetikzlibrary{shapes.arrows}
+    \usetikzlibrary{shapes.callouts}
+    \usetikzlibrary{shapes.geometric}
+    \usetikzlibrary{shapes.misc}
+    \usetikzlibrary{shapes.multipart}
+    \usetikzlibrary{shapes.symbols}
+    \usetikzlibrary{through}
+    \usetikzlibrary{topaths}
+
+    \RequirePackage[linguistics]{forest}
+
+    \RequirePackage{pgf,pgfplots,etoolbox}
+    \pgfplotsset{compat=newest}
+}
+
+\DeclareOptionBeamer{cleveref}{
+    \RequirePackage[nameinlink, noabbrev]{cleveref}
+    \crefname{part}{part}{parts}
+    \Crefname{part}{Part}{Parts}
+    \crefname{chapter}{chapter}{chapters}
+    \Crefname{chapter}{Chapter}{Chapters}
+    \crefname{section}{section}{sections}
+    \Crefname{section}{Section}{Sections}
+    \crefname{table}{table}{tables}
+    \Crefname{table}{Table}{Tables}
+    \crefname{figure}{figure}{figures}
+    \Crefname{figure}{Figure}{Figures}
+    \crefname{listing}{listing}{listings}
+    \Crefname{listing}{Listing}{Listings}
+    \crefname{algorithm}{algorithm}{algorithms}
+    \Crefname{algorithm}{Algorithm}{Algorithms}
+    \crefname{query}{query}{queries}
+    \Crefname{query}{Query}{Queries}
+    \crefname{appendix}{appendix}{appendices}
+    \Crefname{appendix}{Appendix}{Appendices}
+}
+
+\DeclareOptionBeamer{linkref}{
+    \ExecuteOptionsBeamer{cleveref}
+    \RequirePackage{linkref}
+}
+
+\DeclareOptionBeamer{minted}{
+    \RequirePackage[newfloat=true]{minted}
+    \RequirePackage{mdframed}
+    \RequirePackage{tcolorbox}
+    \tcbuselibrary{minted}
+    \tcbuselibrary{skins}
+}
+
+\DeclareOptionBeamer{algorithmicx}{
+    \RequirePackage{algorithmicx}
+    \RequirePackage{algpseudocode}
+}
+
+\ProcessOptionsBeamer\relax
+
+% Layout
+\RequirePackage{scrhack}
+\RequirePackage{microtype}
+\RequirePackage{relsize}
+
+% Maths
+\RequirePackage{amsmath} % AMS macros
+\RequirePackage{amsthm} % Theorems
+\RequirePackage{mathtools} % amsmath extension, e.g. \coloneqq (:=)
+
+\RequirePackage[np]{numprint} % Pretty print numbers
+\npthousandsep{\,} % Use small space as thousand separator
+\npdecimalsign{\ensuremath{.}} % Use period as decimal sign
+
+% % Fonts, including double stroke and blackboard fonts
+\RequirePackage{amsfonts} % e.g. blackboard letters \mathbb{} 
+% \RequirePackage{amssymb} % could use instead of amsfonts?
+% \RequirePackage{bm} % Bold math fonts
+\RequirePackage{dsfont} % \mathds{} for double stroke fonts
+\RequirePackage[lm]{sfmath} % Sans Serif maths
+\RequirePackage{soul} % Strikeout, underlining etc.
+
+% Graphics and colors
+\RequirePackage{graphicx}
+\RequirePackage{adjustbox}
+\RequirePackage{xcolor} % already loaded by acl package..
+\RequirePackage{tcolorbox}
+
+% Tables (nowadays only tblr)
+\RequirePackage{tabularray}
+\UseTblrLibrary{amsmath}
+\UseTblrLibrary{booktabs}
+\UseTblrLibrary{functional}
+
+% Floats, subfigures
+\RequirePackage{float}
+\RequirePackage{stfloats}
+\RequirePackage{subcaption}
+
+%% Bibliography %%
+\usepackage[
+    style=authoryear-icomp,
+    citestyle=authoryear,
+    maxcitenames=2,
+    natbib=true,
+    backend=biber,
+]{biblatex}
+\DefineBibliographyStrings{german}{%
+    andothers = {et\addabbrvspace al\adddot}
+}
+\DefineBibliographyStrings{ngerman}{%
+    andothers = {et\addabbrvspace al\adddot}
+}
+\DefineBibliographyStrings{english}{%
+    andothers = {et\addabbrvspace al\adddot}
+}
+\DeclareDelimFormat[coloncite]{postnotedelim}{\addcolon}
+\DeclareFieldFormat{postnote}{#1}
+
+\newbibmacro*{coloncite:postnote}{%
+    \iffieldundef{postnote}
+    {\ifbool{cbx:parens}
+        {\bibcloseparen}
+        {}}
+    {\ifbool{cbx:parens}
+        {\setunit{\printdelim[coloncite]{postnotedelim}}}
+        {\setunit{\printdelim{extpostnotedelim}\bibopenparen}}%
+        \printfield[coloncite]{postnote}\bibcloseparen}}
+
+\DeclareCiteCommand{\coloncite}
+{\boolfalse{cbx:parens}}
+{\usebibmacro{citeindex}%
+    \iffirstcitekey
+    {\setcounter{textcitetotal}{1}}
+    {\stepcounter{textcitetotal}\textcitedelim}%
+    \usebibmacro{textcite}}
+{\ifbool{cbx:parens}
+    {\bibcloseparen\global\boolfalse{cbx:parens}}
+    {}}
+{\usebibmacro{coloncite:postnote}}
+
+\newbibmacro*{coloncitep:postnote}{%
+    \iffieldundef{postnote}
+    {}
+    {\setunit{\printdelim[coloncite]{postnotedelim}}%
+        \printfield[coloncite]{postnote}}}
+
+\DeclareCiteCommand{\coloncitep}[\mkbibparens]
+{\usebibmacro{prenote}}
+{\usebibmacro{citeindex}%
+    \usebibmacro{cite}}
+{\multicitedelim}
+{\usebibmacro{coloncitep:postnote}}
+
+% Misc
+\RequirePackage{xurl}
+\PassOptionsToPackage{hyphens}{url}
+\RequirePackage{hyperref}
+\hypersetup{
+    colorlinks=true,
+    anchorcolor=blue,
+    linkcolor=blue,
+    citecolor=blue,
+    filecolor=magenta,
+    urlcolor=blue,
+    % pdfsubject={},
+}
+\RequirePackage{csquotes}
+
+
+%% Commands %%
+\newcommand{\tsf}[1]{\textsf{#1}}
+\newcommand{\ttt}[1]{\texttt{#1}}
+\newcommand{\npp}[1]{\numprint[\%]{#1}}
+
+%% Math Operators %%
+
+% Models
+\DeclareMathOperator{\LSTM}{\ensuremath{\mathsf{LSTM}}}
+\DeclareMathOperator{\BiLSTM}{\ensuremath{\mathsf{BiLSTM}}}
+\DeclareMathOperator{\Linear}{\ensuremath{\mathsf{Linear}}}
+\DeclareMathOperator{\Dropout}{\ensuremath{\mathsf{Dropout}}}
+\DeclareMathOperator{\LayerNorm}{\ensuremath{\mathsf{LayerNorm}}}
+\DeclareMathOperator{\ConvOneD}{\ensuremath{\mathsf{Conv1D}}}
+\DeclareMathOperator{\WordEmbedding}{\ensuremath{\mathsf{WordEmbedding}}}
+\DeclareMathOperator{\CharEmbedding}{\ensuremath{\mathsf{CharEmbedding}}}
+\DeclareMathOperator{\LanguageModel}{\ensuremath{\mathsf{LanguageModel}}}
+\DeclareMathOperator{\SubwordPooling}{\ensuremath{\mathsf{SubwordPooling}}}
+\DeclareMathOperator{\TreeLSTM}{\ensuremath{\mathsf{TreeLSTM}}}
+\DeclareMathOperator{\StackLSTM}{\ensuremath{\mathsf{StackLSTM}}}
+
+% Language Modelling
+\DeclareMathOperator{\similar}{\ensuremath{sim}}
+\DeclareMathOperator{\tokenizer}{\ensuremath{\mathit{tokenize}}}
+\DeclareMathOperator{\embed}{\ensuremath{\mathit{embed}}}
+
+% Misc
+\DeclareMathOperator{\mean}{\ensuremath{\mathit{mean}}}
+\newcommand{\vv}[2][b]{\vec{\vphantom{#1}#2}}
+
+% Performance Measures
+\DeclareMathOperator{\precision}{\ensuremath{\mathit{precision}}}
+\DeclareMathOperator{\recall}{\ensuremath{\mathit{recall}}}
+\DeclareMathOperator{\fone}{\ensuremath{\mathit{F_1}}}
+
+%% Conditionals
+\RequirePackage{ltxcmds}
+
+% Custom float environments using newfloat
+\RequirePackage{newfloat}
+\ltx@ifpackageloaded{minted}{
+    \setminted{
+        fontsize=\footnotesize,
+        linenos,    % number lines
+        autogobble, % autmatically remove indents for better readability
+        breaklines, % break long lines
+        mathescape, % allow math mode in code
+    }
+
+    % Define a tcolorbox environment for code
+    \newtcblisting{tcbMinted}[2][]{
+        enhanced,
+        sharp corners,
+        colback=red!5!white,
+        colframe=red!75!black,
+        left=5mm, top=1mm, bottom=1mm,
+        leftrule=0pt,
+        rightrule=0pt,
+        overlay={%
+            \begin{tcbclipinterior}\fill[red!20!white] (frame.south west) rectangle ([xshift=5mm]frame.north west);\end{tcbclipinterior}%
+        },
+        minted options={numbersep=3mm},
+        minted language=#2,
+        listing only,
+        #1
+    }
+
+    \newtcbinputlisting{\inputmintedTcbRed}[3][]{
+        enhanced,
+        sharp corners,
+        colback=red!5!white,
+        colframe=red!75!black,
+        left=5mm, top=1mm, bottom=1mm,
+        leftrule=0pt, rightrule=0pt,
+        overlay={%
+            \begin{tcbclipinterior}\fill[red!20!white] (frame.south west) rectangle ([xshift=5mm]frame.north west);\end{tcbclipinterior}%
+        },
+        minted options={numbersep=3mm},
+        minted language={#2},
+        listing file={#3},
+        listing only,
+        #1
+    }
+
+    \SetupFloatingEnvironment{listing}{
+        name=Listing,
+        listname=List of Listings,
+        placement=!h,
+    }
+}{
+    \DeclareFloatingEnvironment[
+        name=Listing,
+        listname=List of Listings,
+        placement=!h,
+    ]{listing}
+}
+
+% Load subcaption and setup captions
+\RequirePackage{caption}
+\RequirePackage{subcaption}
+\captionsetup[listing]{position=top} %,skip=0pt
+\floatname{listing}{Listing}
+% \AtEndEnvironment{listing}{\vspace{-14pt}}
+
+\ltx@ifpackageloaded{algorithmicx}{
+    \DeclareFloatingEnvironment[
+        name=Algorithm,
+        listname={List of Algorithms},
+        placement=h,
+    ]{algorithm}
+    \captionsetup[algorithm]{position=top} %,skip=0pt
+    \floatname{algorithm}{Algorithm}
+    % \AtEndEnvironment{algorithm}{\vspace{-14pt}}
+}{}
+
+\DeclareFloatingEnvironment[
+    name=Query,
+    listname={List of Queries},
+    placement=h,
+]{query}
+\captionsetup[query]{position=top} %,skip=0pt
+\floatname{query}{Query}
+% \AtEndEnvironment{query}{\vspace{-14pt}}
+
+\providecommand{\listofqueries}{\listof{query}{\listofqueriescaption}}
+
+\mode<all>

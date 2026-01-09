@@ -1,0 +1,352 @@
+% !TeX root = main.tex
+\mode<presentation>
+
+\DeclareOptionBeamer{titleheight}{\def\beamer@goethe@title@height{#1}}
+\ExecuteOptionsBeamer{titleheight=0.4\paperheight}
+
+\DeclareOptionBeamer{titledepth}{\def\beamer@goethe@title@depth{#1}}
+\ExecuteOptionsBeamer{titledepth=0\paperheight}
+
+\newlength{\beamer@goethe@titlemargin}
+\DeclareOptionBeamer{titlemargin}{\def\beamer@goethe@titlemargin{#1}}
+\ExecuteOptionsBeamer{titlemargin=0.15\paperwidth}
+
+\newif\if@goethe@title@center
+\@goethe@title@centerfalse
+\DeclareOptionBeamer{centertitle}{\@goethe@title@centertrue}
+
+\DeclareOptionBeamer{sectionheight}{\def\beamer@goethe@section@height{#1}}
+\ExecuteOptionsBeamer{sectionheight=0.5\paperheight}
+
+\DeclareOptionBeamer{logo}{\def\beamer@goethe@logo{#1}}
+\ExecuteOptionsBeamer{logo=images/TTLogo-2.pdf}
+
+\DeclareOptionBeamer{logowidth}{\def\beamer@goethe@logo@width{#1}}
+\ExecuteOptionsBeamer{logowidth=0.25\paperwidth}
+
+\newif\if@goethe@logo@use
+\@goethe@logo@usetrue
+\DeclareOptionBeamer{nologo}{\@goethe@logo@usefalse}
+
+\newif\if@goethe@logo@center
+\@goethe@logo@centerfalse
+\DeclareOptionBeamer{centerlogo}{\@goethe@logo@centertrue}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\ProcessOptionsBeamer\relax
+%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\def\beamer@goethe@subtitle@depth{\dimexpr(\paperheight-\beamer@goethe@title@height+2pt)\relax}
+\def\beamer@goethe@title@width{\dimexpr(\paperwidth-\beamer@goethe@titlemargin-\beamer@goethe@titlemargin)\relax}
+
+\RequirePackage{tabularray}
+\UseTblrLibrary{counter}
+\UseTblrLibrary{varwidth} % see: https://github.com/lvjr/tabularray/issues/36
+
+\defbeamertemplate*{title table nosubtitle}{goethe}{%
+    \begin{tblr}{width=\beamer@goethe@title@width,colspec={A}}
+        {\usebeamerfont{title}\inserttitle} \\
+    \end{tblr}
+}
+
+\defbeamertemplate*{title table subtitle}{goethe}{%
+    \begin{tblr}{width=\beamer@goethe@title@width,colspec={A}}
+        {\usebeamerfont{title}\inserttitle}                                \\
+        {\usebeamerfont{subtitle}\usebeamercolor{subtitle}\insertsubtitle} \\
+    \end{tblr}
+}
+
+\defbeamertemplate*{title table}{goethe}{%
+    \SetTblrInner{leftsep={0pt}, rightsep={0pt}, rowsep={1ex}}%
+    \if@goethe@title@center%
+        \NewColumnType{A}{X[c]}%
+    \else%
+        \NewColumnType{A}{X[l]}%
+    \fi%
+    \ifx\insertsubtitle\@empty%
+        \usebeamertemplate{title table nosubtitle}%
+    \else%
+        \usebeamertemplate{title table subtitle}%
+    \fi%
+}
+
+\defbeamertemplate*{author table on title page}{goethe}{%
+    \SetTblrInner{leftsep={0pt}, abovesep={0pt}, belowsep={0pt}, rightsep={0pt}, measure=vbox}%
+\begin{tblr}{width=\beamer@goethe@title@width,colspec={Xr}}%
+    \SetCell[r=2]{l}{\usebeamerfont{author}\insertauthor} & \SetCell{h}{\usebeamerfont{institute}\insertinstitute} \\%
+                                                          & \SetCell{f}{\usebeamerfont{date}\insertdate}           \\%
+\end{tblr}%
+}
+
+\defbeamertemplate*{logo on title page}{goethe}{%
+    \includegraphics[width=\beamer@goethe@logo@width]{\beamer@goethe@logo}%
+}
+
+\defbeamertemplate*{title page}{goethe}[1][]
+{%
+    \vspace{-1.5\baselineskip}%
+    \begin{beamercolorbox}[wd=1\paperwidth,ht=\beamer@goethe@title@height,dp=\beamer@goethe@title@depth,sep=1ex,left]{title}
+        \leftskip=\beamer@goethe@titlemargin%
+        \usebeamertemplate{title table}%
+    \end{beamercolorbox}
+    \vspace{-2pt}
+    \begin{beamercolorbox}[wd=1\paperwidth,left,sep=1ex]{author}
+        \leftskip=\beamer@goethe@titlemargin%
+        \usebeamertemplate{author table on title page}%
+    \end{beamercolorbox}
+    \if@goethe@logo@use
+        \vskip0pt plus 1filll
+        \begin{beamercolorbox}[wd=1\paperwidth,left,sep=0.1ex]{logo on title page}
+            \if@goethe@logo@center\centering\else\leftskip=\beamer@goethe@titlemargin\fi%
+            \usebeamertemplate{logo on title page}
+        \end{beamercolorbox}
+        \vskip0pt plus 1filll
+    \else
+        \vskip1cm plus 1filll%
+    \fi
+}
+
+%% Table of Contents 
+%% Sections, Sub-Sections and Sub-Sub-Sections
+
+% Paragraph skip for entries in TOC
+\defbeamertemplate*{section skip in toc}{goethe}{\setlength{\parskip}{8pt plus 2pt}}
+\defbeamertemplate*{subsection skip in toc}{goethe}{\setlength{\parskip}{2pt plus 1pt}}
+\defbeamertemplate*{subsubsection skip in toc}{goethe}{\setlength{\parskip}{0pt plus 1pt}}
+
+\def\beamer@sectionintoc#1#2#3#4#5{%
+    \ifnum\c@tocdepth>0%
+        \ifnum#4=\beamer@showpartnumber%
+            {
+                \beamer@saveanother%
+                \gdef\beamer@todo{}%
+                \beamer@slideinframe=#1\relax%
+                \expandafter\only\beamer@tocsections{\gdef\beamer@todo{%
+                        \beamer@tempcount=#5\relax%
+                        \advance\beamer@tempcount by\beamer@sectionadjust%
+                        \ifnum\beamer@tempcount>0
+                            \ifnum\beamer@tempcount>\beamer@toclastsection
+                                \def\inserttocsectionnumber{}%
+                            \else
+                                \edef\inserttocsectionnumber{\the\beamer@tempcount}%
+                            \fi
+                        \else
+                            \def\inserttocsectionnumber{}%
+                        \fi%
+                        \def\inserttocsection{\hyperlink{Navigation#3}{#2}}%
+                        \beamer@tocifnothide{\ifnum\c@section=#1\beamer@toc@cs\else\beamer@toc@os\fi}%
+                        {%
+                            \ifbeamer@pausesections\pause\fi%
+                            \usebeamertemplate{section skip in toc}%
+                            {%
+                                \hbox{\vbox{%
+                                        \def\beamer@breakhere{\\}%
+                                        \beamer@tocact{\ifnum\c@section=#1\beamer@toc@cs\else\beamer@toc@os\fi}{section in toc}}}%
+                                \par%
+                            }%
+                        }%
+                    }%
+                }%
+                \beamer@restoreanother%
+            }
+            \beamer@todo%
+        \fi\fi%
+}
+
+\long\def\beamer@subsectionintoc#1#2#3#4#5#6{%
+    \ifnum\c@tocdepth>1%
+        \ifnum#5=\beamer@showpartnumber%
+            {%
+                \beamer@saveanother%
+                \gdef\beamer@todo{}%
+                \beamer@slideinframe=#1\relax%
+                \expandafter\only\beamer@tocsections{\gdef\beamer@todo{%
+                        \ifbeamer@pausesubsections\pause\fi%
+                        \beamer@tempcount=#6%
+                        \advance\beamer@tempcount by\beamer@sectionadjust%
+                        \edef\inserttocsectionnumber{\the\beamer@tempcount}%
+                        \def\inserttocsubsectionnumber{#2}%
+                        \def\inserttocsubsection{\hyperlink{Navigation#4}{#3}}%
+                        \beamer@tocifnothide{\ifnum\c@section=#1\beamer@toc@css\else\beamer@toc@oss\fi}%
+                        {%
+                            \usebeamertemplate{subsection skip in toc}%
+                            \def\beamer@breakhere{\\}%
+                            \beamer@tocact{\ifnum\c@section=#1\ifnum\c@subsection=#2\beamer@toc@css\else\beamer@toc@oss\fi\else\beamer@toc@ooss\fi}{subsection in toc}%
+                        }%
+                    }}%
+                \beamer@restoreanother%
+            }%
+            \beamer@todo%
+        \fi\fi%
+}
+
+\long\def\beamer@subsubsectionintoc#1#2#3#4#5#6#7{%
+    \ifnum\c@tocdepth>2%
+        \ifnum#6=\beamer@showpartnumber%
+            {
+                \beamer@saveanother%
+                \gdef\beamer@todo{}%
+                \beamer@slideinframe=#1\relax%
+                \expandafter\only\beamer@tocsections{\gdef\beamer@todo{%
+                        \ifbeamer@pausesubsections\pause\fi%
+                        \beamer@tempcount=#7%
+                        \advance\beamer@tempcount by\beamer@sectionadjust%
+                        \edef\inserttocsectionnumber{\the\beamer@tempcount}%
+                        \def\inserttocsubsectionnumber{#2}%
+                        \def\inserttocsubsubsectionnumber{#3}%
+                        \def\inserttocsubsubsection{\hyperlink{Navigation#5}{#4}}%
+                        \beamer@tocifnothide{\ifnum\c@section=#1\beamer@toc@csss\else\beamer@toc@osss\fi}%
+                        {%
+                            \usebeamertemplate{subsubsection skip in toc}%
+                            \def\beamer@breakhere{\\}%
+                            \beamer@tocact{\ifnum\c@section=#1\ifnum\c@subsection=#2\ifnum\c@subsubsection=#3\beamer@toc@csss\else\beamer@toc@osss\fi\else\beamer@toc@oosss\fi\else\beamer@toc@ooosss\fi}{subsubsection in toc}%
+                        }%
+                    }}%
+                \beamer@restoreanother%
+            }
+            \beamer@todo%
+        \fi\fi%
+}
+
+%% Agenda Frame Styling
+% Agenda title
+\defbeamertemplate*{agenda title}{goethe}{Agenda}
+
+\defbeamertemplate*{agenda in toc}{goethe}{%
+    \begin{beamercolorbox}[wd=1\paperwidth,ht=\agendaht,dp=\agendadp,left]{agenda in toc}
+        \setlength{\parindent}{\beamer@goethe@titlemargin}%
+        \usebeamercolor{agenda in toc}\usebeamerfont{agenda in toc}%
+        \leftskip=\parindent%
+        \usebeamertemplate{agenda title}%
+    \end{beamercolorbox}
+}
+
+% Skip after agenda title
+\newlength{\agendaskip}\setlength{\agendaskip}{0.5\baselineskip}
+\defbeamertemplate*{agenda skip in toc}{goethe}{\vskip\agendaskip}
+
+% Agend title height & depth
+\newlength{\agendaht}\setlength{\agendaht}{3\baselineskip}
+\newlength{\agendadp}\setlength{\agendadp}{1\baselineskip}
+
+\defbeamertemplate*{section page}{goethe}[1][]{%
+    \usebeamertemplate{agenda in toc}%
+    \usebeamertemplate{agenda skip in toc}%
+    \begin{adjustbox}{max height=\dimexpr\paperheight-2\baselineskip-\agendaht-\agendadp-\agendaskip}%
+        \begin{beamercolorbox}[wd=1\paperwidth,left,#1]{section in toc}
+            \setlength{\parindent}{\beamer@goethe@titlemargin}%
+            \usebeamercolor{section in toc}%
+            \let\hyperlink\@secondoftwo\tableofcontents[sectionstyle=show/shaded,hideallsubsections]%
+        \end{beamercolorbox}%
+    \end{adjustbox}%
+    \vskip1cm plus 1filll%
+}
+\defbeamertemplate{section page}{goethe only current}[1][]{%
+    \usebeamertemplate{agenda in toc}%
+    \usebeamertemplate{agenda skip in toc}%
+    \begin{adjustbox}{max height=\dimexpr\paperheight-2\baselineskip-\agendaht-\agendadp-\agendaskip}%
+        \begin{beamercolorbox}[wd=1\paperwidth,left,#1]{section in toc}
+            \setlength{\parindent}{\beamer@goethe@titlemargin}%
+            \usebeamercolor{section in toc}%
+            \let\hyperlink\@secondoftwo\tableofcontents[sectionstyle=show/hide,subsectionstyle=show/show/hide]%
+        \end{beamercolorbox}%
+    \end{adjustbox}%
+    \vskip1cm plus 1filll%
+}
+\defbeamertemplate{section page}{goethe subsections}[1][]{%
+    \usebeamertemplate{agenda in toc}%
+    \usebeamertemplate{agenda skip in toc}%
+    \begin{adjustbox}{max height=\dimexpr\paperheight-2\baselineskip-\agendaht-\agendadp-\agendaskip}%
+        \begin{beamercolorbox}[wd=1\paperwidth,left,#1]{section in toc}
+            \setlength{\parindent}{\beamer@goethe@titlemargin}%
+            \usebeamercolor{section in toc}%
+            \let\hyperlink\@secondoftwo\tableofcontents[sectionstyle=show/shaded,subsectionstyle=show/show/hide]%
+        \end{beamercolorbox}%
+    \end{adjustbox}%
+    \vskip1cm plus 1filll%
+}
+
+\usepackage{pgfkeys}
+\newif\ifshowsubsections
+\newif\ifonlycurrentsection
+\pgfkeys{
+    /sectionFrame/.is family, /sectionFrame,
+    default/.style = {%
+        show subsections=false,%
+        only current section=false,%
+    },
+    show subsections/.is if=showsubsections,
+    only current section/.is if=onlycurrentsection,
+}
+\newcommand{\sectionFrame}[1][]{%
+    \begingroup%
+    \pgfkeys{/sectionFrame, default, #1}%
+    \setbeamercolor*{background canvas}{parent=section in toc}
+    \setlength{\parindent}{\beamer@goethe@titlemargin}%
+    \begin{frame}[c,plain,noframenumbering]{}
+        \setbeamertemplate{section page}[goethe]%
+        \ifshowsubsections%
+            \setbeamertemplate{section page}[goethe subsections]%
+        \fi%
+        \ifonlycurrentsection%
+            \setbeamertemplate{section page}[goethe only current]%
+        \fi%
+        \sectionpage%
+    \end{frame}%
+    \endgroup%
+}
+\let\sectionAgenda\sectionFrame
+
+%% Subsection page
+\defbeamertemplate*{subsection page}{goethe}[1][]{%
+    \usebeamertemplate{agenda in toc}%
+    \usebeamertemplate{agenda skip in toc}%
+    \begin{adjustbox}{max height=\dimexpr\paperheight-2\baselineskip-\agendaht-\agendadp-\agendaskip}%
+        \begin{beamercolorbox}[wd=1\paperwidth,left,#1]{section in toc}
+            \setlength{\parindent}{\beamer@goethe@titlemargin}%
+            \usebeamercolor{section in toc}%
+            \let\hyperlink\@secondoftwo\tableofcontents[sectionstyle=show/shaded,subsectionstyle=show/shaded/hide]%
+        \end{beamercolorbox}%
+    \end{adjustbox}%
+    \vskip1cm plus 1filll%
+}
+\defbeamertemplate*{subsection page}{goethe only current}[1][]{%
+    \usebeamertemplate{agenda in toc}%
+    \usebeamertemplate{agenda skip in toc}%
+    \begin{adjustbox}{max height=\dimexpr\paperheight-2\baselineskip-\agendaht-\agendadp-\agendaskip}%
+        \begin{beamercolorbox}[wd=1\paperwidth,left,#1]{section in toc}%
+            \setlength{\parindent}{\beamer@goethe@titlemargin}%
+            \usebeamercolor{section in toc}%
+            \let\hyperlink\@secondoftwo\tableofcontents[sectionstyle=show/hide,subsectionstyle=show/shaded/hide]%
+        \end{beamercolorbox}%
+    \end{adjustbox}
+    \vskip1cm plus 1filll%
+}
+
+\pgfkeys{
+    /subsectionFrame/.is family, /subsectionFrame,
+    default/.style = {%
+        only current section=false,%
+    },
+    only current section/.is if=onlycurrentsection,
+}
+\newcommand{\subsectionFrame}[1][]{%
+    \begingroup%
+    \pgfkeys{/subsectionFrame, default, #1}%
+    \setbeamercolor*{background canvas}{parent=section in toc}
+    \begin{frame}[c,plain,noframenumbering]{}
+        \setbeamertemplate{subsection page}[goethe]%
+        \ifonlycurrentsection%
+            \setbeamertemplate{subsection page}[goethe only current]%
+        \fi%
+        \subsectionpage%
+    \end{frame}%
+    \endgroup%
+}
+\let\subsectionAgenda\subsectionFrame
+
+\defbeamertemplate*{section in toc shaded}{goethe}[1][60]{\begin{colormixin}{#1!structure.bg}\usebeamertemplate{section in toc}\end{colormixin}\unskip}
+\defbeamertemplate*{subsection in toc shaded}{goethe}[1][60]{\begin{colormixin}{#1!structure.bg}\usebeamertemplate{subsection in toc}\end{colormixin}\unskip}
+\defbeamertemplate*{subsubsection in toc shaded}{goethe}[1][60]{\begin{colormixin}{#1!structure.bg}\usebeamertemplate{subsubsection in toc}\end{colormixin}\unskip}
+
+\mode<all>

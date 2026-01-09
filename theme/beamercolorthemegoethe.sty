@@ -1,0 +1,756 @@
+% !TeX root = main.tex
+\DeclareOptionBeamer{materialcolors}{%
+    % 2014 Material Design color palettes
+    % Adapted for LaTeX by Manuel Stoeckel
+    % Source: https://material.io/design/color/the-color-system.html#tools-for-picking-colors
+    % Courtesy of Google Inc.
+    \definecolor{red50}{HTML}{ffebee} % #ffebee
+    \colorlet{red50-text}{black}
+    \definecolor{red100}{HTML}{ffcdd2} % #ffcdd2
+    \colorlet{red100-text}{black}
+    \definecolor{red200}{HTML}{ef9a9a} % #ef9a9a
+    \colorlet{red200-text}{black}
+    \definecolor{red300}{HTML}{e57373} % #e57373
+    \colorlet{red300-text}{black}
+    \definecolor{red400}{HTML}{ef5350} % #ef5350
+    \colorlet{red400-text}{black}
+    \definecolor{red500}{HTML}{f44336} % #f44336
+    \colorlet{red500-text}{black}
+    \definecolor{red600}{HTML}{e53935} % #e53935
+    \colorlet{red600-text}{black}
+    \definecolor{red700}{HTML}{d32f2f} % #d32f2f
+    \colorlet{red700-text}{white}
+    \definecolor{red800}{HTML}{c62828} % #c62828
+    \colorlet{red800-text}{white}
+    \definecolor{red900}{HTML}{b71c1c} % #b71c1c
+    \colorlet{red900-text}{white}
+    \definecolor{reda100}{HTML}{ff8a80} % #ff8a80
+    \colorlet{reda100-text}{black}
+    \definecolor{reda200}{HTML}{ff5252} % #ff5252
+    \colorlet{reda200-text}{black}
+    \definecolor{reda400}{HTML}{ff1744} % #ff1744
+    \colorlet{reda400-text}{black}
+    \definecolor{reda700}{HTML}{d50000} % #d50000
+    \colorlet{reda700-text}{white}
+    \definecolor{pink50}{HTML}{fce4ec} % #fce4ec
+    \colorlet{pink50-text}{black}
+    \definecolor{pink100}{HTML}{f8bbd0} % #f8bbd0
+    \colorlet{pink100-text}{black}
+    \definecolor{pink200}{HTML}{f48fb1} % #f48fb1
+    \colorlet{pink200-text}{black}
+    \definecolor{pink300}{HTML}{f06292} % #f06292
+    \colorlet{pink300-text}{black}
+    \definecolor{pink400}{HTML}{ec407a} % #ec407a
+    \colorlet{pink400-text}{black}
+    \definecolor{pink500}{HTML}{e91e63} % #e91e63
+    \colorlet{pink500-text}{black}
+    \definecolor{pink600}{HTML}{d81b60} % #d81b60
+    \colorlet{pink600-text}{white}
+    \definecolor{pink700}{HTML}{c2185b} % #c2185b
+    \colorlet{pink700-text}{white}
+    \definecolor{pink800}{HTML}{ad1457} % #ad1457
+    \colorlet{pink800-text}{white}
+    \definecolor{pink900}{HTML}{880e4f} % #880e4f
+    \colorlet{pink900-text}{white}
+    \definecolor{pinka100}{HTML}{ff80ab} % #ff80ab
+    \colorlet{pinka100-text}{black}
+    \definecolor{pinka200}{HTML}{ff4081} % #ff4081
+    \colorlet{pinka200-text}{black}
+    \definecolor{pinka400}{HTML}{f50057} % #f50057
+    \colorlet{pinka400-text}{black}
+    \definecolor{pinka700}{HTML}{c51162} % #c51162
+    \colorlet{pinka700-text}{white}
+    \definecolor{purple50}{HTML}{f3e5f5} % #f3e5f5
+    \colorlet{purple50-text}{black}
+    \definecolor{purple100}{HTML}{e1bee7} % #e1bee7
+    \colorlet{purple100-text}{black}
+    \definecolor{purple200}{HTML}{ce93d8} % #ce93d8
+    \colorlet{purple200-text}{black}
+    \definecolor{purple300}{HTML}{ba68c8} % #ba68c8
+    \colorlet{purple300-text}{black}
+    \definecolor{purple400}{HTML}{ab47bc} % #ab47bc
+    \colorlet{purple400-text}{white}
+    \definecolor{purple500}{HTML}{9c27b0} % #9c27b0
+    \colorlet{purple500-text}{white}
+    \definecolor{purple600}{HTML}{8e24aa} % #8e24aa
+    \colorlet{purple600-text}{white}
+    \definecolor{purple700}{HTML}{7b1fa2} % #7b1fa2
+    \colorlet{purple700-text}{white}
+    \definecolor{purple800}{HTML}{6a1b9a} % #6a1b9a
+    \colorlet{purple800-text}{white}
+    \definecolor{purple900}{HTML}{4a148c} % #4a148c
+    \colorlet{purple900-text}{white}
+    \definecolor{purplea100}{HTML}{ea80fc} % #ea80fc
+    \colorlet{purplea100-text}{black}
+    \definecolor{purplea200}{HTML}{e040fb} % #e040fb
+    \colorlet{purplea200-text}{black}
+    \definecolor{purplea400}{HTML}{d500f9} % #d500f9
+    \colorlet{purplea400-text}{black}
+    \definecolor{purplea700}{HTML}{aa00ff} % #aa00ff
+    \colorlet{purplea700-text}{white}
+    \definecolor{deeppurple50}{HTML}{ede7f6} % #ede7f6
+    \colorlet{deeppurple50-text}{black}
+    \definecolor{deeppurple100}{HTML}{d1c4e9} % #d1c4e9
+    \colorlet{deeppurple100-text}{black}
+    \definecolor{deeppurple200}{HTML}{b39ddb} % #b39ddb
+    \colorlet{deeppurple200-text}{black}
+    \definecolor{deeppurple300}{HTML}{9575cd} % #9575cd
+    \colorlet{deeppurple300-text}{black}
+    \definecolor{deeppurple400}{HTML}{7e57c2} % #7e57c2
+    \colorlet{deeppurple400-text}{white}
+    \definecolor{deeppurple500}{HTML}{673ab7} % #673ab7
+    \colorlet{deeppurple500-text}{white}
+    \definecolor{deeppurple600}{HTML}{5e35b1} % #5e35b1
+    \colorlet{deeppurple600-text}{white}
+    \definecolor{deeppurple700}{HTML}{512da8} % #512da8
+    \colorlet{deeppurple700-text}{white}
+    \definecolor{deeppurple800}{HTML}{4527a0} % #4527a0
+    \colorlet{deeppurple800-text}{white}
+    \definecolor{deeppurple900}{HTML}{311b92} % #311b92
+    \colorlet{deeppurple900-text}{white}
+    \definecolor{deeppurplea100}{HTML}{b388ff} % #b388ff
+    \colorlet{deeppurplea100-text}{black}
+    \definecolor{deeppurplea200}{HTML}{7c4dff} % #7c4dff
+    \colorlet{deeppurplea200-text}{white}
+    \definecolor{deeppurplea400}{HTML}{651fff} % #651fff
+    \colorlet{deeppurplea400-text}{white}
+    \definecolor{deeppurplea700}{HTML}{6200ea} % #6200ea
+    \colorlet{deeppurplea700-text}{white}
+    \definecolor{indigo50}{HTML}{e8eaf6} % #e8eaf6
+    \colorlet{indigo50-text}{black}
+    \definecolor{indigo100}{HTML}{c5cae9} % #c5cae9
+    \colorlet{indigo100-text}{black}
+    \definecolor{indigo200}{HTML}{9fa8da} % #9fa8da
+    \colorlet{indigo200-text}{black}
+    \definecolor{indigo300}{HTML}{7986cb} % #7986cb
+    \colorlet{indigo300-text}{black}
+    \definecolor{indigo400}{HTML}{5c6bc0} % #5c6bc0
+    \colorlet{indigo400-text}{white}
+    \definecolor{indigo500}{HTML}{3f51b5} % #3f51b5
+    \colorlet{indigo500-text}{white}
+    \definecolor{indigo600}{HTML}{3949ab} % #3949ab
+    \colorlet{indigo600-text}{white}
+    \definecolor{indigo700}{HTML}{303f9f} % #303f9f
+    \colorlet{indigo700-text}{white}
+    \definecolor{indigo800}{HTML}{283593} % #283593
+    \colorlet{indigo800-text}{white}
+    \definecolor{indigo900}{HTML}{1a237e} % #1a237e
+    \colorlet{indigo900-text}{white}
+    \definecolor{indigoa100}{HTML}{8c9eff} % #8c9eff
+    \colorlet{indigoa100-text}{black}
+    \definecolor{indigoa200}{HTML}{536dfe} % #536dfe
+    \colorlet{indigoa200-text}{black}
+    \definecolor{indigoa400}{HTML}{3d5afe} % #3d5afe
+    \colorlet{indigoa400-text}{white}
+    \definecolor{indigoa700}{HTML}{304ffe} % #304ffe
+    \colorlet{indigoa700-text}{white}
+    \definecolor{blue50}{HTML}{e3f2fd} % #e3f2fd
+    \colorlet{blue50-text}{black}
+    \definecolor{blue100}{HTML}{bbdefb} % #bbdefb
+    \colorlet{blue100-text}{black}
+    \definecolor{blue200}{HTML}{90caf9} % #90caf9
+    \colorlet{blue200-text}{black}
+    \definecolor{blue300}{HTML}{64b5f6} % #64b5f6
+    \colorlet{blue300-text}{black}
+    \definecolor{blue400}{HTML}{42a5f5} % #42a5f5
+    \colorlet{blue400-text}{black}
+    \definecolor{blue500}{HTML}{2196f3} % #2196f3
+    \colorlet{blue500-text}{black}
+    \definecolor{blue600}{HTML}{1e88e5} % #1e88e5
+    \colorlet{blue600-text}{black}
+    \definecolor{blue700}{HTML}{1976d2} % #1976d2
+    \colorlet{blue700-text}{white}
+    \definecolor{blue800}{HTML}{1565c0} % #1565c0
+    \colorlet{blue800-text}{white}
+    \definecolor{blue900}{HTML}{0d47a1} % #0d47a1
+    \colorlet{blue900-text}{white}
+    \definecolor{bluea100}{HTML}{82b1ff} % #82b1ff
+    \colorlet{bluea100-text}{black}
+    \definecolor{bluea200}{HTML}{448aff} % #448aff
+    \colorlet{bluea200-text}{black}
+    \definecolor{bluea400}{HTML}{2979ff} % #2979ff
+    \colorlet{bluea400-text}{black}
+    \definecolor{bluea700}{HTML}{2962ff} % #2962ff
+    \colorlet{bluea700-text}{white}
+    \definecolor{lightblue50}{HTML}{e1f5fe} % #e1f5fe
+    \colorlet{lightblue50-text}{black}
+    \definecolor{lightblue100}{HTML}{b3e5fc} % #b3e5fc
+    \colorlet{lightblue100-text}{black}
+    \definecolor{lightblue200}{HTML}{81d4fa} % #81d4fa
+    \colorlet{lightblue200-text}{black}
+    \definecolor{lightblue300}{HTML}{4fc3f7} % #4fc3f7
+    \colorlet{lightblue300-text}{black}
+    \definecolor{lightblue400}{HTML}{29b6f6} % #29b6f6
+    \colorlet{lightblue400-text}{black}
+    \definecolor{lightblue500}{HTML}{03a9f4} % #03a9f4
+    \colorlet{lightblue500-text}{black}
+    \definecolor{lightblue600}{HTML}{039be5} % #039be5
+    \colorlet{lightblue600-text}{black}
+    \definecolor{lightblue700}{HTML}{0288d1} % #0288d1
+    \colorlet{lightblue700-text}{black}
+    \definecolor{lightblue800}{HTML}{0277bd} % #0277bd
+    \colorlet{lightblue800-text}{white}
+    \definecolor{lightblue900}{HTML}{01579b} % #01579b
+    \colorlet{lightblue900-text}{white}
+    \definecolor{lightbluea100}{HTML}{80d8ff} % #80d8ff
+    \colorlet{lightbluea100-text}{black}
+    \definecolor{lightbluea200}{HTML}{40c4ff} % #40c4ff
+    \colorlet{lightbluea200-text}{black}
+    \definecolor{lightbluea400}{HTML}{00b0ff} % #00b0ff
+    \colorlet{lightbluea400-text}{black}
+    \definecolor{lightbluea700}{HTML}{0091ea} % #0091ea
+    \colorlet{lightbluea700-text}{black}
+    \definecolor{cyan50}{HTML}{e0f7fa} % #e0f7fa
+    \colorlet{cyan50-text}{black}
+    \definecolor{cyan100}{HTML}{b2ebf2} % #b2ebf2
+    \colorlet{cyan100-text}{black}
+    \definecolor{cyan200}{HTML}{80deea} % #80deea
+    \colorlet{cyan200-text}{black}
+    \definecolor{cyan300}{HTML}{4dd0e1} % #4dd0e1
+    \colorlet{cyan300-text}{black}
+    \definecolor{cyan400}{HTML}{26c6da} % #26c6da
+    \colorlet{cyan400-text}{black}
+    \definecolor{cyan500}{HTML}{00bcd4} % #00bcd4
+    \colorlet{cyan500-text}{black}
+    \definecolor{cyan600}{HTML}{00acc1} % #00acc1
+    \colorlet{cyan600-text}{black}
+    \definecolor{cyan700}{HTML}{0097a7} % #0097a7
+    \colorlet{cyan700-text}{black}
+    \definecolor{cyan800}{HTML}{00838f} % #00838f
+    \colorlet{cyan800-text}{black}
+    \definecolor{cyan900}{HTML}{006064} % #006064
+    \colorlet{cyan900-text}{white}
+    \definecolor{cyana100}{HTML}{84ffff} % #84ffff
+    \colorlet{cyana100-text}{black}
+    \definecolor{cyana200}{HTML}{18ffff} % #18ffff
+    \colorlet{cyana200-text}{black}
+    \definecolor{cyana400}{HTML}{00e5ff} % #00e5ff
+    \colorlet{cyana400-text}{black}
+    \definecolor{cyana700}{HTML}{00b8d4} % #00b8d4
+    \colorlet{cyana700-text}{black}
+    \definecolor{teal50}{HTML}{e0f2f1} % #e0f2f1
+    \colorlet{teal50-text}{black}
+    \definecolor{teal100}{HTML}{b2dfdb} % #b2dfdb
+    \colorlet{teal100-text}{black}
+    \definecolor{teal200}{HTML}{80cbc4} % #80cbc4
+    \colorlet{teal200-text}{black}
+    \definecolor{teal300}{HTML}{4db6ac} % #4db6ac
+    \colorlet{teal300-text}{black}
+    \definecolor{teal400}{HTML}{26a69a} % #26a69a
+    \colorlet{teal400-text}{black}
+    \definecolor{teal500}{HTML}{009688} % #009688
+    \colorlet{teal500-text}{black}
+    \definecolor{teal600}{HTML}{00897b} % #00897b
+    \colorlet{teal600-text}{black}
+    \definecolor{teal700}{HTML}{00796b} % #00796b
+    \colorlet{teal700-text}{white}
+    \definecolor{teal800}{HTML}{00695c} % #00695c
+    \colorlet{teal800-text}{white}
+    \definecolor{teal900}{HTML}{004d40} % #004d40
+    \colorlet{teal900-text}{white}
+    \definecolor{teala100}{HTML}{a7ffeb} % #a7ffeb
+    \colorlet{teala100-text}{black}
+    \definecolor{teala200}{HTML}{64ffda} % #64ffda
+    \colorlet{teala200-text}{black}
+    \definecolor{teala400}{HTML}{1de9b6} % #1de9b6
+    \colorlet{teala400-text}{black}
+    \definecolor{teala700}{HTML}{00bfa5} % #00bfa5
+    \colorlet{teala700-text}{black}
+    \definecolor{green50}{HTML}{e8f5e9} % #e8f5e9
+    \colorlet{green50-text}{black}
+    \definecolor{green100}{HTML}{c8e6c9} % #c8e6c9
+    \colorlet{green100-text}{black}
+    \definecolor{green200}{HTML}{a5d6a7} % #a5d6a7
+    \colorlet{green200-text}{black}
+    \definecolor{green300}{HTML}{81c784} % #81c784
+    \colorlet{green300-text}{black}
+    \definecolor{green400}{HTML}{66bb6a} % #66bb6a
+    \colorlet{green400-text}{black}
+    \definecolor{green500}{HTML}{4caf50} % #4caf50
+    \colorlet{green500-text}{black}
+    \definecolor{green600}{HTML}{43a047} % #43a047
+    \colorlet{green600-text}{black}
+    \definecolor{green700}{HTML}{388e3c} % #388e3c
+    \colorlet{green700-text}{black}
+    \definecolor{green800}{HTML}{2e7d32} % #2e7d32
+    \colorlet{green800-text}{white}
+    \definecolor{green900}{HTML}{1b5e20} % #1b5e20
+    \colorlet{green900-text}{white}
+    \definecolor{greena100}{HTML}{b9f6ca} % #b9f6ca
+    \colorlet{greena100-text}{black}
+    \definecolor{greena200}{HTML}{69f0ae} % #69f0ae
+    \colorlet{greena200-text}{black}
+    \definecolor{greena400}{HTML}{00e676} % #00e676
+    \colorlet{greena400-text}{black}
+    \definecolor{greena700}{HTML}{00c853} % #00c853
+    \colorlet{greena700-text}{black}
+    \definecolor{lightgreen50}{HTML}{f1f8e9} % #f1f8e9
+    \colorlet{lightgreen50-text}{black}
+    \definecolor{lightgreen100}{HTML}{dcedc8} % #dcedc8
+    \colorlet{lightgreen100-text}{black}
+    \definecolor{lightgreen200}{HTML}{c5e1a5} % #c5e1a5
+    \colorlet{lightgreen200-text}{black}
+    \definecolor{lightgreen300}{HTML}{aed581} % #aed581
+    \colorlet{lightgreen300-text}{black}
+    \definecolor{lightgreen400}{HTML}{9ccc65} % #9ccc65
+    \colorlet{lightgreen400-text}{black}
+    \definecolor{lightgreen500}{HTML}{8bc34a} % #8bc34a
+    \colorlet{lightgreen500-text}{black}
+    \definecolor{lightgreen600}{HTML}{7cb342} % #7cb342
+    \colorlet{lightgreen600-text}{black}
+    \definecolor{lightgreen700}{HTML}{689f38} % #689f38
+    \colorlet{lightgreen700-text}{black}
+    \definecolor{lightgreen800}{HTML}{558b2f} % #558b2f
+    \colorlet{lightgreen800-text}{black}
+    \definecolor{lightgreen900}{HTML}{33691e} % #33691e
+    \colorlet{lightgreen900-text}{white}
+    \definecolor{lightgreena100}{HTML}{ccff90} % #ccff90
+    \colorlet{lightgreena100-text}{black}
+    \definecolor{lightgreena200}{HTML}{b2ff59} % #b2ff59
+    \colorlet{lightgreena200-text}{black}
+    \definecolor{lightgreena400}{HTML}{76ff03} % #76ff03
+    \colorlet{lightgreena400-text}{black}
+    \definecolor{lightgreena700}{HTML}{64dd17} % #64dd17
+    \colorlet{lightgreena700-text}{black}
+    \definecolor{lime50}{HTML}{f9fbe7} % #f9fbe7
+    \colorlet{lime50-text}{black}
+    \definecolor{lime100}{HTML}{f0f4c3} % #f0f4c3
+    \colorlet{lime100-text}{black}
+    \definecolor{lime200}{HTML}{e6ee9c} % #e6ee9c
+    \colorlet{lime200-text}{black}
+    \definecolor{lime300}{HTML}{dce775} % #dce775
+    \colorlet{lime300-text}{black}
+    \definecolor{lime400}{HTML}{d4e157} % #d4e157
+    \colorlet{lime400-text}{black}
+    \definecolor{lime500}{HTML}{cddc39} % #cddc39
+    \colorlet{lime500-text}{black}
+    \definecolor{lime600}{HTML}{c0ca33} % #c0ca33
+    \colorlet{lime600-text}{black}
+    \definecolor{lime700}{HTML}{afb42b} % #afb42b
+    \colorlet{lime700-text}{black}
+    \definecolor{lime800}{HTML}{9e9d24} % #9e9d24
+    \colorlet{lime800-text}{black}
+    \definecolor{lime900}{HTML}{827717} % #827717
+    \colorlet{lime900-text}{black}
+    \definecolor{limea100}{HTML}{f4ff81} % #f4ff81
+    \colorlet{limea100-text}{black}
+    \definecolor{limea200}{HTML}{eeff41} % #eeff41
+    \colorlet{limea200-text}{black}
+    \definecolor{limea400}{HTML}{c6ff00} % #c6ff00
+    \colorlet{limea400-text}{black}
+    \definecolor{limea700}{HTML}{aeea00} % #aeea00
+    \colorlet{limea700-text}{black}
+    \definecolor{yellow50}{HTML}{fffde7} % #fffde7
+    \colorlet{yellow50-text}{black}
+    \definecolor{yellow100}{HTML}{fff9c4} % #fff9c4
+    \colorlet{yellow100-text}{black}
+    \definecolor{yellow200}{HTML}{fff59d} % #fff59d
+    \colorlet{yellow200-text}{black}
+    \definecolor{yellow300}{HTML}{fff176} % #fff176
+    \colorlet{yellow300-text}{black}
+    \definecolor{yellow400}{HTML}{ffee58} % #ffee58
+    \colorlet{yellow400-text}{black}
+    \definecolor{yellow500}{HTML}{ffeb3b} % #ffeb3b
+    \colorlet{yellow500-text}{black}
+    \definecolor{yellow600}{HTML}{fdd835} % #fdd835
+    \colorlet{yellow600-text}{black}
+    \definecolor{yellow700}{HTML}{fbc02d} % #fbc02d
+    \colorlet{yellow700-text}{black}
+    \definecolor{yellow800}{HTML}{f9a825} % #f9a825
+    \colorlet{yellow800-text}{black}
+    \definecolor{yellow900}{HTML}{f57f17} % #f57f17
+    \colorlet{yellow900-text}{black}
+    \definecolor{yellowa100}{HTML}{ffff8d} % #ffff8d
+    \colorlet{yellowa100-text}{black}
+    \definecolor{yellowa200}{HTML}{ffff00} % #ffff00
+    \colorlet{yellowa200-text}{black}
+    \definecolor{yellowa400}{HTML}{ffea00} % #ffea00
+    \colorlet{yellowa400-text}{black}
+    \definecolor{yellowa700}{HTML}{ffd600} % #ffd600
+    \colorlet{yellowa700-text}{black}
+    \definecolor{amber50}{HTML}{fff8e1} % #fff8e1
+    \colorlet{amber50-text}{black}
+    \definecolor{amber100}{HTML}{ffecb3} % #ffecb3
+    \colorlet{amber100-text}{black}
+    \definecolor{amber200}{HTML}{ffe082} % #ffe082
+    \colorlet{amber200-text}{black}
+    \definecolor{amber300}{HTML}{ffd54f} % #ffd54f
+    \colorlet{amber300-text}{black}
+    \definecolor{amber400}{HTML}{ffca28} % #ffca28
+    \colorlet{amber400-text}{black}
+    \definecolor{amber500}{HTML}{ffc107} % #ffc107
+    \colorlet{amber500-text}{black}
+    \definecolor{amber600}{HTML}{ffb300} % #ffb300
+    \colorlet{amber600-text}{black}
+    \definecolor{amber700}{HTML}{ffa000} % #ffa000
+    \colorlet{amber700-text}{black}
+    \definecolor{amber800}{HTML}{ff8f00} % #ff8f00
+    \colorlet{amber800-text}{black}
+    \definecolor{amber900}{HTML}{ff6f00} % #ff6f00
+    \colorlet{amber900-text}{black}
+    \definecolor{ambera100}{HTML}{ffe57f} % #ffe57f
+    \colorlet{ambera100-text}{black}
+    \definecolor{ambera200}{HTML}{ffd740} % #ffd740
+    \colorlet{ambera200-text}{black}
+    \definecolor{ambera400}{HTML}{ffc400} % #ffc400
+    \colorlet{ambera400-text}{black}
+    \definecolor{ambera700}{HTML}{ffab00} % #ffab00
+    \colorlet{ambera700-text}{black}
+    \definecolor{orange50}{HTML}{fff3e0} % #fff3e0
+    \colorlet{orange50-text}{black}
+    \definecolor{orange100}{HTML}{ffe0b2} % #ffe0b2
+    \colorlet{orange100-text}{black}
+    \definecolor{orange200}{HTML}{ffcc80} % #ffcc80
+    \colorlet{orange200-text}{black}
+    \definecolor{orange300}{HTML}{ffb74d} % #ffb74d
+    \colorlet{orange300-text}{black}
+    \definecolor{orange400}{HTML}{ffa726} % #ffa726
+    \colorlet{orange400-text}{black}
+    \definecolor{orange500}{HTML}{ff9800} % #ff9800
+    \colorlet{orange500-text}{black}
+    \definecolor{orange600}{HTML}{fb8c00} % #fb8c00
+    \colorlet{orange600-text}{black}
+    \definecolor{orange700}{HTML}{f57c00} % #f57c00
+    \colorlet{orange700-text}{black}
+    \definecolor{orange800}{HTML}{ef6c00} % #ef6c00
+    \colorlet{orange800-text}{black}
+    \definecolor{orange900}{HTML}{e65100} % #e65100
+    \colorlet{orange900-text}{black}
+    \definecolor{orangea100}{HTML}{ffd180} % #ffd180
+    \colorlet{orangea100-text}{black}
+    \definecolor{orangea200}{HTML}{ffab40} % #ffab40
+    \colorlet{orangea200-text}{black}
+    \definecolor{orangea400}{HTML}{ff9100} % #ff9100
+    \colorlet{orangea400-text}{black}
+    \definecolor{orangea700}{HTML}{ff6d00} % #ff6d00
+    \colorlet{orangea700-text}{black}
+    \definecolor{deeporange50}{HTML}{fbe9e7} % #fbe9e7
+    \colorlet{deeporange50-text}{black}
+    \definecolor{deeporange100}{HTML}{ffccbc} % #ffccbc
+    \colorlet{deeporange100-text}{black}
+    \definecolor{deeporange200}{HTML}{ffab91} % #ffab91
+    \colorlet{deeporange200-text}{black}
+    \definecolor{deeporange300}{HTML}{ff8a65} % #ff8a65
+    \colorlet{deeporange300-text}{black}
+    \definecolor{deeporange400}{HTML}{ff7043} % #ff7043
+    \colorlet{deeporange400-text}{black}
+    \definecolor{deeporange500}{HTML}{ff5722} % #ff5722
+    \colorlet{deeporange500-text}{black}
+    \definecolor{deeporange600}{HTML}{f4511e} % #f4511e
+    \colorlet{deeporange600-text}{black}
+    \definecolor{deeporange700}{HTML}{e64a19} % #e64a19
+    \colorlet{deeporange700-text}{black}
+    \definecolor{deeporange800}{HTML}{d84315} % #d84315
+    \colorlet{deeporange800-text}{black}
+    \definecolor{deeporange900}{HTML}{bf360c} % #bf360c
+    \colorlet{deeporange900-text}{white}
+    \definecolor{deeporangea100}{HTML}{ff9e80} % #ff9e80
+    \colorlet{deeporangea100-text}{black}
+    \definecolor{deeporangea200}{HTML}{ff6e40} % #ff6e40
+    \colorlet{deeporangea200-text}{black}
+    \definecolor{deeporangea400}{HTML}{ff3d00} % #ff3d00
+    \colorlet{deeporangea400-text}{black}
+    \definecolor{deeporangea700}{HTML}{dd2c00} % #dd2c00
+    \colorlet{deeporangea700-text}{white}
+    \definecolor{brown50}{HTML}{efebe9} % #efebe9
+    \colorlet{brown50-text}{black}
+    \definecolor{brown100}{HTML}{d7ccc8} % #d7ccc8
+    \colorlet{brown100-text}{black}
+    \definecolor{brown200}{HTML}{bcaaa4} % #bcaaa4
+    \colorlet{brown200-text}{black}
+    \definecolor{brown300}{HTML}{a1887f} % #a1887f
+    \colorlet{brown300-text}{black}
+    \definecolor{brown400}{HTML}{8d6e63} % #8d6e63
+    \colorlet{brown400-text}{white}
+    \definecolor{brown500}{HTML}{795548} % #795548
+    \colorlet{brown500-text}{white}
+    \definecolor{brown600}{HTML}{6d4c41} % #6d4c41
+    \colorlet{brown600-text}{white}
+    \definecolor{brown700}{HTML}{5d4037} % #5d4037
+    \colorlet{brown700-text}{white}
+    \definecolor{brown800}{HTML}{4e342e} % #4e342e
+    \colorlet{brown800-text}{white}
+    \definecolor{brown900}{HTML}{3e2723} % #3e2723
+    \colorlet{brown900-text}{white}
+    \definecolor{gray50}{HTML}{fafafa} % #fafafa
+    \colorlet{gray50-text}{black}
+    \definecolor{gray100}{HTML}{f5f5f5} % #f5f5f5
+    \colorlet{gray100-text}{black}
+    \definecolor{gray200}{HTML}{eeeeee} % #eeeeee
+    \colorlet{gray200-text}{black}
+    \definecolor{gray300}{HTML}{e0e0e0} % #e0e0e0
+    \colorlet{gray300-text}{black}
+    \definecolor{gray400}{HTML}{bdbdbd} % #bdbdbd
+    \colorlet{gray400-text}{black}
+    \definecolor{gray500}{HTML}{9e9e9e} % #9e9e9e
+    \colorlet{gray500-text}{black}
+    \definecolor{gray600}{HTML}{757575} % #757575
+    \colorlet{gray600-text}{white}
+    \definecolor{gray700}{HTML}{616161} % #616161
+    \colorlet{gray700-text}{white}
+    \definecolor{gray800}{HTML}{424242} % #424242
+    \colorlet{gray800-text}{white}
+    \definecolor{gray900}{HTML}{212121} % #212121
+    \colorlet{gray900-text}{white}
+    \definecolor{bluegray50}{HTML}{eceff1} % #eceff1
+    \colorlet{bluegray50-text}{black}
+    \definecolor{bluegray100}{HTML}{cfd8dc} % #cfd8dc
+    \colorlet{bluegray100-text}{black}
+    \definecolor{bluegray200}{HTML}{b0bec5} % #b0bec5
+    \colorlet{bluegray200-text}{black}
+    \definecolor{bluegray300}{HTML}{90a4ae} % #90a4ae
+    \colorlet{bluegray300-text}{black}
+    \definecolor{bluegray400}{HTML}{78909c} % #78909c
+    \colorlet{bluegray400-text}{black}
+    \definecolor{bluegray500}{HTML}{607d8b} % #607d8b
+    \colorlet{bluegray500-text}{black}
+    \definecolor{bluegray600}{HTML}{546e7a} % #546e7a
+    \colorlet{bluegray600-text}{white}
+    \definecolor{bluegray700}{HTML}{455a64} % #455a64
+    \colorlet{bluegray700-text}{white}
+    \definecolor{bluegray800}{HTML}{37474f} % #37474f
+    \colorlet{bluegray800-text}{white}
+    \definecolor{bluegray900}{HTML}{263238} % #263238
+    \colorlet{bluegray900-text}{white}
+}
+\DeclareOptionBeamer{ttlabcolors}{%
+    %% HuCompute.org colors:
+    \definecolor{HUDarkBlue}{RGB}{16,82,132}
+    \definecolor{HULightBlue}{RGB}{55,140,195} %% #378cc3
+    \definecolor{HUBlueText}{RGB}{0,115,186}
+    \definecolor{HUDarkGrey}{RGB}{206,207,209}
+    \definecolor{HUMedGrey}{RGB}{219,220,221}
+    \definecolor{HULightGrey}{RGB}{241,241,241} %% #f1f1f1
+    \definecolor{HUDarkOrange}{RGB}{146,76,0} %% #924c00
+    %%
+    %% old ones for compatibility reasons:
+    \definecolor{LNshadowblue}{RGB}{112,159,203}
+    \definecolor{LNlightblue}{RGB}{153,196,236}
+    \definecolor{LNultralightblue}{RGB}{229,240,250}
+    \definecolor{LNgreen}{RGB}{153,204,51}
+    \definecolor{GoetheOrange}{RGB}{243,192,57} % Pantone 143
+    \definecolor{GoetheOrangePlakativ}{RGB}{237,167,45} % Pantone 151
+    \definecolor{Papier}{RGB}{233,234,192}
+    \definecolor{agttlightSeminarGrau}{RGB}{219,220,222}
+    \definecolor{bottomcolor}{rgb}{0.32,0.3,0.38}
+    \definecolor{middlecolor}{rgb}{0.08,0.08,0.16}
+    \definecolor{loeweblau}{rgb}{0.33,0.57,0.84}
+    % \definecolor{loeweblau}{RGB}{84,145,214}
+    \definecolor{loewehellblau}{RGB}{219,238,244}
+    \definecolor{loewegruen}{RGB}{90,162,80}
+    \definecolor{loeweorange}{RGB}{220,150,55}
+    \definecolor{DigihumRot}{RGB}{212,0,0}
+    \definecolor{DigihumBlau}{RGB}{0,94,170}
+    \definecolor{DigihumHellBlau}{RGB}{221,240,255}
+    \definecolor{DigihumText}{RGB}{103,102,102}
+    \definecolor{DigihumHellGrau}{RGB}{214,214,214}
+    \colorlet{loewegrau}{DigihumText!83!white}
+    %%
+    %% actual Seminar-style color:
+    \definecolor{SeminarBlau}{RGB}{0,154,224}
+    \definecolor{SeminarRot}{rgb}{0.75,0,0}
+    \definecolor{SeminarGruen}{RGB}{0,128,0}
+    \definecolor{SeminarOrange}{RGB}{237,167,45} % rgb: {0.93,0.65,0.18}
+    \definecolor{SeminarGrau}{rgb}{0.32,0.3,0.38} % RGB: {81.6,76.5,96.6}
+    %% mapping seminar colors onto gu colors:
+    %\colorlet{SeminarBlau}{GU-Goethe-Blau}
+    %\colorlet{SeminarRot}{GU-Emo-Rot}
+    %\colorlet{SeminarGruen}{GU-Gruen}
+    %\colorlet{SeminarOrange}{GU-Orange}
+    %\colorlet{SeminarGrau}{GU-Dunkelgrau}
+    %\colorlet{SeminarSehrHellGrau}{GU-Hellgrau}
+    %%
+    \colorlet{SeminarHellBlau}{SeminarBlau!25!white}
+    \colorlet{SeminarHellGruen}{SeminarGruen!25!white}
+    \colorlet{SeminarHellRot}{SeminarRot!25!white}
+    \colorlet{SeminarHellOrange}{GoetheOrangePlakativ!25!white}
+    \colorlet{SeminarHellGrau}{SeminarGrau!35!white}
+    \colorlet{SeminarSehrHellGrau}{SeminarGrau!15!white}
+    \colorlet{SeminarSehrSehrHellGrau}{SeminarGrau!5!white}
+
+    \colorlet{SeminarBlauGruen}{SeminarBlau!50!SeminarGruen}
+    \colorlet{SeminarGruenBlau}{SeminarBlau!50!SeminarGruen}
+    \colorlet{SeminarMix}{SeminarBlau!50!SeminarGruen}
+    \colorlet{SeminarHellMix}{SeminarMix!25!white}
+    \colorlet{SeminarHellBlauGruen}{SeminarMix!25!white}
+    \colorlet{SeminarHellGruenBlau}{SeminarMix!25!white}
+    \colorlet{SeminarRotOrange}{SeminarRot!50!GoetheOrangePlakativ}
+    \colorlet{SeminarOrangeRot}{SeminarRot!50!GoetheOrangePlakativ}
+    \colorlet{SeminarHellOrangeRot}{SeminarOrangeRot!25!white}
+    \colorlet{SeminarHellRotOrange}{SeminarOrangeRot!25!white}
+    \colorlet{SeminarRotGruen}{SeminarRot!50!SeminarGruen}
+    \colorlet{SeminarGruenRot}{SeminarRot!50!SeminarGruen}
+    \colorlet{SeminarRotBlau}{SeminarRot!50!SeminarBlau}
+    \colorlet{SeminarBlauRot}{SeminarRot!50!SeminarBlau}
+    \colorlet{SeminarHellRotBlau}{SeminarRotBlau!25!white}
+    \colorlet{SeminarHellBlauRot}{SeminarRotBlau!25!white}
+    \colorlet{SeminarHellRotGruen}{SeminarRotGruen!25!white}
+    \colorlet{SeminarHellGruenRot}{SeminarRotGruen!25!white}
+    \colorlet{SeminarOrangeGruen}{SeminarOrange!50!SeminarGruen}
+    \colorlet{SeminarGruenOrange}{SeminarOrange!50!SeminarGruen}
+    \colorlet{SeminarHellGruenOrange}{SeminarOrangeGruen!25!white}
+    \colorlet{SeminarHellOrangeGruen}{SeminarOrangeGruen!25!white}
+    \colorlet{SeminarOrangeBlau}{SeminarOrange!50!SeminarBlau}
+    \colorlet{SeminarBlauOrange}{SeminarOrange!50!SeminarBlau}
+    \colorlet{SeminarHellBlauOrange}{SeminarOrangeBlau!25!white}
+    \colorlet{SeminarHellOrangeBlau}{SeminarOrangeBlau!25!white}
+    \colorlet{SeminarSehrHellRot}{SeminarRot!15!white}
+    \colorlet{SeminarSehrHellGrau}{SeminarGrau!15!white}
+    \colorlet{SeminarSehrHellGruen}{SeminarGruen!15!white}
+    \colorlet{SeminarSehrHellBlau}{SeminarBlau!15!white}
+    \colorlet{SeminarSehrHellOrange}{SeminarHellOrange!15!white}
+    \colorlet{SeminarOrangeGrau}{SeminarOrange!50!SeminarGrau}
+    \colorlet{SeminarGrauOrange}{SeminarOrange!50!SeminarGrau}
+    \colorlet{SeminarRotGrau}{SeminarRot!50!SeminarGrau}
+    \colorlet{SeminarGrauRot}{SeminarRot!50!SeminarGrau}
+    \colorlet{SeminarBlauGrau}{SeminarBlau!50!SeminarGrau}
+    \colorlet{SeminarGrauBlau}{SeminarBlau!50!SeminarGrau}
+    \colorlet{SeminarGruenGrau}{SeminarGruen!50!SeminarGrau}
+    \colorlet{SeminarGrauGruen}{SeminarGruen!50!SeminarGrau}
+    \colorlet{SeminarHellGrauRot}{SeminarGrauRot!25!white}
+    \colorlet{SeminarHellRotGrau}{SeminarGrauRot!25!white}
+    \colorlet{SeminarHellGrauBlau}{SeminarGrauBlau!25!white}
+    \colorlet{SeminarHellBlauGrau}{SeminarGrauBlau!25!white}
+    \colorlet{SeminarHellGrauGruen}{SeminarGrauGruen!25!white}
+    \colorlet{SeminarHellGruenGrau}{SeminarGrauGruen!25!white}
+    \colorlet{SeminarHellGrauOrange}{SeminarGrauOrange!25!white}
+    \colorlet{SeminarHellOrangeGrau}{SeminarGrauOrange!25!white}
+
+    \definecolor{DarkRed}{HTML}{b94a48}
+}
+\DeclareOptionBeamer{alphabetcolors}{%
+    % From: https://rdrr.io/cran/Polychrome/
+    % Citation: Carter RC, Carter EC. High-contrast sets of colors. Applied Optics, 1982; 21(16):2936–9. 
+    \AtBeginDocument{\nocite{Green_Armytage_2010_color}}
+    \definecolor{alphabet-amethyst}{HTML}{AA0DFE} % #AA0DFE
+    \definecolor{alphabet-blue}{HTML}{3283FE} % #3283FE
+    \definecolor{alphabet-caramel}{HTML}{85660D} % #85660D
+    \definecolor{alphabet-damson}{HTML}{782AB6} % #782AB6
+    \definecolor{alphabet-ebony}{HTML}{565656} % #565656
+    \definecolor{alphabet-forest}{HTML}{1C8356} % #1C8356
+    \definecolor{alphabet-green}{HTML}{16FF32} % #16FF32
+    \definecolor{alphabet-honey}{HTML}{F7E1A0} % #F7E1A0
+    \definecolor{alphabet-iron}{HTML}{E2E2E2} % #E2E2E2
+    \definecolor{alphabet-jade}{HTML}{1CBE4F} % #1CBE4F
+    \definecolor{alphabet-kingcrab}{HTML}{C4451C} % #C4451C
+    \definecolor{alphabet-lavender}{HTML}{DEA0FD} % #DEA0FD
+    \definecolor{alphabet-magenta}{HTML}{FE00FA} % #FE00FA
+    \definecolor{alphabet-navy}{HTML}{325A9B} % #325A9B
+    \definecolor{alphabet-orange}{HTML}{FEAF16} % #FEAF16
+    \definecolor{alphabet-pink}{HTML}{F8A19F} % #F8A19F
+    \definecolor{alphabet-quagmire}{HTML}{90AD1C} % #90AD1C
+    \definecolor{alphabet-red}{HTML}{F6222E} % #F6222E
+    \definecolor{alphabet-sea}{HTML}{1CFFCE} % #1CFFCE
+    \definecolor{alphabet-turquoise}{HTML}{2ED9FF} % #2ED9FF
+    \definecolor{alphabet-ultraviolet}{HTML}{B10DA1} % #B10DA1
+    \definecolor{alphabet-violet}{HTML}{C075A6} % #C075A6
+    \definecolor{alphabet-wine}{HTML}{FC1CBF} % #FC1CBF
+    \definecolor{alphabet-xanthin}{HTML}{B00068} % #B00068
+    \definecolor{alphabet-yellow}{HTML}{FBE426} % #FBE426
+    \definecolor{alphabet-zinnia}{HTML}{FA0087} % #FA0087
+}
+\DeclareOptionBeamer{greenarmytagecolors}{%
+    % From: https://rdrr.io/cran/Polychrome/
+    % Citation: Green-Armytage, P. A Colour Alphabet and the Limits of Colour Coding. Colour: Design and Creativity, 2010; 10:1–23. 
+    \AtBeginDocument{\nocite{Carter_1982_High}}
+    \definecolor{green-armytage-amethyst}{HTML}{F0A3FF} % #F0A3FF
+    \definecolor{green-armytage-blue}{HTML}{0075DC} % #0075DC
+    \definecolor{green-armytage-caramel}{HTML}{993F00} % #993F00
+    \definecolor{green-armytage-damson}{HTML}{4C005C} % #4C005C
+    \definecolor{green-armytage-ebony}{HTML}{191919} % #191919
+    \definecolor{green-armytage-forest}{HTML}{005C31} % #005C31
+    \definecolor{green-armytage-green}{HTML}{2BCE48} % #2BCE48
+    \definecolor{green-armytage-honeydew}{HTML}{FFCC99} % #FFCC99
+    \definecolor{green-armytage-iron}{HTML}{808080} % #808080
+    \definecolor{green-armytage-jade}{HTML}{94FFB5} % #94FFB5
+    \definecolor{green-armytage-khaki}{HTML}{8F7C00} % #8F7C00
+    \definecolor{green-armytage-lime}{HTML}{9DCC00} % #9DCC00
+    \definecolor{green-armytage-mallow}{HTML}{C20088} % #C20088
+    \definecolor{green-armytage-navy}{HTML}{003380} % #003380
+    \definecolor{green-armytage-orpiment}{HTML}{19A405} % #19A405
+    \definecolor{green-armytage-pink}{HTML}{FFA8BB} % #FFA8BB
+    \definecolor{green-armytage-quagmire}{HTML}{426600} % #426600
+    \definecolor{green-armytage-red}{HTML}{FF0010} % #FF0010
+    \definecolor{green-armytage-sky}{HTML}{5EF1F2} % #5EF1F2
+    \definecolor{green-armytage-turquoise}{HTML}{00998F} % #00998F
+    \definecolor{green-armytage-uranium}{HTML}{E0FF66} % #E0FF66
+    \definecolor{green-armytage-violet}{HTML}{100AFF} % #100AFF
+    \definecolor{green-armytage-wine}{HTML}{990000} % #990000
+    \definecolor{green-armytage-xanthin}{HTML}{FFFF80} % #FFFF80
+    \definecolor{green-armytage-yellow}{HTML}{FFE100} % #FFE100
+    \definecolor{green-armytage-zinnia}{HTML}{FF5000} % #FF5000
+}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\ProcessOptionsBeamer\relax
+%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\mode<presentation>
+
+%% Color definitions of the new GU corporate identity http://www.muk.uni-frankfurt.de/52945514/farben
+\definecolorset{cmyk}{Goethe-}{}{%
+    Blau,1,0.2,0,0.4;%
+    Blau-Web,1.0,0.32,0.0,0.44;%
+    Hellgrau,0.04,0.04,0.05,0.02;%
+    Sandgrau,0.12,0.09,0.13,0;%
+    Dunkelgrau,0.25,0.25,0.3,0.75;%
+    Purple,0.08,1,0.3,0.36;%
+    Emo-Rot,0.04,1,0.8,0.07;%
+    Senfgelb,0.01,0.25,1,0.05;%
+    Gruen,0.62,0.4,0.87,0.09;%
+    Magenta,0.08,0.86,0.12,0.12;%
+    Orange,0,0.7,1,0.04;%
+    Sonnengelb,0,0.12,0.95,0;%
+    Helles-Gruen,0.4,0.17,0.81,0.07;%
+    Lichtblau,0.8,0,0.06,0.04%
+}
+\definecolorset{cmyk}{GU-}{}{%
+    Goethe-Blau,1,0.2,0,0.4;%
+    Hellgrau,0.04,0.04,0.05,0.02;%
+    Sandgrau,0.12,0.09,0.13,0;%
+    Dunkelgrau,0.25,0.25,0.3,0.75;%
+    Purple,0.08,1,0.3,0.36;%
+    Emo-Rot,0.04,1,0.8,0.07;%
+    Senfgelb,0.01,0.25,1,0.05;%
+    Gruen,0.62,0.4,0.87,0.09;%
+    Magenta,0.08,0.86,0.12,0.12;%
+    Orange,0,0.7,1,0.04;%
+    Sonnengelb,0,0.12,0.95,0;%
+    Helles-Gruen,0.4,0.17,0.81,0.07;%
+    Lichtblau,0.8,0,0.06,0.04%
+}
+
+\setbeamercolor*{structure}{fg=Goethe-Blau,bg=Goethe-Blau}
+\setbeamercolor*{palette primary}{fg=white,bg=Goethe-Blau}
+\setbeamercolor*{palette secondary}{fg=white,bg=Goethe-Blau-Web}
+\setbeamercolor*{palette tertiary}{fg=white,bg=Goethe-Lichtblau}
+\setbeamercolor*{palette quarternary}{fg=black,bg=white}
+
+\setbeamercolor*{title}{parent=palette primary}
+\setbeamercolor*{author}{parent=palette secondary}
+
+\setbeamercolor*{frametitle}{parent=palette primary}
+\setbeamercolor*{framesubtitle}{parent=palette secondary}
+
+\setbeamercolor*{sectiontitle}{parent=palette primary}
+\setbeamercolor*{subsectiontitle}{parent=palette secondary}
+\setbeamercolor*{subsubsectiontitle}{parent=palette tertiary}
+
+\setbeamercolor*{agenda in toc}{parent=palette secondary}
+
+\setbeamercolor*{section in toc}{parent=palette primary}
+\setbeamercolor*{section in toc shaded}{parent=section in toc}
+
+\setbeamercolor*{subsection in toc}{parent=palette primary}
+\setbeamercolor*{subsection in toc shaded}{parent=subsection in toc}
+
+\setbeamercolor*{subsubsection in toc}{parent=subpalette primary}
+\setbeamercolor*{subsubsection in toc shaded}{parent=subsubsection in toc}
+
+\setbeamercolor*{alerted text}{fg=Goethe-Orange}
+\setbeamercolor*{example text}{fg=Goethe-Gruen}
+
+\setbeamercolor*{section in head/foot}{parent=palette primary}
+\setbeamercolor*{date in head/foot}{parent=palette secondary}
+
+\mode<all>

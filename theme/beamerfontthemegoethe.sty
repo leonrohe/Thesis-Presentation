@@ -1,0 +1,52 @@
+% !TeX root = main.tex
+\mode<presentation>
+
+% Font & Input Encoding
+\RequirePackage{iftex}
+\ifPDFTeX
+    \RequirePackage[T1]{fontenc}
+    \RequirePackage[utf8]{inputenc}
+    \RequirePackage{libertine}
+    \RequirePackage{inconsolata}
+\else
+    \ifXeTeX
+        \ClassWarning{beamerthemegoethe}{Use LuaLaTeX instead of XeLaTeX}
+    \fi
+    \RequireLuaTeX
+    \RequirePackage{fontspec}
+    \setromanfont[Ligatures=TeX]{Linux Libertine O} % Serifenschrift
+    \setsansfont[Ligatures=TeX]{Linux Biolinum O} % serifenlose Schrift
+    \setmonofont[Scale=MatchLowercase]{inconsolata}%
+\fi
+
+\setbeamerfont{title}{series=\bfseries,size=\huge}
+\setbeamerfont{subtitle}{series=\mdseries\Large}
+\setbeamerfont{shorttitle}{series=\mdseries}
+
+\setbeamerfont{frametitle}{series=\mdseries,size=\Large}
+\setbeamerfont{framesubtitle}{series=\mdseries,size=\large}
+\setbeamerfont{framecitation}{series=\mdseries,size=\normalsize}
+
+\setbeamerfont{sectiontitle}{series=\mdseries,size=\huge}
+\setbeamerfont{subsectiontitle}{series=\mdseries,size=\Large}
+\setbeamerfont{subsubsectiontitle}{series=\mdseries,size=\large}
+
+\setbeamerfont{agenda in toc}{series=\mdseries,size=\huge}
+
+\setbeamerfont{section in toc}{parent=sectiontitle,size=\Large}
+\setbeamerfont{section in toc shaded}{parent=section in toc}
+
+\setbeamerfont{subsection in toc}{parent=subsectiontitle,size=\large}
+\setbeamerfont{subsection in toc shaded}{parent=subsection in toc}
+
+\setbeamerfont{subsubsection in toc}{parent=subsubsectiontitle,size=\normalsize}
+\setbeamerfont{subsubsection in toc shaded}{parent=subsubsection in toc}
+
+\setbeamerfont{footline}{series=\mdseries,size=\footnotesize}
+\setbeamerfont{institute}{size=\footnotesize}
+\setbeamerfont{date}{size=\footnotesize}
+
+\setbeamerfont{author}{series=\mdseries}
+\setbeamerfont{author short}{size=\footnotesize}
+
+\mode<all>

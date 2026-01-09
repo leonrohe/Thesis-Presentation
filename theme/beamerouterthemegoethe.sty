@@ -1,0 +1,111 @@
+% !TeX root = main.tex
+\mode<presentation>
+
+\define@key{beamerframe}{noframenumbering}[true]{%
+    \setbeamertemplate{footline}[none]%
+    \addtocounter{framenumber}{-1}%
+}
+
+\newlength{\beamer@goethe@frametitlemargin}
+\DeclareOptionBeamer{frametitlemargin}{\def\beamer@goethe@frametitlemargin{#1}}
+\ExecuteOptionsBeamer{frametitlemargin={0.3cm}}
+
+\newlength{\beamer@goethe@framefootermargin}
+\DeclareOptionBeamer{framefootermargin}{\def\beamer@goethe@framefootermargin{#1}}
+\ExecuteOptionsBeamer{framefootermargin={0.3cm}}
+
+\ProcessOptionsBeamer\relax
+
+\defbeamertemplate*{footline separator}{goethe}{~--~}
+\defbeamertemplate*{footline content}{goethe}[2]{%
+    {#2}%
+    {\let\hyperlink\@secondoftwo\insertshortinstitute}%
+    {\ifx\insertshortinstitute\@empty\else{\usebeamertemplate{footline separator}}\fi}%
+    {\let\hyperlink\@secondoftwo\insertshortauthor}%
+    {\ifx\insertshortauthor\@empty\else\usebeamertemplate{footline separator}\fi}%
+    {\let\hyperlink\@secondoftwo\insertshorttitle}%
+    {\ifx\insertshortsubtitle\@empty\else\usebeamertemplate{footline separator}\fi}%
+    {\let\hyperlink\@secondoftwo\insertshortsubtitle}%
+    {#1}%
+}
+
+\setbeamertemplate{footline}
+{%
+    \leavevmode
+    \begin{beamercolorbox}[wd=.85\paperwidth,ht=2.25ex,dp=1ex,left]{section in head/foot}
+        \hspace*{\beamer@goethe@framefootermargin}%
+        \usebeamerfont{footline}
+        \usebeamertemplate{footline content}%
+    \end{beamercolorbox}%
+    \hspace*{-.01\paperwidth}%
+    \begin{beamercolorbox}[wd=.16\paperwidth,ht=2.25ex,dp=1ex,right]{date in head/foot}
+        \usebeamerfont{footline}
+        {\insertframenumber{} / \inserttotalframenumber\hspace*{\beamer@goethe@framefootermargin}}
+    \end{beamercolorbox}
+}
+
+\newlength{\beamer@goethe@frametitle@ht}
+\def\beamer@goethe@frametitle@ht{2.75ex}%
+\define@key{beamerframe}{frametitleheight}{%
+    \def\beamer@goethe@frametitle@ht{#1}%
+}%
+
+\newlength{\beamer@goethe@frametitle@dp}
+\def\beamer@goethe@frametitle@dp{1.15ex}%
+\define@key{beamerframe}{frametitledepth}{%
+    \def\beamer@goethe@frametitle@dp{#1}%
+}%
+
+\newlength{\beamer@goethe@framesubtitle@ht}
+\def\beamer@goethe@framesubtitle@ht{2.25ex}%
+\define@key{beamerframe}{framesubtitleheight}{%
+    \def\beamer@goethe@framesubtitle@ht{#1}%
+}%
+
+\newlength{\beamer@goethe@framesubtitle@dp}
+\def\beamer@goethe@framesubtitle@dp{1.15ex}%
+\define@key{beamerframe}{framesubtitledepth}{%
+    \def\beamer@goethe@framesubtitle@dp{#1}%
+}%
+
+\apptocmd{\beamer@reseteecodes}{%
+    \def\beamer@goethe@frametitle@ht{2.75ex}%
+    \def\beamer@goethe@frametitle@dp{1.15ex}%
+    \def\beamer@goethe@framesubtitle@ht{2.25ex}%
+    \def\beamer@goethe@framesubtitle@dp{1.15ex}%
+}{}{}%
+
+\defbeamertemplate*{frametitle}{goethe}[1][left]
+{%
+    \ifbeamercolorempty[bg]{frametitle}{}{\nointerlineskip}%
+    \@tempdima=\textwidth%
+    \advance\@tempdima by\beamer@leftmargin%
+    \advance\@tempdima by\beamer@rightmargin%
+    \usebeamerfont{frametitle}%
+    \begin{beamercolorbox}[%
+        ht=\beamer@goethe@frametitle@ht,%
+        dp=\beamer@goethe@frametitle@dp,%
+        #1,%
+        wd=\the\@tempdima%
+    ]{frametitle}%
+        \vbox{}\vskip-1ex%
+        \if@tempswa\else\csname beamer@fte#1\endcsname\fi%
+        \leftskip\beamer@goethe@frametitlemargin\strut\insertframetitle\strut\par%
+    \end{beamercolorbox}%
+    \vskip-2pt%
+    \ifx\insertframesubtitle\@empty\else{%
+        \usebeamerfont{frame subtitle}
+        \begin{beamercolorbox}[%
+            ht=\beamer@goethe@framesubtitle@ht,%
+            dp=\beamer@goethe@framesubtitle@dp,%
+            #1,%
+            wd=\the\@tempdima%
+        ]{framesubtitle}%
+            \leftskip\beamer@goethe@frametitlemargin\strut\insertframesubtitle\strut\par%
+            \vskip-1ex%
+            \if@tempswa\else\vskip-.3cm\fi% set inside beamercolorbox... evil here...
+        \end{beamercolorbox}%
+    }\fi
+}
+
+\mode<all>
