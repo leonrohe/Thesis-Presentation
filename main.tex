@@ -1,0 +1,92 @@
+% !TeX spellcheck = en-US, de-DE
+% !TeX encoding = UTF-8 Unicode
+\documentclass[aspectratio=169,9pt]{beamer}
+
+\usetheme[
+    %% Language, passed to babel/polyglossia
+    english, % or (n)german
+    localization=babel, % or polyglossia or none
+    biblatexbackend=bibtex8, % or biber or bibtex (7-bit)
+    %
+    %% Imports
+    tikz, % import tikz and commonly used packages
+    minted, % import minted and set-up associated environments
+    %% Note: Using minted requires the [fragile] option for frames
+    algorithmicx, % import algorithmicx and set-up associated environments
+    % cleveref, % import cleveref and set-up some names
+    linkref, % expands cleveref to enable hyperlinks on reference numbers
+    %
+    %% LuaLaTeX
+    % The following options require LuaLaTeX, which may increase compilation times substantially.
+    % localization=polyglossia, % This replaces babel
+    %
+    %% Colors (GU corporate colors are always available)
+    ttlabcolors, % TTLab colors
+    % materialcolors, % Material default colorscheme colors
+    % alphabetcolors, % Alphabet color scheme, REQUIRES CITATION
+    % greenarmytagecolors, % Green-Armytage color scheme, REQUIRES CITATION
+    %
+    %% Layout options
+    titlemargin=0.1\paperwidth, % the size of margins left and right of the title
+    titleheight=0.4\paperheight, % the hight of the beamercolorbox containing title and subtitle
+    titledepth=0\paperheight, % the depth of the beamercolorbox containing title and subtitle
+    % centertitle, % center the title and subtitle
+    sectionheight=0.5\paperheight, % the height of the section title box section/subsection frame
+    frametitlemargin=0.3cm, % the size of the margin left of each frame title and subtitle
+    framefootermargin=0.3cm, % the size of the margins left and right in the footline
+    logo=images/logo-ttlab.pdf, % can be PDF or any image, is scaled to logowidth
+    logowidth=0.4\paperwidth, % you may need to scale your logo to fit the title page
+    % centerlogo, % center the logo on the title page
+    % nologo, % disable the logo on the title page
+    nonavigation, % disable the navigation in the footline
+]{goethe}
+
+%%%%%%%%%%%%%%%%%%%%%%%%
+% Title, Authors, etc. %
+%%%%%%%%%%%%%%%%%%%%%%%%
+\title[RTReconstruct]{RTReconstruct: Konzeption und Evaluation eines skalierbaren Systems für Echtzeit-3D-Rekonstruktionen}
+\author[Leon Rohe]{\Large Leon Rohe} % TODO
+\institute[Text Technology Lab]{\large Text Technology Lab}
+\date{\today} % TODO
+
+%%%%%%%%%%%%%%%%%
+% Customization %
+%%%%%%%%%%%%%%%%%
+%% Uncomment and change the following lines to change the footline
+% \makeatletter
+% \setbeamertemplate{footline separator}{~--~}
+% \setbeamertemplate{footline content}{%
+%     \let\hyperlink\@secondoftwo%
+%     \insertshorttitle\usebeamertemplate{footline separator}\insertshortsubtitle%
+% }
+% \makeatother
+
+%% Or, change the logo on the title page:
+% \makeatletter
+% \setbeamertemplate{logo on title page}{%
+%    \includegraphics[width=\beamer@goethe@logo@width]{\beamer@goethe@logo} %
+% }
+% \makeatother
+
+%%%%%%%%%%%%%%%%
+% Bibliography %
+%%%%%%%%%%%%%%%%
+\addbibresource{theme/colors.bib}
+% \addbibresource{references.bib}
+
+%%%%%%%%%%%%
+% Document %
+%%%%%%%%%%%%
+\begin{document}
+
+\maketitle
+
+\include{chapters/00_motivation}
+\include{chapters/01_grundlagen}
+\include{chapters/02_stand_der_technik}
+\include{chapters/03_konzeption}
+\include{chapters/04_implementation}
+\include{chapters/05_evaluation}
+\include{chapters/06_zusammenfassung}
+
+\end{document}
