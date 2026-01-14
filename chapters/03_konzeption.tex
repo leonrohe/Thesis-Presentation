@@ -1,1 +1,43 @@
 \section{Konzeption}\sectionFrame
+
+\begin{frame}{Funktionale Anforderungen}
+    \begin{itemize}
+        \item Kontinuierliche Datenerfassung: RGB-Bilder + Posen zeitlich fensterbasiert
+        \item Fensterbasierte Übertragung: Fragmente eindeutig zu Szene \& Modell
+        \item Rekonstruktion durch mehrere Modelle: Parallel NeuralRecon, VisFusion, MASt3R-SLAM, SLAM3R
+        \item Rückführung der Ergebnisse: 3D-Geometrie an VR-Clients
+        \item Szenen- \& Mehrbenutzerverwaltung: Mehrere Clients in einer Szene
+        \item Persistenz der Rekonstruktionen: Backend-Speicherung für Evaluation
+    \end{itemize}
+\end{frame}
+
+\begin{frame}{Nicht-funktionale Anforderungen}
+    \begin{itemize}
+        \item Niedrige Latenz: VR-tauglich (HMD-Ausgabe akzeptabel)
+        \item Stabilität: Paketverlust, ausfallende Modelle tolerierbar
+        \item Skalierbarkeit: Mehrere parallele Worker ohne Anpassungen
+        \item Modularität der Modelle: Entkoppelte Services mit einheitlicher Schnittstelle
+        \item Wiederverwendbarkeit: Generische Infrastruktur für verschiedene Szenarien
+    \end{itemize}
+\end{frame}
+
+\begin{frame}{Gesamtarchitektur}
+    \onslide<1-3> {
+        Router (Backend):
+        \begin{itemize}
+            \item Aufgabe: Vermittlung und Verteilung
+        \end{itemize}
+    }
+    \onslide<2-3> {
+        Worker (containerisiert):
+        \begin{itemize}
+            \item Erfassung und Visualisierung
+        \end{itemize}
+    }
+    \onslide<3> {
+        Frontend (Unity):
+        \begin{itemize}
+            \item Aufgabe: Kapselung der Rekonstruktionsmodelle
+        \end{itemize}
+    }
+\end{frame}
