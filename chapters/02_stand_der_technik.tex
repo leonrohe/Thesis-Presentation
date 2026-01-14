@@ -1,1 +1,68 @@
 \section{Stand der Technik}\sectionFrame
+
+\begin{frame}{RGB-D-basierte Verfahren}
+    \begin{itemize}
+        \item KinectFusion: Grundlegend für volumetrische Fusion mittels TSDF-Repräsentation
+        \item Erweiterungen: VoxelHashing, DynamicFusion, BundleFusion für verbesserte Konsistenz
+        \item Abhängig von RGB-D-Hardware → begrenzt auf Systeme mit Tiefensensoren
+        \item Consumer-VR (Meta Quest) hat typischerweise keine integrierten Tiefensensoren
+        \item Limitation: Schwierig für Multi-User-VR ohne identische Hardware
+    \end{itemize}
+\end{frame}
+
+\begin{frame}{Monokulare Verfahren}
+    \begin{itemize}
+        \item DTAM, LSD-SLAM, ORB-SLAM: Tiefe aus Kamerabewegung \& Konsistenz
+        \item Hardwareseitig kompatibel mit Standard-RGB-Kameras
+        \item Geeignet für Consumer-VR-Headsets
+        \item Neuere Ansätze: DeepVideoMVS, NICE-SLAM mit neuronaler Tiefenschätzung
+        \item Problem: Oft an spezifische Frameworks \& Datenformate gekoppelt
+        \item Systematischer Vergleich mehrerer Verfahren mit hohem Integrationsaufwand
+    \end{itemize}
+\end{frame}
+
+\begin{frame}{Limitationen für VR-Integration}
+    \begin{itemize}
+        \item Monolithische Architektur: Rekonstruktion, Tracking \& Output fest integriert
+        \item Keine Streaming-Infrastruktur: Batch-Verarbeitung statt kontinuierlicher Updates
+        \item Limitierte Pose-Flexibilität: Verfahren benötigen unterschiedliche Eingaben
+        \item Mangel an Multi-Client-Unterstützung: Nicht auf synchronisierte VR-Clients ausgerichtet
+    \end{itemize}
+\end{frame}
+
+\begin{frame}
+    \begin{itemize}
+        \item NeuralRecon (Volumetrisch, Extern Pose) → Mesh-Output
+        \item VisFusion (Volumetrisch, Extern Pose) → TSDF/Mesh mit Sichtbarkeitsmodellierung
+        \item MASt3R-SLAM (Hybrid SLAM, Interne Pose) → Punktwolken-Output
+        \item SLAM3R (Feed-Forward, Implizite Pose) → Inkrementelle Punktwolke
+    \end{itemize}
+\end{frame}
+
+\begin{frame}{Forschungslücke}
+    Fehlende Infrastrukturen:
+    \begin{itemize}
+        \item Modellunabhängige Integration: Standardisierte Schnittstelle fehlt
+        \item Multi-Client Streaming: Keine Unterstützung für kontinuierliche VR-Updates
+        \item Heterogene Ausgabeformate: Mesh \& Punktwolken nicht einheitlich abgedeckt
+        \item Pose-Flexibilität: Externe \& interne Pose-Verfahren nicht parallel einsetzbar
+    \end{itemize}
+    \onslide<2> {
+        Problem:
+        \begin{itemize}
+            \item Forschungsprototypen sind monolithisch $\rightarrow$ keine Wiederverwendung
+            \item Viele ad-hoc-Integrationen statt systematischer Vergleiche
+            \item Hoher Aufwand für VR-Integration jedes neuen Verfahrens
+        \end{itemize}
+    }
+\end{frame}
+
+\begin{frame}{RTReconstruct als Lösung}
+    \begin{itemize}
+        \item Containerisierte, modulare Architektur für heterogene Verfahren
+        \item Standardisiertes Streaming-Protokoll für kontinuierliche VR-Updates
+        \item Modellunabhängige Schnittstellen $\rightarrow$ austauschbare Rekonstruktionsmodule
+        \item Multi-Client-Unterstützung via WebSocket-basiertes Fan-Out
+        \item Skalierbar \& erweiterbar $\rightarrow$ neue Modelle ohne Code-Änderungen integrierbar
+    \end{itemize}
+\end{frame}
