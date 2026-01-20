@@ -1,1 +1,154 @@
 \section{Evaluation}\sectionFrame
+
+\begin{frame}{Evaluationsziele}
+    \onslide<1-3> {
+        Funktionale Validierung:
+        \begin{itemize}
+            \item Modulare Architektur erfüllt Anforderungen
+            \item Parallelbetrieb von Modellen
+            \item Stabile Kommunikation
+        \end{itemize}
+    }
+    \onslide<2-3> {
+        Echtzeitfähigkeit:
+        \begin{itemize}
+            \item Latenz
+            \item Durchsatz
+            \item Resourcenauslastung
+        \end{itemize}
+    }
+    \onslide<3> {
+        Rekonstruktionsqualität:
+        \begin{itemize}
+            \item Quantiativ (F-Score)
+            \item Qualitativ (Vollständigkeit, Detailtreue)
+        \end{itemize}
+    }
+\end{frame}
+
+\begin{frame}{Test- und Evaluationsumgebung}
+    \begin{columns}
+        \begin{column}{0.5\textwidth}
+            \textbf{Hardware (Backend)}
+            \begin{itemize}
+                \item CPU: AMD Ryzen 5 2600
+                \item GPU: NVIDIA GTX 1070 Ti (8GB)
+                \item RAM: 16 GB
+                \item Docker 29.0.1
+            \end{itemize}
+        \end{column}
+
+        \begin{column}{0.5\textwidth}
+            \textbf{VR-System \& Netzwerk}
+            \begin{itemize}
+                \item Meta Quest 3
+                \item WiFi 5 Heimnetzwerk
+                \item Unity 6000.2.12f1
+                \item 60 Mbit Internet
+            \end{itemize}
+        \end{column}
+    \end{columns}
+\end{frame}
+
+\begin{frame}{Testzenen im Überblick}
+    \textbf{3 virtuelle Szenen} (mit Ground-Truth)
+    \begin{enumerate}
+        \item V1 – Geometrische Primitive: Würfel, Torus, Pyramide | 5×5×5m
+        \item V2 – Möbliertes Schlafzimmer: Möbel, Okklusionen | 6×5×3m
+        \item V3 – Mehrzweckraum: Große Flächen, viele Details | 10×5×3m
+    \end{enumerate}
+    \textbf{2 reale Szenen} (für Praktikabilität)
+    \begin{enumerate}
+        \item R1 – Schlafzimmer: Dachschräge, natürliches Licht
+        \item R2 – Wohnzimmer: Große Fensterfront, Glasflächen
+    \end{enumerate}
+\end{frame}
+
+\begin{frame}{Messsmethoden \& Metriken}
+        \begin{columns}
+        \begin{column}{0.5\textwidth}
+            \textbf{Performance}
+            \begin{itemize}
+                \item Latenz: Fragment-Versand bis Visualisierung
+                \item Durchsatz: Fragmente pro Sekunde
+                \item Ressourcen: GPU/CPU-Auslastung
+            \end{itemize}
+        \end{column}
+
+        \begin{column}{0.5\textwidth}
+            \textbf{Qualität}
+            \begin{itemize}
+                \item Quantiativ: F-Score (Präzision \& Recall)
+                \item Schwellwert: 10cm zur GT
+                \item Qualitativ: Vollständigkeit, Details, Artefakte
+            \end{itemize}
+        \end{column}
+    \end{columns}
+\end{frame}
+
+\begin{frame}{Funktionale Validierung - Ergebnisse}
+    \begin{columns}
+        \begin{column}{0.5\textwidth}
+        \textbf{End-to-End-Kommunikation:}
+        \begin{itemize}
+            \item 60 Testläufe über 6h
+            \item 0 Verbindungsabbrüche
+        \end{itemize}
+        \vspace{1cm}
+        \textbf{Parallele Modellausführung:}
+        \begin{itemize}
+            \item Alle 4 Modelle stabil gleichzeitig
+            \item Containerisierung funktioniert
+        \end{itemize}    
+        \end{column}
+        \begin{column}{0.5\textwidth}
+        \textbf{Multi-Szenen-Unterstützung:}
+        \begin{itemize}
+            \item 2 Szenen mit 4 Clients
+            \item Fehlerfreie Zuordnung
+        \end{itemize}
+        \vspace{1cm}
+        \textbf{VR-Integration:}
+        \begin{itemize}
+            \item Meshes und Punktwolken visualisiert
+            \item Bis 100k Punkte darstellbar
+        \end{itemize}
+    \end{column}
+    \end{columns}
+\end{frame}
+
+\begin{frame}{Latenz - Gesamtübersicht}
+    
+\end{frame}
+
+\begin{frame}{Latenzkomposition}
+    
+\end{frame}
+
+\begin{frame}{Fragment- \& Ergebnisgrößen}
+    
+\end{frame}
+
+\begin{frame}{Durchsatz \& Resourcenauslastung}
+    
+\end{frame}
+
+\begin{frame}{Rekonstruktionsqualität - F-Score}
+    
+\end{frame}
+
+\begin{frame}{Qualitative Bewertung}
+    
+\end{frame}
+
+\begin{frame}{Echtzeitfähigkeit - Zusammenfassung}
+    
+\end{frame}
+
+\begin{frame}{Diskussion der Ergebnisse}
+    
+\end{frame}
+
+\begin{frame}{Limitationen \& Beantwortung der Forschungsfrage}
+    
+\end{frame}
