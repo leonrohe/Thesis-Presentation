@@ -1,1 +1,94 @@
 \section{Implementation}\sectionFrame
+
+\begin{frame}{Technologie Stack}
+    \begin{itemize}
+        \item \textbf{Backend}: FastAPI + Uvicorn (asynchrone Verarbeitung, nicht-blockierend)
+        \item \textbf{Frontend}: Unity 6000.2.12f1 + NativeWebSocket
+        \item \textbf{Containerisierung}: Docker Compose, NVIDIA Container Toolkit für GPU-Zugriff
+        \item \textbf{Speicherung}: SQLite für Metadaten + GLB-Blobs
+    \end{itemize}
+\end{frame}
+
+\begin{frame}{Binäres Kommunikationsprotokoll}
+    \begin{itemize}
+        \item Warum binär? 33\% Overhead-Einsparung vs. Base64-JSON
+        \item JPEG-Komprimierung für Bilder
+        \item GLB-Format für 3D-Modelle
+        \item Paketstruktur: Einheitlicher Header (Magic + Versionsnummer)
+        \item Drei Pakettypen: ModelFragment, ModelResult, TransformFragment
+    \end{itemize}
+\end{frame}
+
+\begin{frame}{Backend - Asynchrones Routing}
+    Router als Vermittler:
+    \begin{itemize}
+        \item WebSocket /ws/client: Unity-Clients registrieren sich
+        \item WebSocket /ws/model/{name}: Worker registrieren sich
+    \end{itemize}
+    Funktionen:
+    \begin{itemize}
+        \item Fragment-Validierung und Deserialisierung
+        \item Zuordnung zu Modellen in Warteschlangen
+        \item Fan-Out an alle Clients derselben Szene (mit asyncio.gather())
+        \item Persistente Speicherung von Modellen
+    \end{itemize}
+\end{frame}
+
+\begin{frame}{Backend - Worker Architektur}
+    \textbf{BaseReconstructionModel:}
+    \begin{itemize}
+        \item WebSocket-Verbindung zu Router
+        \item Asynchrone Schleife \texttt{listen()} für Fragment-Empfang
+        \item Abstrakte Methode \texttt{handle\_fragment()} für Subklassen
+    \end{itemize}
+    \textbf{Spezialisierte Worker:}
+    \begin{itemize}
+        \item Laden externe Modelle, transformieren Eingaben, senden Ergebnisse
+        \item Container-Setup: Modellname + Server-URL als Umgebungsvariablen
+    \end{itemize}    
+\end{frame}
+
+\begin{frame}{Frontend - Hardware Abstraktion}
+    \textbf{ICaptureDevice-Interface:}
+    \begin{itemize}
+        \item SmartphoneCaptureDevice: ARFoundation (Android/iOS)
+        \item MetaQuestCaptureDevice: Passthrough-API (Umgebungskameras + Headset-Position)
+        \item EvalCaptureDevice: Synthetische Szenen (Testing)
+    \end{itemize}
+\end{frame}
+
+\begin{frame}{Frontend - Fragment Sammlung}
+    \textbf{Bewegungsbasierte Datenerfassung:}
+    \begin{itemize}
+        \item Min. 0,1 m Positionsänderung
+        \item Min. 15° Rotationsänderung
+    \end{itemize}
+    \textbf{Pufferung:} Frames bis konfigurierte Fenstergröße (z.B. 9 Frames)\\
+    \textbf{Effizienz:} Nur informative Ansichten übertragen → weniger Netzwerk-Overhead
+\end{frame}
+
+\begin{frame}{Frontend - Visualisierung der Rekonstruktion}
+    Mesh-Daten (NeuralRecon, VisFusion):
+    \begin{itemize}
+        \item Chunking: 5×5×5 Meter Gitter
+        \item GPU Frustum Culling für Performance
+    \end{itemize}
+    Punktwolken (SLAM3R, MASt3R-SLAM):
+    \begin{itemize}
+        \item GPU-beschleunigtes Rendering (limitiert auf ~100.000 Punkte für Meta Quest 3)
+        \item GraphicsBuffer + Compute-Shader + VFX Graph
+    \end{itemize}
+\end{frame}
+
+\begin{frame}{Integration in das Va.Si.Li-Lab}
+    \begin{itemize}
+        \item Nicht-invasive Erweiterung: RTReconstruct als eigenständiger Dienst
+        \item Vorkonfigurierte Prefabs: ReconstructionManager, RoomReconstructor, ReconstructionClient
+        \item Unabhängig: Lab-Funktionalität bleibt komplett unverändert 
+    \end{itemize}
+    Rollen-Konzept:
+    \begin{itemize}
+        \item Host: Initiiert Datenerfassung, sendet Sensordaten
+        \item Visitor: Empfängt Rekonstruktionen zur Visualisierung
+    \end{itemize}
+\end{frame}
