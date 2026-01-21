@@ -86,7 +86,7 @@
     \end{columns}
 \end{frame}
 
-\begin{frame}{Funktionale Validierung - Ergebnisse}
+\begin{frame}{Funktionale Validierung}
     \begin{columns}
         \begin{column}{0.5\textwidth}
         \textbf{End-to-End-Kommunikation:}
@@ -117,20 +117,146 @@
     \end{columns}
 \end{frame}
 
-\begin{frame}{Latenz - Gesamtübersicht}
+\begin{frame}{End-To-End-Latenz - Definition}
     
+    {
+        \Large
+        \begin{align*}
+            L_{\text{total}} = L_{\text{network}} + L_{\text{inference}} + L_{\text{render}} \\
+        \end{align*}
+    }  
+
+    \begin{itemize}
+        \item $L_{\text{network}}$~:~Benötigte Zeit zum Up- und Download des Fragments
+        \item $L_{\text{inference}}$~:~Benötigte Zeit für die Inferrenz des Fragments
+        \item $L_{\text{render}}$~:~Benötigte Zeit für das Darstellen des Modell Ergebnisses
+    \end{itemize}
 \end{frame}
 
-\begin{frame}{Latenzkomposition}
-    
+\begin{frame}{End-To-End-Latenz - Ergebnisse - V1}
+    \centering
+    \includegraphics{images/room00_latency.png}
 \end{frame}
 
-\begin{frame}{Fragment- \& Ergebnisgrößen}
-    
+\begin{frame}{End-To-End-Latenz - Ergebnisse - V2}
+    \centering
+    \includegraphics{images/room01_latency.png}
 \end{frame}
 
-\begin{frame}{Durchsatz \& Resourcenauslastung}
-    
+\begin{frame}{End-To-End-Latenz - Ergebnisse - V3}
+    \centering
+    \includegraphics{images/room02_latency.png}
+\end{frame}
+
+\begin{frame}{End-To-End-Latenz - Ergebnisse - R1}
+    \centering
+    \includegraphics{images/room03_latency.png}
+\end{frame}
+
+\begin{frame}{End-To-End-Latenz - Ergebnisse - R2}
+    \centering
+    \includegraphics{images/room04_latency.png}
+\end{frame}
+
+\begin{frame}{End-To-End-Latenz - Komposition}
+    \centering
+    \includegraphics[width=\textwidth]{images/latency_split.png}
+\end{frame}
+
+\begin{frame}{Fragment- \& Ergebnisgrößen - Virtuelle Szenen}
+    \begin{table}[h]
+        \centering
+        \label{tab:data_volumes}
+        \resizebox{\textwidth}{!}{%
+        \begin{tabular}{l|l|c|c|c|c}
+            \toprule
+            \textbf{Szene} & \textbf{Modell} & \makecell{\textbf{\O~$\text{Frag}_{\text{in}}$~[MB]}} & \makecell{\textbf{\O~$\text{Frag}_{\text{out}}$~[MB]}} & \makecell{\textbf{$\sum\text{Frag}_{\text{in}}$~[MB]}} & \makecell{\textbf{$\sum\text{Frag}_{\text{out}}$~[MB]}} \\
+            \midrule
+            \multirow{4}{*}{V1} 
+                & NeuralRecon  & \multirow{4}{*}{0{,}82} & 1{,}83 & \multirow{4}{*}{19{,}57} & 44{,}04 \\
+                & VisFusion    &                       & 2{,}73 &                        & 65{,}40 \\
+                & MASt3R-SLAM  &                       & 1{,}60 &                        & 38{,}42 \\
+                & SLAM3R       &                       & 1{,}60 &                        & 38{,}42 \\
+            \midrule
+            \multirow{4}{*}{V2} 
+                & NeuralRecon  & \multirow{4}{*}{1{,}62} & 2{,}84 & \multirow{4}{*}{69{,}57} & 122{,}28 \\
+                & VisFusion    &                      & 3{,}25  &                        & 139{,}85 \\
+                & MASt3R-SLAM  &                      & 1{,}60  &                        & 68{,}60 \\
+                & SLAM3R       &                      & 1{,}60  &                        & 68{,}84 \\
+            \midrule
+            \multirow{4}{*}{V3} 
+                & NeuralRecon  & \multirow{4}{*}{1{,}56} & 3{,}60 & \multirow{4}{*}{88{,}70} & 204{,}93 \\
+                & VisFusion    &                      & 4{,}24  &                        & 241{,}51 \\
+                & MASt3R-SLAM  &                      & 1{,}59  &                        & 90{,}69 \\
+                & SLAM3R       &                      & 1{,}60  &                        & 91{,}26 \\
+            \bottomrule
+        \end{tabular}%
+        }
+    \end{table}
+\end{frame}
+
+\begin{frame}{Fragment- \& Ergebnisgrößen - Reale Szenen}
+    \begin{table}[h]
+        \centering
+        \label{tab:data_volumes}
+        \resizebox{\textwidth}{!}{%
+        \begin{tabular}{l|l|c|c|c|c}
+            \toprule
+            \textbf{Szene} & \textbf{Modell} & \makecell{\textbf{\O~$\text{Frag}_{\text{in}}$~[MB]}} & \makecell{\textbf{\O~$\text{Frag}_{\text{out}}$~[MB]}} & \makecell{\textbf{$\sum\text{Frag}_{\text{in}}$~[MB]}} & \makecell{\textbf{$\sum\text{Frag}_{\text{out}}$~[MB]}} \\
+            \midrule
+            \multirow{4}{*}{R1} 
+                & NeuralRecon  & \multirow{4}{*}{1{,}63} & 2{,}19 & \multirow{4}{*}{78{,}50} & 105{,}29 \\
+                & VisFusion    &                       & 2{,}58 &                       & 124{,}14 \\
+                & MASt3R-SLAM  &                       & 1{,}60 &                       & 76{,}85 \\
+                & SLAM3R       &                       & 1{,}60 &                       & 76{,}85 \\
+            \midrule
+            \multirow{4}{*}{R2} 
+                & NeuralRecon  & \multirow{4}{*}{1{,}84} & 2{,}48 & \multirow{4}{*}{79{,}33} & 106{,}87 \\
+                & VisFusion    &                       & 3{,}70 &                        & 159{,}19 \\
+                & MASt3R-SLAM  &                       & 1{,}60 &                        & 68{,}84 \\
+                & SLAM3R       &                       & 1{,}60 &                        & 68{,}84 \\
+            \bottomrule
+        \end{tabular}%
+        }
+    \end{table}
+\end{frame}
+
+\begin{frame}{Durchsatz}
+    \textbf{Volumetrische Verfahren}
+    \begin{itemize}
+        \item NeuralRecon: 0,32 - 0,62 Fragmente/s
+        \item VisFusion: 0,30 - 0,38 Fragmente/s
+    \end{itemize}
+
+    \textbf{SLAM Verfahren}
+    \begin{itemize}
+        \item MaSt3R-SLAM: 0,12 - 0,13 Fragmente/s
+        \item SLAM3R: 0,03 - 0,10 Fragmente/s
+    \end{itemize}
+
+    \textbf{Trade-Off:} Schneller aber weniger reobust (volumetrisch) vs. Langsam, aber robuster (SLAM)
+\end{frame}
+
+\begin{frame}{Ressourcenauslastung}
+        \begin{columns}
+        \begin{column}{0.5\textwidth}
+            \textbf{GPU-Auslastung}
+            \begin{itemize}
+                \item Latenz: Fragment-Versand bis Visualisierung
+                \item Durchsatz: Fragmente pro Sekunde
+                \item Ressourcen: GPU/CPU-Auslastung
+            \end{itemize}
+        \end{column}
+
+        \begin{column}{0.5\textwidth}
+            \textbf{Qualität}
+            \begin{itemize}
+                \item Quantiativ: F-Score (Präzision \& Recall)
+                \item Schwellwert: 10cm zur GT
+                \item Qualitativ: Vollständigkeit, Details, Artefakte
+            \end{itemize}
+        \end{column}
+    \end{columns}
 \end{frame}
 
 \begin{frame}{Rekonstruktionsqualität - F-Score}
