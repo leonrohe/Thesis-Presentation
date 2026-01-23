@@ -1,94 +1,73 @@
 \section{Grundlagen}\sectionFrame
 
-\begin{frame}{Virtual Reality}
+\begin{frame}{Grundlagen: Virtual Reality \& monokulare Rekonstruktion}
+    \textbf{VR-Hardware heute:}
     \begin{itemize}
-        \item Inside-Out-Tracking: Kameras im Headset erfassen Umgebung für Positionsbestimmung
-        \item Position \& Orientierung relativ zu definiertem Referenzpunkt berechnet
-        \item Passthrough-Funktionalität: Frontkameras zeigen Live-Bild der realen Umgebung
-        \item Ermöglicht Mixed-Reality-Anwendungen: Virtuelle Inhalte in realer Umgebung eingebettet
-        \item Kontinuierliche RGB-Videodaten direkt von HMD-Kameras verfügbar
-        \item Ideal für monokulare 3D-Rekonstruktion ohne zusätzliche Hardware
+        \item HMDs wie Meta Quest 3 mit integrierten RGB-Kameras
+        \item Kein Tiefensensor $\Rightarrow$ klassische RGB-D-Verfahren nicht einsetzbar
+    \end{itemize}
+    
+    \vspace{0.8em}
+    \textbf{RTReconstruct-Ziel:}
+    \begin{itemize}
+        \item Tiefe aus Bildsequenzen rekonstruieren (SLAM, volumetrische Verfahren)
+        \item Ergebnisse in laufende VR-Anwendung streamen
+        \item Mehrere Rekonstruktionsmodelle parallel austauschbar
     \end{itemize}
 \end{frame}
 
-\begin{frame}{3D-Rekonstruktion: Volumetrische Verfahren}
+\begin{frame}{Grundlagen: 3D-Rekonstruktion}
     \begin{itemize}
-        \item TSDF-Repräsentation: Truncated Signed Distance Field
-        \item Diskrete Gitter von Voxeln mit Distanzinformationen
-        \item Positive Distanz = Bereich vor Oberfläche
-        \item Negative Distanz = Bereich hinter Oberfläche
-        \item Marching Cubes-Algorithmus für Mesh-Generierung
-        \item Schrittweise Fusion mehrerer Ansichten → global konsistent
-        \item GPU-beschleunigte, effiziente Echtzeit-Updates
-    \end{itemize}
-\end{frame}
-
-\begin{frame}{3D-Rekonstruktion: SLAM-Verfahren}
-    \begin{itemize}
-        \item Klassisch: Visuelle Merkmals-Verfolgung über mehrere Frames
-        \item Gleichzeitige Optimierung von Kameraposen und 3D-Punkten
-        \item Lernbasiert: Hybride Verfahren mit neuronalen Netzen
-        \item Robuster gegen schwierige Beleuchtung \& texturarme Szenen
-        \item Monokulare Verfahren ideal für VR-Headsets ohne dedizierte Tiefensensoren
-    \end{itemize}
-\end{frame}
-
-\begin{frame}{Systemtechnologien: Client-Server-Architektur}
-    \begin{itemize}
-        \item Clients: Datenerzeugung \& Visualisierung
-        \item Server: Rechenintensive Verarbeitung auf GPU
-        \item Vorteilhaft für mobile VR mit begrenzte Rechenleistung
-        \item Bidirektionale, persistente Verbindung erforderlich
-        \item Asynchrone Kommunikation für Echtzeitanwendungen
-    \end{itemize}
-\end{frame}
-
-\begin{frame}{Systemtechnologien: WebSocket-Protokoll}
-    \begin{itemize}
-        \item Vollständig bidirektional über persistente TCP-Verbindung
-        \item Server kann jederzeit Daten an Clients senden
-        \item Gegenüber HTTP-Polling:
+        \item Prozess: 2D-Bilder $\rightarrow$ 3D-Geometrie
+        \item \textbf{Monokulare Rekonstruktion}: Tiefe aus Kamerabewegung + Bildsequenzen
+        \item Zwei zentrale Paradigmen:
         \begin{itemize}
-            \item Drastisch reduzierte Latenz
-            \item Minimierter Netzwerk-Overhead
-            \item Ideal für Streaming mit kontinuierlichem Datenfluss
+            \setlength{\itemsep}{\lineskip}
+            \item \textbf{Volumetrisch} (z.\,B. NeuralRecon): Benötigt externe Kameraposen
+            \item \textbf{SLAM-basiert} (z.\,B. MASt3R-SLAM): Schätzt Posen selbst
         \end{itemize}
-        \item Dauerhafte Verbindung ohne Verbindungsaufbau-Kosten
+        \item Diese Heterogenität ist zentral für das System-Design
     \end{itemize}
 \end{frame}
 
-\begin{frame}{Systemtechnologien: Containerisierung}
-    \begin{itemize}
-        \item Container: Isolierte Laufzeitumgebungen mit allen Abhängigkeiten
-        \item Docker: Verbreitetste Implementierung
-        \item Docker Compose: Orchestrierung mehrerer Container über yml-Datei
-        \item NVIDIA Container Toolkit: GPU-Zugriff innerhalb von Containern
-        \item Ressourcenschonender als virtuelle Maschinen
-        \item Konsistente Ausführung unabhängig von Host-Umgebung
-        \item Ideal für heterogene Rekonstruktionsverfahren mit verschiedenen GPU-Abhängigkeiten
-    \end{itemize}
+\begin{frame}{Grundlagen: 3D-Repräsentationsformate}
+    \begin{columns}[T]
+        \column{0.5\textwidth}
+        \textbf{Punktwolken}
+        \begin{itemize}
+            \item Ungeordnete 3D-Punkte
+            \item Speichereffizient
+            \item Schnelle Visualisierung
+        \end{itemize}
+        
+        \column{0.5\textwidth}
+        \textbf{Meshes}
+        \begin{itemize}
+            \item Explizite Oberflächengeometrie
+            \item GLB-Format (binär, kompakt)
+            \item Besser für Kollisionen
+        \end{itemize}
+    \end{columns}
+    \vfill
+    \only<2>{
+        \begin{center}
+            \textbf{RTReconstruct muss beide Formate handhaben!}    
+        \end{center}
+    }
 \end{frame}
 
-\begin{frame}{Zielumgebung: Unity}
+\begin{frame}{Grundlagen: Zielumgebung Va.Si.Li-Lab}
     \begin{itemize}
-        \item Unity: Führende 3D-Engine für interaktive Anwendungen
-        \item Komponentenorientierte Architektur mit GameObjects
-        \item Spezialisierte XR-Subsysteme für VR
-        \item Head-Tracking, stereoskopisches Rendering, HMD-Integration
-        \item C\#-Scripting-API für flexible Logik \& Netzwerk
-        \item Unterstützung moderner Grafik-APIs: OpenGL, Vulkan, DirectX
-        \item Plattformübergreifend: Mobile \& hochauflösende VR
-    \end{itemize}
-\end{frame}
-
-\begin{frame}{Zielumgebung: Va.Si.Li-Lab}
-    \begin{itemize}
-        \item VR-Lab for Simulation-based Learning - Goethe-Universität Frankfurt
-        \item Mehrbenutzerfähige VR-Plattform für simulationsbasierte Lernszenarien
-        \item Fokus: Pädagogisch-professionelle Handlungssituationen
-        \item Ubiq-Framework für Netzwerkkommunikation \& Synchronisation
-        \item Unterstützt verschiedene Endgeräte \& Remote-Teilnahme
-        \item Modulare Architektur ermöglicht Integration neuer Funktionalitäten
-        \item Ideale Zielplattform für RTReconstruct-Integration
+        \item \textbf{Multi-User VR-Plattform}: Basis-Technologie = Unity + Ubiq-Framework
+        \item Designed für \textit{kollaborative, simulationsbasierte Lernszenarien}
+        \item Bereits vorhanden: Tracking, Netzwerk-Sync, Szenenlogik
+        \item \vspace{0.5em}
+        \textbf{RTReconstruct als Modul}:
+        \begin{itemize}
+            \setlength{\itemsep}{\lineskip}
+            \item Nutzt bestehende \texttt{Tracking-System} für Kameradaten
+            \item Erhält Rekonstruktionsergebnisse von Backend
+            \item Visualisiert in gemeinsamem 3D-Raum
+        \end{itemize}
     \end{itemize}
 \end{frame}

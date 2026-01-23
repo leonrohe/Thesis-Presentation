@@ -1,77 +1,70 @@
 \section{Motivation}\sectionFrame
 
-\begin{frame}{Virtual-Reality und die Realität}
+\begin{frame}{Warum 3D-Rekonstruktion in VR?}
     \begin{itemize}
-        \item Moderne VR-Systeme ermöglichen natürliche Interaktion durch präzises Tracking
-        \item Passthrough-Funktionen erlauben Mixed-Reality-Anwendungen
-        \item Problem: Viele VR-Erfahrungen basieren auf künstlich erstellten Szenen
-        \item Nachteil für spezifische Anwendungsfelder:
-        \begin{itemize}
-            \item Kollaboratives Arbeiten
-            \item Simulationsbasiertes Lernen
-            \item Räumliche Analysewerkzeuge
-        \end{itemize}
-        \item Diese Anwendungen benötigen enge Beziehung zwischen digitaler und realer Welt
+        \item Moderne VR-Systeme ermöglichen natürliche Interaktion in virtuellen Räumen
+        \item Viele VR-Erfahrungen basieren auf künstlich erstellten Szenen
+        \item Für kollaboratives Arbeiten, simulationsbasiertes Lernen und räumliche Analysen: enge Beziehung zwischen digitaler und realer Welt erforderlich
+        \item Glaubwürdige virtuelle Räume leiten sich aus realen Szenen ab
     \end{itemize}
 \end{frame}
 
-\begin{frame}{Warum 3D-Rekonstruktion}
+\begin{frame}{Praktische Vorteile der Rekonstruktion}
     \begin{itemize}
-        \item Virtuelle Räume wirken glaubwürdiger, wenn sie aus realen Szenen abgeleitet sind
-        \item Praktische Vorteile:
-        \begin{itemize}
-            \item Spontane Erfassung von Umgebungen
-            \item Gemeinsame Analyse und Visualisierung
-            \item Kollaborative Aufgaben ohne aufwändige manuelle Modellierung
-        \end{itemize}
-        \item Zentrale Komponente für nächste Generation interaktiver VR-Systeme
-        \item Erspart zeit- und kostenintensive Modellierungsprozesse
+        \item Räume können spontan erfasst und gemeinsam analysiert werden
+        \item Kollaborative Aufgaben ohne aufwendige manuelle Modellierungsprozesse
+        \item Szenen-Erfassung ermöglicht dynamische VR-Anwendungen
+        \item Grundbaustein für nächste Generation interaktiver VR-Systeme
     \end{itemize}
 \end{frame}
 
-\begin{frame}{Von Photogrammetrie zu Echtzeit-Verfahren}
-    Klassische Photogrammetrie:
+\begin{frame}{Problem: Klassische Photogrammetrie}
     \begin{itemize}
         \item Hochauflösende Resultate
-        \item Umfangreiche Bildaufnahmen erforderlich
-        \item Lange Verarbeitungszeiten
-        \item[$\Longrightarrow$] Ungeeignet für dynamische/interaktive VR-Anwendungen
+        \item \textbf{Aber:} umfangreiche Bildaufnahmen erforderlich
+        \item \textbf{Aber:} lange Verarbeitungszeiten
+        \item \textbf{Ergebnis:} ungeeignet für dynamische und interaktive VR-Anwendungen
     \end{itemize}
-    \onslide<2>{
-        Monokulare-Echtzeit-Verfahren:
-        \begin{itemize}
-            \item Fortlaufende RGB-Videodaten nutzen
-            \item Geometrie schrittweise rekonstruieren
-            \item Direkt auf VR-Headset-Kameras angewendet
-            \item Keine zusätzliche Hardware erforderlich
-            \item[$\Longrightarrow$] Gute Eignung für dynamische/interaktive VR-Anwendungen
-        \end{itemize}
-    }
 \end{frame}
 
-\begin{frame}{Das Integrationsproblem}
-    Aktuelle Forschungsprototypen:
+\begin{frame}{Lösungsansatz: Monokulare Echtzeit-Rekonstruktion}
     \begin{itemize}
-        \item Entwickelt in isolierten Forschungskontexten
-        \item Eigene Laufzeitumgebungen und Frameworks
-        \item Heterogene Datenpipelines
+        \item Fortlaufende RGB-Videodaten ermöglichen schrittweise Geometrie-Rekonstruktion
+        \item Monokulare Verfahren spielen zentrale Rolle
+        \item \textbf{Vorteil:} keine zusätzliche Hardware erforderlich
+        \item \textbf{Vorteil:} direkte Nutzung von Frontkameras moderner VR-Headsets
     \end{itemize}
-    \onslide<2> {
-        Anforderungen von VR-Anwendungen:
-        \begin{itemize}
-            \item Stabiler, strukturierter Datenfluss
-            \item Zuverlässige Bereitstellung kontinuierlich wachsender Modelle
-            \item Nahtlose Frontend-Integration
-            \item Forschungslücke: Modulare Architektur zur Kapselung verschiedener Verfahren bislang nur unzureichend adressiert
-        \end{itemize}
-    }
 \end{frame}
 
-\begin{frame}{Forschungsfrage und Ziel}
-    \only<2> {
-        \begin{center}
-            \Large
-            \textit{Wie gut eignet sich eine modulare, containerisierte Systemarchitektur zur Integration verschiedener Echtzeit-3D-Rekonstruktionsverfahren in eine bestehende Virtual-Reality-Umgebung?}
-        \end{center}
-    }
+\begin{frame}{Zentrale Herausforderung}
+    \begin{itemize}
+        \item Monokulare Rekonstruktionsverfahren grundsätzlich für VR geeignet
+        \item \textbf{Problem:} praktische Einbindung in bestehende Anwendungen kaum etabliert
+        \item Viele Modelle entwickelt in isolierten Forschungskontexten
+        \item Heterogene Laufzeitumgebungen, Frameworks und Datenpipelines
+        \item Nicht auf Einsatz in interaktiven Systemen ausgelegt
+    \end{itemize}
+\end{frame}
+
+\begin{frame}{Was VR-Anwendungen benötigen}
+    \begin{itemize}
+        \item Stabiler und klar strukturierter Datenfluss
+        \item Kontinuierlich wachsende Modelle verlässlich bereitstellen
+        \item Nahtlose Integration ins Frontend
+        \item Vergleichbarer Betrieb mehrerer Rekonstruktionsverfahren
+    \end{itemize}
+\end{frame}
+
+\begin{frame}{Forschungslücke}
+    \begin{itemize}
+        \item Modulare Architektur noch nicht ausreichend adressiert
+        \item Keine Lösung für standardisierte Integration verschiedener Verfahren
+        \item Fehlende Infrastruktur für kapselte und vereinheitlichte Rekonstruktion in VR
+    \end{itemize}
+\end{frame}
+
+\begin{frame}{Forschungsfrage}
+    \begin{center}
+        \Large \textit{Wie gut eignet sich eine modulare, containerisierte Systemarchitektur zur Integration verschiedener Echtzeit-3D-Rekonstruktionsverfahren in eine bestehende Virtual-Reality-Umgebung?}
+    \end{center}
 \end{frame}

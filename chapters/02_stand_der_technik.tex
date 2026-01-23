@@ -1,68 +1,101 @@
-\section{Stand der Technik}\sectionFrame
+\section{Stand der Technik}
+\sectionFrame
 
-\begin{frame}{RGB-D-basierte Verfahren}
-    \begin{itemize}
-        \item KinectFusion: Grundlegend für volumetrische Fusion mittels TSDF-Repräsentation
-        \item Erweiterungen: VoxelHashing, DynamicFusion, BundleFusion für verbesserte Konsistenz
-        \item Abhängig von RGB-D-Hardware → begrenzt auf Systeme mit Tiefensensoren
-        \item Consumer-VR (Meta Quest) hat typischerweise keine integrierten Tiefensensoren
-        \item Limitation: Schwierig für Multi-User-VR ohne identische Hardware
-    \end{itemize}
-\end{frame}
-
-\begin{frame}{Monokulare Verfahren}
-    \begin{itemize}
-        \item DTAM, LSD-SLAM, ORB-SLAM: Tiefe aus Kamerabewegung \& Konsistenz
-        \item Hardwareseitig kompatibel mit Standard-RGB-Kameras
-        \item Geeignet für Consumer-VR-Headsets
-        \item Neuere Ansätze: DeepVideoMVS, NICE-SLAM mit neuronaler Tiefenschätzung
-        \item Problem: Oft an spezifische Frameworks \& Datenformate gekoppelt
-        \item Systematischer Vergleich mehrerer Verfahren mit hohem Integrationsaufwand
-    \end{itemize}
-\end{frame}
-
-\begin{frame}{Limitationen für VR-Integration}
-    \begin{itemize}
-        \item Monolithische Architektur: Rekonstruktion, Tracking \& Output fest integriert
-        \item Keine Streaming-Infrastruktur: Batch-Verarbeitung statt kontinuierlicher Updates
-        \item Limitierte Pose-Flexibilität: Verfahren benötigen unterschiedliche Eingaben
-        \item Mangel an Multi-Client-Unterstützung: Nicht auf synchronisierte VR-Clients ausgerichtet
-    \end{itemize}
-\end{frame}
-
-\begin{frame}
-    \begin{itemize}
-        \item NeuralRecon (Volumetrisch, Extern Pose) → Mesh-Output
-        \item VisFusion (Volumetrisch, Extern Pose) → TSDF/Mesh mit Sichtbarkeitsmodellierung
-        \item MASt3R-SLAM (Hybrid SLAM, Interne Pose) → Punktwolken-Output
-        \item SLAM3R (Feed-Forward, Implizite Pose) → Inkrementelle Punktwolke
-    \end{itemize}
-\end{frame}
-
-\begin{frame}{Forschungslücke}
-    Fehlende Infrastrukturen:
-    \begin{itemize}
-        \item Modellunabhängige Integration: Standardisierte Schnittstelle fehlt
-        \item Multi-Client Streaming: Keine Unterstützung für kontinuierliche VR-Updates
-        \item Heterogene Ausgabeformate: Mesh \& Punktwolken nicht einheitlich abgedeckt
-        \item Pose-Flexibilität: Externe \& interne Pose-Verfahren nicht parallel einsetzbar
-    \end{itemize}
-    \onslide<2> {
-        Problem:
+\begin{frame}{Stand der Technik: 3D-Rekonstruktion}
+    \begin{columns}[T]
+        \column{0.5\textwidth}
+        \textbf{\large RGB-D-basiert}
         \begin{itemize}
-            \item Forschungsprototypen sind monolithisch $\rightarrow$ keine Wiederverwendung
-            \item Viele ad-hoc-Integrationen statt systematischer Vergleiche
-            \item Hoher Aufwand für VR-Integration jedes neuen Verfahrens
+            \item KinectFusion
+            \item VoxelHashing
+            \item DynamicFusion
         \end{itemize}
-    }
+        \vspace{0.3cm}
+        {\small \color{gray} Hardware-gebunden}
+        
+        \column{0.5\textwidth}
+        \textbf{\large Monokulare Verfahren}
+        \begin{itemize}
+            \item DTAM, ORB-SLAM
+            \item LSD-SLAM
+            \item DeepVideoMVS, NICE-SLAM
+        \end{itemize}
+        \vspace{0.3cm}
+        {\small \color{gray} Framework-abhängig}
+    \end{columns}
+    
+    \vspace{0.8cm}
+    \begin{tcolorbox}[colback=blue!10, colframe=blue!40, boxsep=5pt]
+        \textbf{Problem für VR:} Hardware-Abhängigkeit oder Monolithische Architekturen
+    \end{tcolorbox}
 \end{frame}
 
-\begin{frame}{RTReconstruct als Lösung}
+\begin{frame}{End-to-End-Pipelines: Zentrale Limitationen}
+    \vspace{0.2cm}
+    
+    \begin{tcolorbox}[colback=red!10, colframe=red!40, boxsep=6pt, title={\textbf{1. Monolithische Architektur}}]
+        Rekonstruktionslogik fest gekoppelt, schwer austauschbar
+    \end{tcolorbox}
+    
+    \vspace{0.4cm}
+    
+    \begin{tcolorbox}[colback=orange!10, colframe=orange!40, boxsep=6pt, title={\textbf{2. Fehlende Streaming-Infrastruktur}}]
+        Batch-Processing statt Live-Datenfluss – keine Multi-User-Unterstützung
+    \end{tcolorbox}
+    
+    \vspace{0.4cm}
+    
+    \begin{tcolorbox}[colback=yellow!10, colframe=yellow!40, boxsep=6pt, title={\textbf{3. Pose-Inflexibilität}}]
+        Extern vs. intern: Heterogene Anforderungen können nicht parallel laufen
+    \end{tcolorbox}
+\end{frame}
+
+\begin{frame}{Vier ausgewählte Rekonstruktionsverfahren}
+    \vspace{0.3cm}
+    
+    \begin{table}
+        \Large
+        \centering
+        \renewcommand{\arraystretch}{1}
+        \begin{tabular}{|l|c|c|c|}
+            \hline
+            \textbf{Verfahren} & \textbf{Paradigma} & \textbf{Pose} & \textbf{Output} \\
+            \hline
+            NeuralRecon & Volumetrisch & Extern & Mesh \\
+            VisFusion & Volumetrisch & Extern & Mesh \\
+            MASt3R-SLAM & SLAM-hybrid & Intern & Punktwolke \\
+            SLAM3R & Feed-forward & Implizit & Punktwolke \\
+            \hline
+        \end{tabular}
+    \end{table}
+    
+    \vspace{0.4cm}
+    \textbf{Bewusste Auswahl:}
     \begin{itemize}
-        \item Containerisierte, modulare Architektur für heterogene Verfahren
-        \item Standardisiertes Streaming-Protokoll für kontinuierliche VR-Updates
-        \item Modellunabhängige Schnittstellen $\rightarrow$ austauschbare Rekonstruktionsmodule
-        \item Multi-Client-Unterstützung via WebSocket-basiertes Fan-Out
-        \item Skalierbar \& erweiterbar $\rightarrow$ neue Modelle ohne Code-Änderungen integrierbar
+        \item Paradigmen-Vielfalt abdecken
+        \item Heterogene Schnittstellen testen
     \end{itemize}
+    
+    \vspace{0.3cm}
+    \textit{\small Ausgeschlossen: Sparse-SLAM, NeRF, 3D Gaussian Splatting}
+\end{frame}
+
+\begin{frame}{Forschungslücke: Modulare Integration}
+    \vspace{0.3cm}
+    \begin{center}
+        \Large \textbf{Was fehlt?}
+    \end{center}
+    
+    \vspace{0.4cm}
+    \begin{itemize}
+        \item[\color{red}$\times$] Modellunabhängige Schnittstellen
+        \item[\color{red}$\times$] Standardisierte Streaming-Protokolle
+        \item[\color{red}$\times$] Einheitliche Behandlung von Ausgabeformaten
+        \item[\color{red}$\times$] Flexible Pose-Verwaltung (parallel, heterogen)
+    \end{itemize}
+    
+    \vspace{0.6cm}
+    \begin{tcolorbox}[colback=blue!10, colframe=blue!40, boxsep=4pt, title={\textbf{Lösung}}]
+        \textbf{RTReconstruct:} Containerisierte, modulare Architektur für nahtlose VR-Integration
+    \end{tcolorbox}
 \end{frame}
