@@ -1,94 +1,195 @@
-\section{Implementation}\sectionFrame
+\section{Implementierung}\sectionFrame
 
-\begin{frame}{Technologie Stack}
-    \begin{itemize}
-        \item \textbf{Backend}: FastAPI + Uvicorn (asynchrone Verarbeitung, nicht-blockierend)
-        \item \textbf{Frontend}: Unity 6000.2.12f1 + NativeWebSocket
-        \item \textbf{Containerisierung}: Docker Compose, NVIDIA Container Toolkit für GPU-Zugriff
-        \item \textbf{Speicherung}: SQLite für Metadaten + GLB-Blobs
-    \end{itemize}
+\begin{frame}{Technologie-Stack}
+    \begin{columns}[T]
+        \column{0.5\textwidth}
+        \textbf{Backend (Python)}
+        \begin{itemize}
+            \itemsep0.4em
+            \item FastAPI + Uvicorn
+            \item Asynchrone Verarbeitung (asyncio)
+            \item Docker Compose Orchestrierung
+            \item NVIDIA Container Toolkit
+            \item SQLite Persistierung
+        \end{itemize}
+        
+        \column{0.5\textwidth}
+        \textbf{Frontend (Unity)}
+        \begin{itemize}
+            \itemsep0.4em
+            \item Unity 6000.2.12f1
+            \item Visual Effect Graph
+            \item NativeWebSocket
+            \item glTFast Import
+            \item C\# Scripting
+        \end{itemize}
+    \end{columns}
 \end{frame}
 
 \begin{frame}{Binäres Kommunikationsprotokoll}
+    \begin{columns}[T]
+        \column{0.33\textwidth}
+        \begin{tcolorbox}[colback=blue!10, colframe=blue!70, boxsep=0.4em, title=\textbf{ModelFragment}]
+            \small
+            \centering
+            \vspace{0.2em}
+            Client $\to$ Server\\
+            (Anfrage)
+        \end{tcolorbox}
+        
+        \column{0.33\textwidth}
+        \begin{tcolorbox}[colback=teal!10, colframe=teal!70, boxsep=0.4em, title=\textbf{ModelResult}]
+            \small
+            \centering
+            \vspace{0.2em}
+            Server $\to$ Client\\
+            (Ergebnis)
+        \end{tcolorbox}
+        
+        \column{0.33\textwidth}
+        \begin{tcolorbox}[colback=orange!10, colframe=orange!70, boxsep=0.4em, title=\textbf{TransformFragment}]
+            \small
+            \centering
+            \vspace{0.2em}
+            Client $\to$ Server\\
+            (Korrektur)
+        \end{tcolorbox}    
+    \end{columns}
+    
+    \vfill
+    \textbf{Vorteile gegenüber JSON:}
     \begin{itemize}
-        \item Warum binär? 33\% Overhead-Einsparung vs. Base64-JSON
-        \item JPEG-Komprimierung für Bilder
-        \item GLB-Format für 3D-Modelle
-        \item Paketstruktur: Einheitlicher Header (Magic + Versionsnummer)
-        \item Drei Pakettypen: ModelFragment, ModelResult, TransformFragment
+        \itemsep0.4em
+        \item ca. 33\% weniger Overhead durch Binaercodierung
+        \item geringere Bandbreitennutzung
     \end{itemize}
 \end{frame}
 
-\begin{frame}{Backend - Asynchrones Routing}
-    Router als Vermittler:
+\begin{frame}{Backend-Implementierung: Router}
+    \textbf{Zwei WebSocket-Endpunkte}
     \begin{itemize}
-        \item WebSocket /ws/client: Unity-Clients registrieren sich
-        \item WebSocket /ws/model/{name}: Worker registrieren sich
+        \itemsep0.4em
+        \item \textbf{/ws/client}: Unity-Clients verbinden sich, registrieren fuer Szenen
+        \item \textbf{/ws/modelname}: Modell-Worker registrieren sich, erhalten Fragment-Queues
     \end{itemize}
-    Funktionen:
+    
+    \vspace{0.8em}
+    
+    \textbf{Asynchrones Routing und Fan-Out}
     \begin{itemize}
-        \item Fragment-Validierung und Deserialisierung
-        \item Zuordnung zu Modellen in Warteschlangen
-        \item Fan-Out an alle Clients derselben Szene (mit asyncio.gather())
-        \item Persistente Speicherung von Modellen
-    \end{itemize}
-\end{frame}
-
-\begin{frame}{Backend - Worker Architektur}
-    \textbf{BaseReconstructionModel:}
-    \begin{itemize}
-        \item WebSocket-Verbindung zu Router
-        \item Asynchrone Schleife \texttt{listen()} für Fragment-Empfang
-        \item Abstrakte Methode \texttt{handle\_fragment()} für Subklassen
-    \end{itemize}
-    \textbf{Spezialisierte Worker:}
-    \begin{itemize}
-        \item Laden externe Modelle, transformieren Eingaben, senden Ergebnisse
-        \item Container-Setup: Modellname + Server-URL als Umgebungsvariablen
-    \end{itemize}    
-\end{frame}
-
-\begin{frame}{Frontend - Hardware Abstraktion}
-    \textbf{ICaptureDevice-Interface:}
-    \begin{itemize}
-        \item SmartphoneCaptureDevice: ARFoundation (Android/iOS)
-        \item MetaQuestCaptureDevice: Passthrough-API (Umgebungskameras + Headset-Position)
-        \item EvalCaptureDevice: Synthetische Szenen (Testing)
+        \itemsep0.4em
+        \item Fragment Validierung und Deserialisierung
+        \item Verteilung in Modell-spezifische Warteschlangen
+        \item Parallelisierte Ergebnis-Verteilung an alle Szenen-Clients
+        \item Persistierung in SQLite Datenbank
     \end{itemize}
 \end{frame}
 
-\begin{frame}{Frontend - Fragment Sammlung}
-    \textbf{Bewegungsbasierte Datenerfassung:}
+\begin{frame}{Backend-Implementierung: Modell-Worker}
+    \textbf{BaseReconstructionModel} \hfill \textit{\small Abstrakte Basisklasse, die alle Worker erweitern}
     \begin{itemize}
-        \item Min. 0,1 m Positionsänderung
-        \item Min. 15° Rotationsänderung
+        \itemsep0.4em
+        \item Verbindung zum Router etablieren
+        \item Fragment-Schleife starten
+        \item Deserialisierung und Inferenz
+        \item Ergebnis-Rueckmeldung
     \end{itemize}
-    \textbf{Pufferung:} Frames bis konfigurierte Fenstergröße (z.B. 9 Frames)\\
-    \textbf{Effizienz:} Nur informative Ansichten übertragen → weniger Netzwerk-Overhead
-\end{frame}
-
-\begin{frame}{Frontend - Visualisierung der Rekonstruktion}
-    Mesh-Daten (NeuralRecon, VisFusion):
+    
+    \vspace{0.8em}
+    
+    \textbf{Spezialisierte Modell-Worker} \hfill \textit{\small Konkrete Unterklassen fuer jedes Modell}
     \begin{itemize}
-        \item Chunking: 5×5×5 Meter Gitter
-        \item GPU Frustum Culling für Performance
-    \end{itemize}
-    Punktwolken (SLAM3R, MASt3R-SLAM):
-    \begin{itemize}
-        \item GPU-beschleunigtes Rendering (limitiert auf ~100.000 Punkte für Meta Quest 3)
-        \item GraphicsBuffer + Compute-Shader + VFX Graph
+        \itemsep0.4em
+        \item NeuralRecon, VisFusion, MASt3R-SLAM, SLAM3R
+        \item Modellspezifische handleFragment Implementierung
+        \item Automatische Registrierung bei Containerstart
     \end{itemize}
 \end{frame}
 
-\begin{frame}{Integration in das Va.Si.Li-Lab}
+\begin{frame}{Frontend-Implementierung: Hardware-Abstraktion}
+    \textbf{ICaptureDevice Interface} \hfill \textit{\small Generisches Interface für Kamerafunktionen}
     \begin{itemize}
-        \item Nicht-invasive Erweiterung: RTReconstruct als eigenständiger Dienst
-        \item Vorkonfigurierte Prefabs: ReconstructionManager, RoomReconstructor, ReconstructionClient
-        \item Unabhängig: Lab-Funktionalität bleibt komplett unverändert 
+        \itemsep0.4em
+        \item \texttt{GetFrame()}: RGB-Bild abrufen
+        \item \texttt{GetIntrinsics()}: Kameraparameter
+        \item \texttt{GetExtrinsics()}: Pose (Position, Rotation)
     \end{itemize}
-    Rollen-Konzept:
+    
+    \vspace{0.8em}
+    
+    \textbf{Implementierungen} \hfill \textit{\small Hardware spezifische Implementierungen}
     \begin{itemize}
-        \item Host: Initiiert Datenerfassung, sendet Sensordaten
-        \item Visitor: Empfängt Rekonstruktionen zur Visualisierung
+        \itemsep0.4em
+        \item \textbf{MetaQuestCaptureDevice}: Passthrough-Kamera des HMD
+        \item \textbf{SmartphoneCaptureDevice}: ARFoundation (Android/iOS)
+        \item \textbf{EvalCaptureDevice}: Synthetische Szenen fuer Evaluation
+    \end{itemize}
+\end{frame}
+
+\begin{frame}{Frontend-Implementierung: Fragmentsammlung}
+    \textbf{IModelCollector Interface} \hfill \textit{\small Verwaltet pro Szene aktive Rekonstruktionsverfahren}
+    \begin{itemize}
+        \itemsep0.4em
+        \item \texttt{ShouldCollect()}: Überprüft ob ein Frame gültig ist
+        \item \texttt{Collect()}: Sammelt Frame und Kameraparameter
+        \item \texttt{Consume()}: Erstellt ModelFragment aus gesammelten Daten
+        \item \dots
+    \end{itemize}
+    
+    \vspace{0.8em}
+    
+    \textbf{Implementierungen} \hfill \textit{\small Modell spezifische Implementierungen}
+    \begin{itemize}
+        \itemsep0.4em
+        \item \textbf{NeuralReconCollector}: NeuralRecon spezifischer Collector
+        \item \textbf{SLAM3RCollector}: SLAM3R spezifischer Collector
+        \item \textbf{DefaultCollector}: Standard Collector
+    \end{itemize}
+\end{frame}
+
+\begin{frame}{Frontend-Visualisierung}
+    \begin{columns}[T]
+        \column{0.5\textwidth}
+        \textbf{Punktwolken}
+        \begin{itemize}
+            \itemsep0.4em
+            \item Visual Effect Graph (VFX Graph)
+            \item GPU-beschleunigte Echtzeitdarstellung
+            \item Bis zu 100\,000 Punkte rendierbar
+        \end{itemize}
+        
+        \column{0.5\textwidth}
+        \textbf{Meshes}
+        \begin{itemize}
+            \itemsep0.4em
+            \item glTFast fuer GLB-Import
+            \item Chunking-Verfahren (MeshUtils)
+            \item Komplexe Geometrie effizient
+        \end{itemize}
+    \end{columns}
+    
+    \vfill
+    \begin{tcolorbox}[colback=yellow!5, colframe=gray!70, rounded corners, boxsep=0.5em]
+        \small Beide Formate ohne externe Abhaengigkeiten, WebGL + Android (Meta Quest) kompatibel
+    \end{tcolorbox}
+\end{frame}
+
+\begin{frame}{Integration in Va.Si.Li-Lab}
+    \textbf{Nicht-invasive Erweiterung}
+    \begin{itemize}
+        \itemsep0.4em
+        \item RTReconstruct als eigenstaendiges Modul
+        \item Vorfertigte Unity-Prefabs (ReconstructionManager, RoomReconstructor, ReconstructionClient)
+        \item Keine Aenderung bestehender Szenenlogik
+    \end{itemize}
+    
+    \vspace{0.8em}
+    
+    \textbf{Rollen- und Szenenkonzept}
+    \begin{itemize}
+        \itemsep0.4em
+        \item \textbf{Host}: Initiiert Datenerfassung und Uebertragung
+        \item \textbf{Visitor}: Empfaengt und visualisiert Rekonstruktionen
+        \item Vollstaendige Rolle-Verwaltung in RTReconstruct-Prefabs
     \end{itemize}
 \end{frame}
