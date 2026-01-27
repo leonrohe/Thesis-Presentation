@@ -1,280 +1,193 @@
 \section{Evaluation}\sectionFrame
 
 \begin{frame}{Evaluationsziele}
-    \onslide<1-3> {
-        Funktionale Validierung:
-        \begin{itemize}
-            \item Modulare Architektur erfüllt Anforderungen
-            \item Parallelbetrieb von Modellen
-            \item Stabile Kommunikation
-        \end{itemize}
-    }
-    \onslide<2-3> {
-        Echtzeitfähigkeit:
-        \begin{itemize}
-            \item Latenz
-            \item Durchsatz
-            \item Resourcenauslastung
-        \end{itemize}
-    }
-    \onslide<3> {
-        Rekonstruktionsqualität:
-        \begin{itemize}
-            \item Quantiativ (F-Score)
-            \item Qualitativ (Vollständigkeit, Detailtreue)
-        \end{itemize}
-    }
+    \textbf{1. Funktionale Validierung:}
+    \begin{itemize}
+        \item Modulare Architektur erfüllt Anforderungen
+    \end{itemize}
+    \textbf{2. Echtzeitfähigkeit:}
+    \begin{itemize}
+        \item Performance-Metriken für VR-Szenarien
+    \end{itemize}
+    \textbf{3. Rekonstruktionsqualität:}
+    \begin{itemize}
+        \item Modellvergleich unter identischen Bedingungen
+    \end{itemize}
+    \textbf{4. Systemstabilität:}
+    \begin{itemize}
+        \item Robustheit unter kontinuierlicher Last
+    \end{itemize}
 \end{frame}
 
-\begin{frame}{Test- und Evaluationsumgebung}
+\begin{frame}{Evaluationsumgebung}
     \begin{columns}
-        \begin{column}{0.5\textwidth}
-            \textbf{Hardware (Backend)}
-            \begin{itemize}
-                \item CPU: AMD Ryzen 5 2600
-                \item GPU: NVIDIA GTX 1070 Ti (8GB)
-                \item RAM: 16 GB
-                \item Docker 29.0.1
-            \end{itemize}
-        \end{column}
-
-        \begin{column}{0.5\textwidth}
-            \textbf{VR-System \& Netzwerk}
-            \begin{itemize}
-                \item Meta Quest 3
-                \item WiFi 5 Heimnetzwerk
-                \item Unity 6000.2.12f1
-                \item 60 Mbit Internet
-            \end{itemize}
-        \end{column}
+        \column{0.5\textwidth}
+            \begin{tcolorbox}[colback=blue!10, colframe=blue!70, boxsep=0.5em, height=3cm, title=\textbf{Backend-Hardware}]
+                \begin{itemize}
+                    \item CPU: AMD Ryzen 5 5600X
+                    \item GPU: NVIDIA GeForce GTX 1070 Ti (8GB VRAM)
+                    \item Speicher: 16 GB RAM
+                \end{itemize}
+            \end{tcolorbox}
+        \column{0.5\textwidth}
+            \begin{tcolorbox}[colback=teal!10, colframe=teal!70, boxsep=0.5em, height=3cm, title=\textbf{Frontend-Hardware}]
+                \begin{itemize}
+                    \item VR-Headset: Meta Quest 3
+                    \item Controller: Standard Meta Quest Controller
+                \end{itemize}
+            \end{tcolorbox}
     \end{columns}
-\end{frame}
-
-\begin{frame}{Testzenen im Überblick}
-    \textbf{3 virtuelle Szenen} (mit Ground-Truth)
-    \begin{enumerate}
-        \item V1 – Geometrische Primitive: Würfel, Torus, Pyramide | 5×5×5m
-        \item V2 – Möbliertes Schlafzimmer: Möbel, Okklusionen | 6×5×3m
-        \item V3 – Mehrzweckraum: Große Flächen, viele Details | 10×5×3m
-    \end{enumerate}
-    \textbf{2 reale Szenen} (für Praktikabilität)
-    \begin{enumerate}
-        \item R1 – Schlafzimmer: Dachschräge, natürliches Licht
-        \item R2 – Wohnzimmer: Große Fensterfront, Glasflächen
-    \end{enumerate}
-\end{frame}
-
-\begin{frame}{Messsmethoden \& Metriken}
-        \begin{columns}
-        \begin{column}{0.5\textwidth}
-            \textbf{Performance}
-            \begin{itemize}
-                \item Latenz: Fragment-Versand bis Visualisierung
-                \item Durchsatz: Fragmente pro Sekunde
-                \item Ressourcen: GPU/CPU-Auslastung
-            \end{itemize}
-        \end{column}
-
-        \begin{column}{0.5\textwidth}
-            \textbf{Qualität}
-            \begin{itemize}
-                \item Quantiativ: F-Score (Präzision \& Recall)
-                \item Schwellwert: 10cm zur GT
-                \item Qualitativ: Vollständigkeit, Details, Artefakte
-            \end{itemize}
-        \end{column}
-    \end{columns}
-\end{frame}
-
-\begin{frame}{Funktionale Validierung}
-    \begin{columns}
-        \begin{column}{0.5\textwidth}
-        \textbf{End-to-End-Kommunikation:}
-        \begin{itemize}
-            \item 60 Testläufe über 6h
-            \item 0 Verbindungsabbrüche
-        \end{itemize}
-        \vspace{1cm}
-        \textbf{Parallele Modellausführung:}
-        \begin{itemize}
-            \item Alle 4 Modelle stabil gleichzeitig
-            \item Containerisierung funktioniert
-        \end{itemize}    
-        \end{column}
-        \begin{column}{0.5\textwidth}
-        \textbf{Multi-Szenen-Unterstützung:}
-        \begin{itemize}
-            \item 2 Szenen mit 4 Clients
-            \item Fehlerfreie Zuordnung
-        \end{itemize}
-        \vspace{1cm}
-        \textbf{VR-Integration:}
-        \begin{itemize}
-            \item Meshes und Punktwolken visualisiert
-            \item Bis 100k Punkte darstellbar
-        \end{itemize}
-    \end{column}
-    \end{columns}
-\end{frame}
-
-\begin{frame}{End-To-End-Latenz - Definition}
     
-    {
-        \Large
-        \begin{align*}
-            L_{\text{total}} = L_{\text{network}} + L_{\text{inference}} + L_{\text{render}} \\
-        \end{align*}
-    }  
+    \vfill
 
+    \begin{tcolorbox}[colback=orange!10, colframe=orange!70, boxsep=0.5em, title=\textbf{Netzwerk}]
+        \begin{itemize}
+            \item WiFi 5 (802.11ac)
+            \item Durchschnittliche Bandbreite: 60 Mbit/s
+        \end{itemize}
+    \end{tcolorbox}
+\end{frame}
+
+\begin{frame}{Testszenarien}
+    \textbf{Virtuelle Szenen (mit Ground-Truth):}
     \begin{itemize}
-        \item $L_{\text{network}}$~:~Benötigte Zeit zum Up- und Download des Fragments
-        \item $L_{\text{inference}}$~:~Benötigte Zeit für die Inferrenz des Fragments
-        \item $L_{\text{render}}$~:~Benötigte Zeit für das Darstellen des Modell Ergebnisses
+        \item V1 – Primitive: 5×5×5m, einfache Geometrie
+        \item V2 – Schlafzimmer: 6×5×3m, moderate Komplexität
+        \item V3 – Mehrzweckraum: 10×5×3m, hohe Komplexität
+    \end{itemize}
+    \textbf{Reale Szenen:}
+    \begin{itemize}
+        \item R1 – Schlafzimmer: Kontraste, Details, Okklusionen
+        \item R2 – Wohnzimmer: Glas, Reflexionen, große Flächen
+    \end{itemize}
+    \textbf{Fenstergröße:} 9 Frames pro Fragment
+\end{frame}
+
+\begin{frame}{Funktionale Validierung - Ergebnisse}
+    \textbf{1. End-to-End-Kommunikation:}
+    \begin{itemize}
+        \item 60 Testläufe (6h), 0 Verbindungsabbrüche
+    \end{itemize}
+    \textbf{2. Parallele Modellausführung:}
+    \begin{itemize}
+        \item Alle 4 Modelle konfliktfrei nebeneinander
+    \end{itemize}
+    \textbf{3. Multi-Szenen-Support:}
+    \begin{itemize}
+        \item Fehlerfrei mit 2 Szenen, 4 Clients
+    \end{itemize}
+    \textbf{4. VR-Visualisierung:}
+    \begin{itemize}
+        \item Meshes und Punktwolken (bis 100k Punkte) dargestellt
     \end{itemize}
 \end{frame}
 
-\begin{frame}{End-To-End-Latenz - Ergebnisse - V1}
-    \centering
-    \includegraphics{images/room00_latency.png}
+\begin{frame}{Performance-Analyse: Gesamtlatenz}
+    \begin{itemize}
+        \item Stabile, reproduzierbare Latenzwerte mit niedriger Varianz
+        \item Trend: Komplexität $\uparrow$ $\longrightarrow$ Latenz $\uparrow$
+        \item SLAM-Verfahren zeigen robusteres Verhalten in realen Szenen
+        \item Starke szenenabhängige Unterschiede beobachtet
+    \end{itemize}
+
+    \vfill
+
+    \begin{figure}
+        \begin{subfigure}{0.33\textwidth}
+            \includegraphics[width=\textwidth]{images/room00_latency.png}
+            \caption{V1}
+        \end{subfigure}
+        \begin{subfigure}{0.33\textwidth}
+            \includegraphics[width=\textwidth]{images/room02_latency.png}
+            \caption{V3}
+        \end{subfigure}
+        \begin{subfigure}{0.33\textwidth}
+            \includegraphics[width=\textwidth]{images/room04_latency.png}
+            \caption{R1}
+        \end{subfigure}
+    \end{figure}
 \end{frame}
 
-\begin{frame}{End-To-End-Latenz - Ergebnisse - V2}
-    \centering
-    \includegraphics{images/room01_latency.png}
+\begin{frame}{Performance-Analyse: Latenz-Zusammensetzung}
+    \begin{itemize}
+        \item \textbf{$L_{inference}$:} Dominierender Anteil (variiert stark mit Szenenkomplexität)
+        \item \textbf{$L_{network}$ und $L_{render}$:} Relativ konstant, prozentual kleiner bei komplexeren Szenen
+        \item Netzwerklatenz abhängig von Datengröße und verfügbarer Bandbreite
+    \end{itemize}
+    
+    \begin{figure}
+        \includegraphics[width=\textwidth]{images/latency_split.png}
+    \end{figure}
 \end{frame}
 
-\begin{frame}{End-To-End-Latenz - Ergebnisse - V3}
-    \centering
-    \includegraphics{images/room02_latency.png}
-\end{frame}
-
-\begin{frame}{End-To-End-Latenz - Ergebnisse - R1}
-    \centering
-    \includegraphics{images/room03_latency.png}
-\end{frame}
-
-\begin{frame}{End-To-End-Latenz - Ergebnisse - R2}
-    \centering
-    \includegraphics{images/room04_latency.png}
-\end{frame}
-
-\begin{frame}{End-To-End-Latenz - Komposition}
-    \centering
-    \includegraphics[width=\textwidth]{images/latency_split.png}
-\end{frame}
-
-\begin{frame}{Fragment- \& Ergebnisgrößen - Virtuelle Szenen}
+\begin{frame}{Performance-Analyse: Durchsatz} 
     \begin{table}[h]
-        \centering
-        \label{tab:data_volumes}
-        \resizebox{\textwidth}{!}{%
-        \begin{tabular}{l|l|c|c|c|c}
-            \toprule
-            \textbf{Szene} & \textbf{Modell} & \makecell{\textbf{\O~$\text{Frag}_{\text{in}}$~[MB]}} & \makecell{\textbf{\O~$\text{Frag}_{\text{out}}$~[MB]}} & \makecell{\textbf{$\sum\text{Frag}_{\text{in}}$~[MB]}} & \makecell{\textbf{$\sum\text{Frag}_{\text{out}}$~[MB]}} \\
-            \midrule
-            \multirow{4}{*}{V1} 
-                & NeuralRecon  & \multirow{4}{*}{0{,}82} & 1{,}83 & \multirow{4}{*}{19{,}57} & 44{,}04 \\
-                & VisFusion    &                       & 2{,}73 &                        & 65{,}40 \\
-                & MASt3R-SLAM  &                       & 1{,}60 &                        & 38{,}42 \\
-                & SLAM3R       &                       & 1{,}60 &                        & 38{,}42 \\
-            \midrule
-            \multirow{4}{*}{V2} 
-                & NeuralRecon  & \multirow{4}{*}{1{,}62} & 2{,}84 & \multirow{4}{*}{69{,}57} & 122{,}28 \\
-                & VisFusion    &                      & 3{,}25  &                        & 139{,}85 \\
-                & MASt3R-SLAM  &                      & 1{,}60  &                        & 68{,}60 \\
-                & SLAM3R       &                      & 1{,}60  &                        & 68{,}84 \\
-            \midrule
-            \multirow{4}{*}{V3} 
-                & NeuralRecon  & \multirow{4}{*}{1{,}56} & 3{,}60 & \multirow{4}{*}{88{,}70} & 204{,}93 \\
-                & VisFusion    &                      & 4{,}24  &                        & 241{,}51 \\
-                & MASt3R-SLAM  &                      & 1{,}59  &                        & 90{,}69 \\
-                & SLAM3R       &                      & 1{,}60  &                        & 91{,}26 \\
-            \bottomrule
-        \end{tabular}%
-        }
+    \centering
+    \begin{tabular}{l|ccccc}
+    \textbf{Modell} & \textbf{V1} & \textbf{V2} & \textbf{V3} & \textbf{R1} & \textbf{R2} \\
+    \hline
+    NeuralRecon & 0,62 & 0,45 & 0,32 & 0,48 & 0,45 \\
+    VisFusion & 0,38 & 0,35 & 0,30 & 0,38 & 0,31 \\
+    SLAM3R & 0,13 & 0,12 & 0,12 & 0,12 & 0,12 \\
+    MASt3R-SLAM & 0,07 & 0,06 & 0,03 & 0,10 & 0,09
+    \end{tabular}
     \end{table}
+    
+    \textbf{Beobachtungen:}
+    \begin{itemize}
+        \item Volumetrische Verfahren deutlich schneller
+        \item SLAM-Verfahren rechenintensiver durch Feature-Matching
+        \item Reale Szenen teilweise performanter als virtuelle
+    \end{itemize}
 \end{frame}
 
-\begin{frame}{Fragment- \& Ergebnisgrößen - Reale Szenen}
+\begin{frame}{Rekonstruktionsqualität: Quantitative Ergebnisse}
+    \textbf{F-Score-Bewertung (10cm Schwellenwert):}
+    
     \begin{table}[h]
-        \centering
-        \label{tab:data_volumes}
-        \resizebox{\textwidth}{!}{%
-        \begin{tabular}{l|l|c|c|c|c}
-            \toprule
-            \textbf{Szene} & \textbf{Modell} & \makecell{\textbf{\O~$\text{Frag}_{\text{in}}$~[MB]}} & \makecell{\textbf{\O~$\text{Frag}_{\text{out}}$~[MB]}} & \makecell{\textbf{$\sum\text{Frag}_{\text{in}}$~[MB]}} & \makecell{\textbf{$\sum\text{Frag}_{\text{out}}$~[MB]}} \\
-            \midrule
-            \multirow{4}{*}{R1} 
-                & NeuralRecon  & \multirow{4}{*}{1{,}63} & 2{,}19 & \multirow{4}{*}{78{,}50} & 105{,}29 \\
-                & VisFusion    &                       & 2{,}58 &                       & 124{,}14 \\
-                & MASt3R-SLAM  &                       & 1{,}60 &                       & 76{,}85 \\
-                & SLAM3R       &                       & 1{,}60 &                       & 76{,}85 \\
-            \midrule
-            \multirow{4}{*}{R2} 
-                & NeuralRecon  & \multirow{4}{*}{1{,}84} & 2{,}48 & \multirow{4}{*}{79{,}33} & 106{,}87 \\
-                & VisFusion    &                       & 3{,}70 &                        & 159{,}19 \\
-                & MASt3R-SLAM  &                       & 1{,}60 &                        & 68{,}84 \\
-                & SLAM3R       &                       & 1{,}60 &                        & 68{,}84 \\
-            \bottomrule
-        \end{tabular}%
-        }
+    \centering
+    \resizebox{\textwidth}{!}{
+    \begin{tabular}{l|ccc|ccc|ccc}
+    \textbf{Modell} & \multicolumn{3}{c|}{\textbf{V1}} & \multicolumn{3}{c|}{\textbf{V2}} & \multicolumn{3}{c}{\textbf{V3}} \\
+    & Prec. & Rec. & F & Prec. & Rec. & F & Prec. & Rec. & F \\
+    \hline
+    NeuralRecon & 0,45 & 0,39 & 0,41 & 0,69 & 0,67 & \textbf{0,68} & 0,59 & 0,59 & 0,59 \\
+    VisFusion & 0,57 & 0,52 & 0,54 & 0,57 & 0,65 & 0,61 & 0,57 & 0,68 & \textbf{0,62} \\
+    SLAM3R & \textbf{0,66} & 0,56 & \textbf{0,61} & 0,67 & 0,59 & 0,63 & 0,41 & 0,43 & 0,42 \\
+    MASt3R-SLAM & 0,52 & 0,48 & 0,50 & 0,47 & 0,53 & 0,50 & 0,43 & 0,48 & 0,45
+    \end{tabular}
+    }
     \end{table}
-\end{frame}
-
-\begin{frame}{Durchsatz}
-    \textbf{Volumetrische Verfahren}
+    
+    \textbf{Szenenabhängige Leistung:}
     \begin{itemize}
-        \item NeuralRecon: 0,32 - 0,62 Fragmente/s
-        \item VisFusion: 0,30 - 0,38 Fragmente/s
+        \item V2 (Schlafzimmer) zeigt beste Ergebnisse für NeuralRecon
+        \item V3 (Mehrzweckraum) mehr Variabilität zwischen Verfahren
     \end{itemize}
+\end{frame}
 
-    \textbf{SLAM Verfahren}
+\begin{frame}{Rekonstruktionsqualität: Qualitative Bewertung}
+    \textbf{Bewertungskriterien:}
     \begin{itemize}
-        \item MaSt3R-SLAM: 0,12 - 0,13 Fragmente/s
-        \item SLAM3R: 0,03 - 0,10 Fragmente/s
+        \item Vollständigkeit: Erfassungsrate der Szene
+        \item Detailtreue: Feine Strukturen und Kanten
+        \item Artefaktfreiheit: Löcher, Flimmern, Fehlgeometrie
+        \item Oberflächenqualität: Glattheit und Konsistenz
     \end{itemize}
-
-    \textbf{Trade-Off:} Schneller aber weniger reobust (volumetrisch) vs. Langsam, aber robuster (SLAM)
-\end{frame}
-
-\begin{frame}{Ressourcenauslastung}
-        \begin{columns}
-        \begin{column}{0.5\textwidth}
-            \textbf{GPU-Auslastung}
-            \begin{itemize}
-                \item Latenz: Fragment-Versand bis Visualisierung
-                \item Durchsatz: Fragmente pro Sekunde
-                \item Ressourcen: GPU/CPU-Auslastung
-            \end{itemize}
-        \end{column}
-
-        \begin{column}{0.5\textwidth}
-            \textbf{Qualität}
-            \begin{itemize}
-                \item Quantiativ: F-Score (Präzision \& Recall)
-                \item Schwellwert: 10cm zur GT
-                \item Qualitativ: Vollständigkeit, Details, Artefakte
-            \end{itemize}
-        \end{column}
-    \end{columns}
-\end{frame}
-
-\begin{frame}{Rekonstruktionsqualität - F-Score}
     
-\end{frame}
-
-\begin{frame}{Qualitative Bewertung}
+    \vfill
     
-\end{frame}
-
-\begin{frame}{Echtzeitfähigkeit - Zusammenfassung}
-    
-\end{frame}
-
-\begin{frame}{Diskussion der Ergebnisse}
-    
-\end{frame}
-
-\begin{frame}{Limitationen \& Beantwortung der Forschungsfrage}
-    
+    \begin{table}[h]
+    \centering
+    \resizebox{0.95\textwidth}{!}{
+    \begin{tabular}{l|cccc}
+    \textbf{Kriterium} & \textbf{NeuralRecon} & \textbf{VisFusion} & \textbf{SLAM3R} & \textbf{MASt3R} \\
+    \hline
+    Vollständigkeit & mittel & hoch & sehr hoch & hoch \\
+    Detailtreue & gering & mittel & sehr hoch & sehr hoch \\
+    Artefaktfreiheit & sehr hoch & sehr hoch & niedrig & niedrig \\
+    Oberflächenqualität & sehr hoch & sehr hoch & mittel & mittel
+    \end{tabular}
+    }
+    \end{table}
 \end{frame}
