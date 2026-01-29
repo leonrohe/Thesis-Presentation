@@ -1,70 +1,83 @@
 \section{Motivation}\sectionFrame
 
-\begin{frame}{Warum 3D-Rekonstruktion in VR?}
+\begin{frame}{3D-Rekonstruktion in VR}
+    \textbf{Ausgangssituation:}
     \begin{itemize}
-        \item Moderne VR-Systeme ermöglichen natürliche Interaktion in virtuellen Räumen
-        \item Viele VR-Erfahrungen basieren auf künstlich erstellten Szenen
-        \item Für kollaboratives Arbeiten, simulationsbasiertes Lernen und räumliche Analysen: enge Beziehung zwischen digitaler und realer Welt erforderlich
-        \item Glaubwürdige virtuelle Räume leiten sich aus realen Szenen ab
+        \item VR-Anwendungen basieren oft auf künstlich erstellten Szenen
+        \item Viele Anwendungsfälle profitieren von Bezug zur realen Welt
+    \end{itemize}
+    
+    \bigskip
+    
+    \textbf{Vorteile durch Rekonstruktion:}
+    \begin{itemize}
+        \item Spontane Erfassung und gemeinsame Analyse von Räumen
+        \item Kollaborative Aufgaben ohne aufwendige manuelle Modellierung
+        \item Grundbaustein für dynamische, interaktive VR-Systeme
     \end{itemize}
 \end{frame}
 
-\begin{frame}{Praktische Vorteile der Rekonstruktion}
+\begin{frame}{Klassische Photogrammetrie: Ungeeignet}
+    \begin{columns}[T]
+        \column{0.5\textwidth}
+        \textbf{Vorteile:}
+        \begin{itemize}
+            \item Hochauflösende Resultate
+        \end{itemize}
+        
+        \column{0.5\textwidth}
+        \textbf{Nachteile:}
+        \begin{itemize}
+            \item Umfangreiche Bildaufnahmen
+            \item Lange Verarbeitungszeiten
+            \item Ungeeignet für dynamische VR
+        \end{itemize}
+    \end{columns}
+\end{frame}
+
+\begin{frame}{Monokulare Echtzeit-Rekonstruktion: Potenzial \& Herausforderung}
+    \textbf{Vorteile:}
     \begin{itemize}
-        \item Räume können spontan erfasst und gemeinsam analysiert werden
-        \item Kollaborative Aufgaben ohne aufwendige manuelle Modellierungsprozesse
-        \item Szenen-Erfassung ermöglicht dynamische VR-Anwendungen
-        \item Grundbaustein für nächste Generation interaktiver VR-Systeme
+        \item Keine zusätzliche Hardware erforderlich
+        \item Direkte Nutzung moderner VR-Headset-Kameras
+    \end{itemize}
+    
+    \bigskip
+    
+    \textbf{Aber: Praktische Integration kaum etabliert}
+    \begin{itemize}
+        \item Modelle in isolierten Forschungskontexten entwickelt
+        \item Heterogene Laufzeitumgebungen und Frameworks
+        \item Nicht auf interaktive Systeme ausgelegt
     \end{itemize}
 \end{frame}
 
-\begin{frame}{Problem: Klassische Photogrammetrie}
+\begin{frame}{Anforderungen an VR-Rekonstruktionssysteme}
+    \textbf{Was die Integration erschwert:}
     \begin{itemize}
-        \item Hochauflösende Resultate
-        \item \textbf{Aber:} umfangreiche Bildaufnahmen erforderlich
-        \item \textbf{Aber:} lange Verarbeitungszeiten
-        \item \textbf{Ergebnis:} ungeeignet für dynamische und interaktive VR-Anwendungen
-    \end{itemize}
-\end{frame}
-
-\begin{frame}{Lösungsansatz: Monokulare Echtzeit-Rekonstruktion}
-    \begin{itemize}
-        \item Fortlaufende RGB-Videodaten ermöglichen schrittweise Geometrie-Rekonstruktion
-        \item Monokulare Verfahren spielen zentrale Rolle
-        \item \textbf{Vorteil:} keine zusätzliche Hardware erforderlich
-        \item \textbf{Vorteil:} direkte Nutzung von Frontkameras moderner VR-Headsets
-    \end{itemize}
-\end{frame}
-
-\begin{frame}{Zentrale Herausforderung}
-    \begin{itemize}
-        \item Monokulare Rekonstruktionsverfahren grundsätzlich für VR geeignet
-        \item \textbf{Problem:} praktische Einbindung in bestehende Anwendungen kaum etabliert
-        \item Viele Modelle entwickelt in isolierten Forschungskontexten
-        \item Heterogene Laufzeitumgebungen, Frameworks und Datenpipelines
-        \item Nicht auf Einsatz in interaktiven Systemen ausgelegt
-    \end{itemize}
-\end{frame}
-
-\begin{frame}{Was VR-Anwendungen benötigen}
-    \begin{itemize}
-        \item Stabiler und klar strukturierter Datenfluss
-        \item Kontinuierlich wachsende Modelle verlässlich bereitstellen
-        \item Nahtlose Integration ins Frontend
-        \item Vergleichbarer Betrieb mehrerer Rekonstruktionsverfahren
+        \item \textbf{Stabiler Datenfluss:} Kontinuierliche Bilder + Posen ohne Ausfälle
+        \item \textbf{Wachsende Modelle:} Szene wird inkrementell aktualisiert, nicht am Ende
+        \item \textbf{Nahtlose Integration:} Muss mit bestehender VR-Engine (z.B.\ Va.Si.Li-Lab) funktionieren
+        \item \textbf{Vergleichbarer Betrieb:} Mehrere Rekonstruktionsverfahren parallel testen
     \end{itemize}
 \end{frame}
 
 \begin{frame}{Forschungslücke}
+    \textbf{Unzureichend erforscht:}
     \begin{itemize}
         \item Modulare Architektur noch nicht ausreichend adressiert
-        \item Keine Lösung für standardisierte Integration verschiedener Verfahren
-        \item Fehlende Infrastruktur für kapselte und vereinheitlichte Rekonstruktion in VR
+        \item Keine standardisierte Lösung für Integration verschiedener Verfahren
+        \item Fehlende Infrastruktur für kapselierte Rekonstruktion in VR
     \end{itemize}
 \end{frame}
 
 \begin{frame}{Forschungsfrage}
+    \vfill
     \begin{center}
-        \Large \textit{Wie gut eignet sich eine modulare, containerisierte Systemarchitektur zur Integration verschiedener Echtzeit-3D-Rekonstruktionsverfahren in eine bestehende Virtual-Reality-Umgebung?}
+        \large
+        \textit{Wie gut eignet sich eine modulare, containerisierte Systemarchitektur zur\\
+        Integration verschiedener Echtzeit-3D-Rekonstruktionsverfahren\\
+        in eine bestehende Virtual-Reality-Umgebung?}
     \end{center}
+    \vfill
 \end{frame}
