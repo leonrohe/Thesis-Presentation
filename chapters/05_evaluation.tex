@@ -123,16 +123,20 @@
 \begin{frame}{Performance-Analyse: Durchsatz} 
     \begin{table}[h]
     \centering
-    \begin{tabular}{l|ccccc}
-    \textbf{Modell} & \textbf{V1} & \textbf{V2} & \textbf{V3} & \textbf{R1} & \textbf{R2} \\
-    \hline
-    NeuralRecon & 0,62 & 0,45 & 0,32 & 0,48 & 0,45 \\
-    VisFusion & 0,38 & 0,35 & 0,30 & 0,38 & 0,31 \\
-    SLAM3R & 0,13 & 0,12 & 0,12 & 0,12 & 0,12 \\
-    MASt3R-SLAM & 0,07 & 0,06 & 0,03 & 0,10 & 0,09
-    \end{tabular}
+    \resizebox{0.7\textwidth}{!}{
+        \begin{tabular}{l|ccccc}
+        \textbf{Modell} & \textbf{V1} & \textbf{V2} & \textbf{V3} & \textbf{R1} & \textbf{R2} \\
+        \hline
+        NeuralRecon & 0,62 & 0,45 & 0,32 & 0,48 & 0,45 \\
+        VisFusion & 0,38 & 0,35 & 0,30 & 0,38 & 0,31 \\
+        SLAM3R & 0,13 & 0,12 & 0,12 & 0,12 & 0,12 \\
+        MASt3R-SLAM & 0,07 & 0,06 & 0,03 & 0,10 & 0,09
+        \end{tabular}
+    }
     \end{table}
     
+    \vspace{1em}
+
     \textbf{Beobachtungen:}
     \begin{itemize}
         \item Volumetrische Verfahren deutlich schneller
@@ -141,9 +145,7 @@
     \end{itemize}
 \end{frame}
 
-\begin{frame}{Rekonstruktionsqualität: Quantitative Ergebnisse}
-    \textbf{F-Score-Bewertung (10cm Schwellenwert):}
-    
+\begin{frame}{Rekonstruktionsqualität: Quantitative Ergebnisse}    
     \begin{table}[h]
     \centering
     \resizebox{\textwidth}{!}{
@@ -157,8 +159,11 @@
     MASt3R-SLAM & 0,52 & 0,48 & 0,50 & 0,47 & 0,53 & 0,50 & 0,43 & 0,48 & 0,45
     \end{tabular}
     }
+    \caption{F-Score, Schwellwert von 10cm}
     \end{table}
-    
+
+    \vspace{1em}
+
     \textbf{Szenenabhängige Leistung:}
     \begin{itemize}
         \item V2 (Schlafzimmer) zeigt beste Ergebnisse für NeuralRecon
