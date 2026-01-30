@@ -17,16 +17,24 @@
 \end{frame}
 
 \begin{frame}{Grundlagen: 3D-Rekonstruktion}
+    \textbf{Der Prozess:}
     \begin{itemize}
-        \item Prozess: 2D-Bilder $\rightarrow$ 3D-Geometrie
-        \item \textbf{Monokulare Rekonstruktion}: Tiefe aus Kamerabewegung + Bildsequenzen
-        \item Zwei zentrale Paradigmen:
-        \begin{itemize}
-            \setlength{\itemsep}{\lineskip}
-            \item \textbf{Volumetrisch} (z.\,B. NeuralRecon): Benötigt externe Kameraposen
-            \item \textbf{SLAM-basiert} (z.\,B. MASt3R-SLAM): Schätzt Posen selbst
-        \end{itemize}
-        \item Diese Heterogenität ist zentral für das System-Design
+        \item 2D-Bilder $\rightarrow$ 3D-Geometrie
+        \item Tiefe aus Kamerabewegung + Bildsequenzen (monokulare Rekonstruktion)
+    \end{itemize}
+    
+    \vspace{0.8em}
+    \textbf{Zentrale Unterscheidung nach Pose-Anforderung:}
+    \begin{itemize}
+        \item \textbf{Externe Posen} (z.\,B. NeuralRecon, VisFusion): System liefert Kameraposen
+        \item \textbf{Interne Pose-Schätzung} (z.\,B. MASt3R-SLAM, SLAM3R): Modell schätzt Posen selbst
+    \end{itemize}
+    
+    \vspace{0.8em}
+    \textbf{Implikation für RTReconstruct:}
+    \begin{itemize}
+        \item Diese Heterogenität erfordert flexible System-Architektur
+        \item Beide Kategorien müssen über einheitliche Schnittstelle integrierbar sein
     \end{itemize}
 \end{frame}
 
@@ -49,25 +57,25 @@
         \end{itemize}
     \end{columns}
     \vfill
-    \only<2>{
-        \begin{center}
-            \textbf{RTReconstruct muss beide Formate handhaben!}    
-        \end{center}
-    }
+    \begin{tcolorbox}[colback=yellow!5, colframe=gray!70, rounded corners, boxsep=0.5em]
+        \centering
+        \textbf{RTReconstruct muss beide Formate handhaben!} 
+    \end{tcolorbox}
 \end{frame}
 
 \begin{frame}{Grundlagen: Zielumgebung Va.Si.Li-Lab}
+    \textbf{Multi-User VR-Plattform:}
     \begin{itemize}
-        \item \textbf{Multi-User VR-Plattform}: Basis-Technologie = Unity + Ubiq-Framework
-        \item Designed für \textit{kollaborative, simulationsbasierte Lernszenarien}
+        \item Basis-Technologie: Unity + Ubiq-Framework
+        \item Designed für kollaborative, simulationsbasierte Lernszenarien
         \item Bereits vorhanden: Tracking, Netzwerk-Sync, Szenenlogik
-        \item \vspace{0.5em}
-        \textbf{RTReconstruct als Modul}:
-        \begin{itemize}
-            \setlength{\itemsep}{\lineskip}
-            \item Nutzt bestehende \texttt{Tracking-System} für Kameradaten
-            \item Erhält Rekonstruktionsergebnisse von Backend
-            \item Visualisiert in gemeinsamem 3D-Raum
-        \end{itemize}
+    \end{itemize}
+    
+    \vspace{0.8em}
+    \textbf{RTReconstruct als Modul:}
+    \begin{itemize}
+        \item Nutzt bestehendes Tracking-System für Kameradaten
+        \item Erhält Rekonstruktionsergebnisse vom Backend
+        \item Visualisiert Ergebnisse im gemeinsamen 3D-Raum
     \end{itemize}
 \end{frame}
