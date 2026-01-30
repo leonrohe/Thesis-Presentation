@@ -5,7 +5,7 @@
         \column{0.5\textwidth}
         {\large \textbf{Funktional}}
         \begin{itemize}
-            \itemsep0.8em
+            \itemsep0.6em
             \item Echtzeitverarbeitung
             \item Kontinuierliche Datenerfassung
             \item Fensterbasierte Übertragung
@@ -14,14 +14,15 @@
         \column{0.5\textwidth}
         {\large \textbf{Nicht-funktional}}
         \begin{itemize}
-            \itemsep0.8em
+            \itemsep0.6em
             \item Niedrige Latenz
             \item Modularität
             \item Stabilität \& Skalierbarkeit
         \end{itemize}
     \end{columns}
     \vfill
-    \begin{tcolorbox}[colback=yellow!5, colframe=gray!70, boxsep=0.5em]
+    \begin{tcolorbox}[box5, boxsep=0.5em]
+        \centering
         \textbf{Ziel:} Heterogene Rekonstruktionsverfahren in einer gemeinsamen Architektur
     \end{tcolorbox}
 \end{frame}
@@ -55,48 +56,44 @@
     \end{columns}
     
     \vfill
-    \begin{tcolorbox}[colback=yellow!5, colframe=gray!70, boxsep=0.5em]
+    \begin{tcolorbox}[box5, boxsep=0.5em]
+        \centering
         \textbf{Entkoppelung:} Asynchrone Pufferung ermöglicht unabhängige Verarbeitung
     \end{tcolorbox}
 \end{frame}
 
 \begin{frame}{Frontend-Architektur: Drei Aufgabenbereiche}
-    \begin{tcolorbox}[colback=blue!10, colframe=blue!70, boxsep=0.5em, title=\textbf{1. Erfassung und Vorverarbeitung}]
-        \begin{itemize}
-            \itemsep0.3em
-            \small
-            \item XR-Endgeräte (HMD, mobile Kameras)
-            \item RGB-Video + kontinuierliche Pose-Daten
-        \end{itemize}
-    \end{tcolorbox}
+    
+    {\large \textbf{1. Erfassung und Vorverarbeitung}}
+    \begin{itemize}
+        \itemsep0.4em
+        \item XR-Endgeräte (HMD, mobile Kameras)
+        \item RGB-Video + kontinuierliche Pose-Daten
+    \end{itemize}
     
     \vspace{0.6em}
     
-    \begin{tcolorbox}[colback=teal!10, colframe=teal!70, boxsep=0.5em, title=\textbf{2. Clientseitige Steuerung \& Fragmentbildung}]
-        \begin{itemize}
-            \itemsep0.3em
-            \small
-            \item Modellverwaltung pro Szene
-            \item Generische + modellspezifische Logik
-        \end{itemize}
-    \end{tcolorbox}
+    {\large \textbf{2. Clientseitige Steuerung \& Fragmentbildung}}
+    \begin{itemize}
+        \itemsep0.4em
+        \item Modellverwaltung pro Szene
+        \item Generische + modellspezifische Logik
+    \end{itemize}
     
     \vspace{0.6em}
     
-    \begin{tcolorbox}[colback=orange!10, colframe=orange!70, boxsep=0.5em, title=\textbf{3. Visualisierung \& Va.Si.Li-Lab-Integration}]
-        \begin{itemize}
-            \itemsep0.3em
-            \small
-            \item Einbettung in laufende VR-Szene
-            \item Keine Anpassung der Basis-Szenlogik
-        \end{itemize}
-    \end{tcolorbox}
+    {\large \textbf{3. Visualisierung \& Va.Si.Li-Lab-Integration}}
+    \begin{itemize}
+        \itemsep0.4em
+        \item Einbettung in laufende VR-Szene
+        \item Keine Anpassung der Basis-Szenlogik
+    \end{itemize}
 \end{frame}
 
 \begin{frame}{Modul- und Schnittstellendesign}    
     \begin{columns}[T]
         \column{0.33\textwidth}
-        \begin{tcolorbox}[colback=blue!10, colframe=blue!70, boxsep=0.5em, height=3.5cm, title=\textbf{Anfrage}]
+        \begin{tcolorbox}[box1, boxsep=0.5em, height=3.5cm, title=\textbf{Anfrage}]
             \small Enthält:
             \begin{itemize}
                 \itemsep0.2em
@@ -108,7 +105,7 @@
         \end{tcolorbox}
         
         \column{0.33\textwidth}
-        \begin{tcolorbox}[colback=teal!10, colframe=teal!70, boxsep=0.5em, height=3.5cm, title=\textbf{Antwort}]
+        \begin{tcolorbox}[box2, boxsep=0.5em, height=3.5cm, title=\textbf{Antwort}]
             \small Enthält:
             \begin{itemize}
                 \itemsep0.2em
@@ -120,7 +117,7 @@
         \end{tcolorbox}
         
         \column{0.33\textwidth}
-        \begin{tcolorbox}[colback=orange!10, colframe=orange!70, boxsep=0.5em, height=3.5cm, title=\textbf{Verwaltung}]
+        \begin{tcolorbox}[box3, boxsep=0.5em, height=3.5cm, title=\textbf{Verwaltung}]
             \small Enthält:
             \begin{itemize}
                 \itemsep0.2em
@@ -132,7 +129,7 @@
     \end{columns}
     
     \vfill
-    \begin{tcolorbox}[colback=yellow!5, colframe=gray!70, boxsep=0.5em]
+    \begin{tcolorbox}[box5, boxsep=0.5em]
         \centering
         \textbf{Vorteil:} Vermittlungsschicht unabhängig von Modellimplementierungen
     \end{tcolorbox}
@@ -141,7 +138,7 @@
 \begin{frame}{Kommunikations- und Datenfluss}    
     \begin{columns}[T]
         \column{0.25\textwidth}
-        \begin{tcolorbox}[colback=blue!10, colframe=blue!70, height=2.75cm, boxsep=0.2em]
+        \begin{tcolorbox}[box1, height=2.75cm, boxsep=0.2em]
             \centering
             \textcolor{blue!70}{\textbf{[1]}}\\
             \textbf{Verbindung}\\
@@ -152,7 +149,7 @@
         \end{tcolorbox}
         
         \column{0.25\textwidth}
-        \begin{tcolorbox}[colback=teal!10, colframe=teal!70, height=2.75cm, boxsep=0.2em]
+        \begin{tcolorbox}[box2, height=2.75cm, boxsep=0.2em]
             \centering
             \textcolor{teal!70}{\textbf{[2]}}\\
             \textbf{Erfassung}\\
@@ -164,7 +161,7 @@
         \end{tcolorbox}
         
         \column{0.25\textwidth}
-        \begin{tcolorbox}[colback=orange!10, colframe=orange!70, height=2.75cm, boxsep=0.2em]
+        \begin{tcolorbox}[box3, height=2.75cm, boxsep=0.2em]
             \centering
             \textcolor{orange!70}{\textbf{[3]}}\\
             \textbf{Rekonstruktion}\\
@@ -176,7 +173,7 @@
         \end{tcolorbox}
         
         \column{0.25\textwidth}
-        \begin{tcolorbox}[colback=red!10, colframe=red!70, height=2.75cm, boxsep=0.2em]
+        \begin{tcolorbox}[box4, height=2.75cm, boxsep=0.2em]
             \centering
             \textcolor{red!70}{\textbf{[4]}}\\
             \textbf{Visualisierung}\\
@@ -189,7 +186,8 @@
     \end{columns}
     
     \vfill
-    \begin{tcolorbox}[colback=yellow!5, colframe=gray!70, boxsep=0.5em]
-        \small \textbf{Asynchrone Entkopplung:} Jede Phase arbeitet mit eigenem Tempo durch Pufferung
+    \begin{tcolorbox}[box5, boxsep=0.5em]
+        \centering
+        \textbf{Asynchrone Entkopplung:} Jede Phase arbeitet mit eigenem Tempo durch Pufferung
     \end{tcolorbox}
 \end{frame}

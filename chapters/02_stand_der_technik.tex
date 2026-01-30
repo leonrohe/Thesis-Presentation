@@ -25,7 +25,8 @@
     \end{columns}
     
     \vspace{0.8cm}
-    \begin{tcolorbox}[colback=blue!10, colframe=blue!40, boxsep=5pt]
+    \begin{tcolorbox}[box5, boxsep=0.5em]
+        \centering
         \textbf{Problem für VR:} Hardware-Abhängigkeit oder Monolithische Architekturen
     \end{tcolorbox}
 \end{frame}
@@ -33,19 +34,19 @@
 \begin{frame}{End-to-End-Pipelines: Zentrale Limitationen}
     \vspace{0.2cm}
     
-    \begin{tcolorbox}[colback=red!10, colframe=red!40, boxsep=6pt, title={\textbf{1. Monolithische Architektur}}]
+    \begin{tcolorbox}[box1, boxsep=6pt, title={\textbf{1. Monolithische Architektur}}]
         Rekonstruktionslogik fest gekoppelt, schwer austauschbar
     \end{tcolorbox}
     
     \vspace{0.4cm}
     
-    \begin{tcolorbox}[colback=orange!10, colframe=orange!40, boxsep=6pt, title={\textbf{2. Fehlende Streaming-Infrastruktur}}]
+    \begin{tcolorbox}[box2, boxsep=6pt, title={\textbf{2. Fehlende Streaming-Infrastruktur}}]
         Batch-Processing statt Live-Datenfluss – keine Multi-User-Unterstützung
     \end{tcolorbox}
     
     \vspace{0.4cm}
     
-    \begin{tcolorbox}[colback=yellow!10, colframe=yellow!40, boxsep=6pt, title={\textbf{3. Pose-Inflexibilität}}]
+    \begin{tcolorbox}[box3, boxsep=6pt, title={\textbf{3. Pose-Inflexibilität}}]
         Extern vs. intern: Heterogene Anforderungen können nicht parallel laufen
     \end{tcolorbox}
 \end{frame}
@@ -95,7 +96,7 @@
     \end{itemize}
     
     \vspace{0.6cm}
-    \begin{tcolorbox}[colback=blue!10, colframe=blue!40, boxsep=4pt, title={\textbf{Lösung}}]
+    \begin{tcolorbox}[box5, title={\textbf{Lösung}}]
         \textbf{RTReconstruct:} Containerisierte, modulare Architektur für nahtlose VR-Integration
     \end{tcolorbox}
 \end{frame}

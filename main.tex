@@ -49,6 +49,17 @@
     nonavigation, % disable the navigation in the footline
 ]{goethe}
 
+%%%%%%%%%%
+% Colors %
+%%%%%%%%%%
+\tcbset{
+    box1/.style ={colback=blue!10,      colframe=blue!70},
+    box2/.style ={colback=teal!10,      colframe=teal!70},
+    box3/.style ={colback=orange!10,    colframe=orange!70},
+    box4/.style ={colback=red!10,       colframe=red!70},
+    box5/.style ={colback=yellow!5,     colframe=gray!70}
+}
+
 %%%%%%%%%%%%%%%%%%%%%%%%
 % Title, Authors, etc. %
 %%%%%%%%%%%%%%%%%%%%%%%%
@@ -56,25 +67,6 @@
 \author[Leon Rohe]{\Large Leon Rohe} % TODO
 \institute[Text Technology Lab]{\large Text Technology Lab}
 \date{\today} % TODO
-
-%%%%%%%%%%%%%%%%%
-% Customization %
-%%%%%%%%%%%%%%%%%
-%% Uncomment and change the following lines to change the footline
-% \makeatletter
-% \setbeamertemplate{footline separator}{~--~}
-% \setbeamertemplate{footline content}{%
-%     \let\hyperlink\@secondoftwo%
-%     \insertshorttitle\usebeamertemplate{footline separator}\insertshortsubtitle%
-% }
-% \makeatother
-
-%% Or, change the logo on the title page:
-% \makeatletter
-% \setbeamertemplate{logo on title page}{%
-%    \includegraphics[width=\beamer@goethe@logo@width]{\beamer@goethe@logo} %
-% }
-% \makeatother
 
 %%%%%%%%%%%%%%%%
 % Bibliography %
