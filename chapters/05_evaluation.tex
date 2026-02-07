@@ -63,6 +63,29 @@
     \textbf{Fenstergröße:} 9 Frames pro Fragment
 \end{frame}
 
+\begin{frame}{Testszenarien}{}
+    \begin{figure}
+        \begin{subfigure}{0.33\textwidth}
+            \includegraphics[width=\textwidth]{images/room00.png}
+        \end{subfigure}
+        \hfill
+        \begin{subfigure}{0.33\textwidth}
+            \includegraphics[width=\textwidth]{images/Room01.png}
+        \end{subfigure}
+        \hfill
+        \begin{subfigure}{0.33\textwidth}
+            \includegraphics[width=\textwidth]{images/Room02.png}
+        \end{subfigure}
+        
+        \begin{subfigure}{0.33\textwidth}
+            \includegraphics[width=\textwidth, trim=0 0 0 20cm, clip]{images/room03.jpg}
+        \end{subfigure}
+        \begin{subfigure}{0.33\textwidth}
+            \includegraphics[width=\textwidth, trim=0 0 0 20cm, clip]{images/room04.jpg}
+        \end{subfigure}
+    \end{figure}
+\end{frame}
+
 \begin{frame}{Funktionale Validierung - Ergebnisse}{}
     \textbf{1. End-to-End-Kommunikation:}
     \begin{itemize}
@@ -145,6 +168,41 @@
     \end{itemize}
 \end{frame}
 
+\begin{frame}{Performance-Analyse: Ressourcenauslastung}{}
+    \textbf{Backend (Server):}
+    \begin{itemize}
+        \itemsep0.4em
+        \item Router: Minimaler Overhead (2,5\% CPU, 100 MB RAM)
+        \item Worker zeigen deutliche Unterschiede:
+    \end{itemize}
+    
+    \vfill
+    
+    \begin{table}[h]
+        \centering
+        \resizebox{0.95\textwidth}{!}{
+            \begin{tabular}{l|cc|cc}
+                \textbf{Modell} & \textbf{GPU-Auslastung} & \textbf{Max. VRAM (GB)} & \textbf{CPU} & \textbf{RAM (GB)} \\
+                \hline
+                NeuralRecon & 43--48\% & 3,8--8,0 & 250 & 1,8 \\
+                VisFusion & 49--56\% & 4,4--6,0 & 100 & 1,8 \\
+                SLAM3R & 98--99\% & 7,6--8,0 & 100 & 1,9 \\
+                MASt3R-SLAM & 100\% & 7,9--8,0 & 100 & 2,8
+            \end{tabular}
+        }
+    \end{table}
+    
+    \vfill
+    
+    \textbf{Frontend (Meta Quest 3):}
+    \begin{itemize}
+        \itemsep0.4em
+        \item Baseline: 72 FPS
+        \item NeuralRecon: 72 FPS, VisFusion: 58 FPS
+        \item SLAM3R, MASt3R-SLAM: 38 FPS
+    \end{itemize}
+\end{frame}
+
 \begin{frame}{Rekonstruktionsqualität: Quantitative Ergebnisse}{}    
     \begin{table}[h]
     \centering
@@ -195,4 +253,116 @@
     \end{tabular}
     }
     \end{table}
+\end{frame}
+
+\begin{frame}{Rekonstruktionsqualität: V1}{}
+    \centering
+
+    % Row 1
+    \begin{minipage}[t]{0.45\textwidth}
+        \centering
+        \imgwithlabel{images/ReconsTransparent/room00/neucon00.png}{NeuralRecon}
+    \end{minipage}
+    \hspace{0.1cm}
+    \begin{minipage}[t]{0.45\textwidth}
+        \centering
+        \imgwithlabel{images/ReconsTransparent/room00/visfusion00.png}{VisFusion}
+    \end{minipage}
+
+    % Row 2
+    \begin{minipage}[t]{0.45\textwidth}
+        \centering
+        \imgwithlabel{images/ReconsTransparent/room00/slam3r00.png}{SLAM3R}
+    \end{minipage}
+    \hspace{0.1cm}
+    \begin{minipage}[t]{0.45\textwidth}
+        \centering
+        \imgwithlabel{images/ReconsTransparent/room00/mast3r0.png}{MASt3R}
+    \end{minipage}
+\end{frame}
+
+\begin{frame}{Rekonstruktionsqualität: V2}{}
+    \centering
+
+    % Row 1
+    \begin{minipage}[t]{0.45\textwidth}
+        \centering
+        \imgwithlabel{images/ReconsTransparent/room01/neucon00.png}{NeuralRecon}
+    \end{minipage}
+    \hspace{0.1cm}
+    \begin{minipage}[t]{0.45\textwidth}
+        \centering
+        \imgwithlabel{images/ReconsTransparent/room01/visfusion00.png}{VisFusion}
+    \end{minipage}
+
+    % Row 2
+    \begin{minipage}[t]{0.45\textwidth}
+        \centering
+        \imgwithlabel{images/ReconsTransparent/room01/slam3r00.png}{SLAM3R}
+    \end{minipage}
+    \hspace{0.1cm}
+    \begin{minipage}[t]{0.45\textwidth}
+        \centering
+        \imgwithlabel{images/ReconsTransparent/room01/mast3r00.png}{MASt3R}
+    \end{minipage}
+\end{frame}
+
+\begin{frame}{Rekonstruktionsqualität: V3}{}
+    \centering
+
+    % Row 1
+    \begin{minipage}[t]{0.45\textwidth}
+        \centering
+        \imgwithlabel{images/ReconsTransparent/room02/neucon00.png}{NeuralRecon}
+    \end{minipage}
+    \hspace{0.1cm}
+    \begin{minipage}[t]{0.45\textwidth}
+        \centering
+        \imgwithlabel{images/ReconsTransparent/room02/visfusion00.png}{VisFusion}
+    \end{minipage}
+
+    % Row 2
+    \begin{minipage}[t]{0.45\textwidth}
+        \centering
+        \imgwithlabel{images/ReconsTransparent/room02/slam3r00.png}{SLAM3R}
+    \end{minipage}
+    \hspace{0.1cm}
+    \begin{minipage}[t]{0.45\textwidth}
+        \centering
+        \imgwithlabel{images/ReconsTransparent/room02/mast3r00.png}{MASt3R}
+    \end{minipage}
+\end{frame}
+
+\begin{frame}{Rekonstruktionsqualität: R1}{}
+    \centering
+
+    \vfill
+    % Row 1
+    \begin{minipage}[t]{0.45\textwidth}
+        \centering
+        \imgwithlabel{images/ReconsTransparent/room03/neucon00.png}{NeuralRecon}
+    \end{minipage}
+    \hspace{0.1cm}
+    \begin{minipage}[t]{0.45\textwidth}
+        \centering
+        \imgwithlabel{images/ReconsTransparent/room03/visfusion00.png}{VisFusion}
+    \end{minipage}
+    \vfill
+\end{frame}
+
+\begin{frame}{Rekonstruktionsqualität: R2}{}
+    \centering
+
+    \vfill
+    % Row 2
+    \begin{minipage}[t]{0.45\textwidth}
+        \centering
+        \imgwithlabel{images/ReconsTransparent/room04/slam3r00.png}{SLAM3R}
+    \end{minipage}
+    \hspace{0.1cm}
+    \begin{minipage}[t]{0.45\textwidth}
+        \centering
+        \imgwithlabel{images/ReconsTransparent/room04/mast3r00.png}{MASt3R}
+    \end{minipage}
+    \vfill
 \end{frame}

@@ -1,18 +1,19 @@
 \section{Grundlagen}\sectionFrame
 
-\begin{frame}{Grundlagen: Virtual Reality \& monokulare Rekonstruktion}{\cite{bozkir2025eyetrackedvirtualrealitycomprehensive, MetaPassthrough2021, HERRERAGRANDA2024e37356}}
-    \textbf{VR-Hardware heute:}
+\begin{frame}{Grundlagen: Virtual Reality}{\cite{bozkir2025eyetrackedvirtualrealitycomprehensive, MetaPassthrough2021}}
+    \textbf{Was ist Virtual Reality?}
     \begin{itemize}
-        \item HMDs wie Meta Quest 3 mit integrierten RGB-Kameras
-        \item Kein Tiefensensor $\Rightarrow$ klassische RGB-D-Verfahren nicht einsetzbar
+        \item Computergenerierte 3D-Umgebung mit vollständiger Immersion
+        \item Head-Mounted Displays (HMDs): Stereoskopische Darstellung + präzises Tracking
+        \item Echtzeit-Interaktion durch Kopf-, Hand- und Körpererfassung
     \end{itemize}
     
     \vspace{0.8em}
-    \textbf{RTReconstruct-Ziel:}
+    \textbf{Moderne VR-Hardware (z.B. Meta Quest 3):}
     \begin{itemize}
-        \item Tiefe aus Bildsequenzen rekonstruieren (SLAM, volumetrische Verfahren)
-        \item Ergebnisse in laufende VR-Anwendung streamen
-        \item Mehrere Rekonstruktionsmodelle parallel austauschbar
+        \item Inside-Out-Tracking: Kameras erfassen Umgebung $\rightarrow$ Position/Orientierung
+        \item Passthrough-Funktionalität: RGB-Kameras ermöglichen Mixed Reality
+        \item \textbf{Wichtig:} Keine Tiefensensoren $\Rightarrow$ monokulare Rekonstruktion nötig
     \end{itemize}
 \end{frame}
 
