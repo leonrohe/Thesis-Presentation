@@ -3,71 +3,106 @@
 \begin{frame}{3D-Rekonstruktion in VR}{(\cite{enhancinginteractions,Stotko_2019,khenak2020spatial})}
     \textbf{Ausgangssituation:}
     \begin{itemize}
-        \item VR-Anwendungen basieren oft auf künstlich erstellten Szenen
+        \item VR-Anwendungen werden immer immersiver
+        \item Dennoch basieren sie oft auf künstlich erstellten Szenen
         \item Viele Anwendungsfälle profitieren von Bezug zur realen Welt
     \end{itemize}
     
     \bigskip
     
-    \textbf{Vorteile durch Rekonstruktion:}
+    \textbf{Vorteile durch Rekonstruktion realer Umgebungen:}
     \begin{itemize}
         \item Spontane Erfassung und gemeinsame Analyse von Räumen
-        \item Kollaborative Aufgaben ohne aufwendige manuelle Modellierung
+        \item Kollaborative Aufgaben ohne manuelle Modellierung
         \item Grundbaustein für dynamische, interaktive VR-Systeme
     \end{itemize}
 \end{frame}
 
-\begin{frame}{Klassische Photogrammetrie: Ungeeignet}{(\cite{Day2025RealTimePhotogrammetry})}
-    \begin{columns}[T]
-        \column{0.5\textwidth}
-        \textbf{Vorteile:}
-        \begin{itemize}
-            \item Hochauflösende Resultate
-        \end{itemize}
-        
-        \column{0.5\textwidth}
-        \textbf{Nachteile:}
-        \begin{itemize}
-            \item Umfangreiche Bildaufnahmen
-            \item Lange Verarbeitungszeiten
-            \item Ungeeignet für dynamische VR
-        \end{itemize}
-    \end{columns}
+\begin{frame}{Bestehende Ansätze zur 3D-Rekonstruktion}
+    \textbf{Klassische Photogrammetrie (Offline/Batch):}
+    \begin{itemize}
+        \item Hochauflösende Ergebnisse
+        \item Umfangreiche Bildaufnahmen, lange Verarbeitungszeiten
+        \item Nicht geeignet für interaktive VR-Szenarien
+    \end{itemize}
+    
+    \vfill
+    
+    \textbf{RGB-D-basierte Online-Rekonstruktion:}
+    \begin{itemize}
+        \item Echtzeitfähig durch Tiefensensoren
+        \item Hardware-Abhängigkeit (bei Consumer-VR oft nicht verfügbar)
+    \end{itemize}
+    
+    \vfill
+    
+    \begin{tcolorbox}[box5]
+        \centering
+        \textbf{Lösung:}~Monokulare Echtzeitverfahren
+    \end{tcolorbox}
 \end{frame}
 
-\begin{frame}{Monokulare Echtzeit-Rekonstruktion: Potenzial \& Herausforderung}{(\cite{sun2021neuralreconrealtimecoherent3d,gao2023visfusionvisibilityawareonline3d,liu2025slam3rrealtimedensescene, murai2025mast3rslamrealtimedenseslam})}
+\begin{frame}{Monokulare Echtzeit-Rekonstruktion: Potenzial}{(\cite{sun2021neuralreconrealtimecoherent3d,gao2023visfusionvisibilityawareonline3d,liu2025slam3rrealtimedensescene, murai2025mast3rslamrealtimedenseslam})}
     \textbf{Vorteile:}
     \begin{itemize}
-        \item Keine zusätzliche Hardware erforderlich
-        \item Direkte Nutzung moderner VR-Headset-Kameras
+        \item Keine zusätzliche Hardware erforderlich (nur RGB-Kamera)
+        \item Direkte Nutzung von VR-Headset-Frontkameras
+        \item Inkrementelle Rekonstruktion während der Bewegung
+        \item Verschiedene Ansätze verfügbar (SLAM, volumetrisch, lernbasiert)
     \end{itemize}
     
     \bigskip
     
-    \textbf{Aber: Praktische Integration kaum etabliert}
+    \textbf{Aber: Praktische Integration in VR kaum etabliert}
     \begin{itemize}
         \item Modelle in isolierten Forschungskontexten entwickelt
         \item Heterogene Laufzeitumgebungen und Frameworks
-        \item Nicht auf interaktive Systeme ausgelegt
+        \item Nicht auf interaktive Multi-User-VR ausgelegt
     \end{itemize}
 \end{frame}
 
-\begin{frame}{Anforderungen an VR-Rekonstruktionssysteme}
+\begin{frame}{Herausforderungen der Integration}
     \textbf{Was die Integration erschwert:}
     \begin{itemize}
-        \item \textbf{Stabiler Datenfluss:} Kontinuierliche Bilder + Posen ohne Ausfälle
-        \item \textbf{Wachsende Modelle:} Szene wird inkrementell aktualisiert, nicht am Ende
-        \item \textbf{Nahtlose Integration:} Muss mit bestehender VR-Engine (z.B.\ Va.Si.Li-Lab) funktionieren
-        \item \textbf{Vergleichbarer Betrieb:} Mehrere Rekonstruktionsverfahren parallel testen
+        \item Eigene Laufzeitumgebungen, Frameworks und Pipelines
+        \item Fehlende Streaming-Infrastruktur für kontinuierliche Updates
+        \item Unterschiedliche Schnittstellen und Ausgabeformate
+        \item Pose-Anforderungen variieren (intern vs.\ extern)
+    \end{itemize}
+    
+    \bigskip
+    
+    \textbf{Folge:}
+    \begin{itemize}
+        \item Hoher manueller Integrationsaufwand pro Verfahren
+        \item Kein systematischer Vergleich unter identischen Bedingungen
     \end{itemize}
 \end{frame}
 
+% \begin{frame}{Anforderungen an VR-Rekonstruktionssysteme}
+%     \textbf{Was ein praktikables System leisten muss:}
+%     \begin{itemize}
+%         \item \textbf{Modellunabhängigkeit:} Verschiedene Verfahren ohne Code-Anpassung integrieren
+%         \item \textbf{Kontinuierliches Streaming:} Inkrementelle Updates in laufende VR-Szene
+%         \item \textbf{Multi-User-Fähigkeit:} Synchronisation mehrerer VR-Clients
+%         \item \textbf{Standardisierte Schnittstelle:} Einheitliche Kommunikation trotz heterogener Verfahren
+%     \end{itemize}
+% \end{frame}
+
 \begin{frame}{Forschungslücke}
-    \textbf{Unzureichend erforscht:}
+    \textbf{Bisherige Forschung fokussiert auf:}
     \begin{itemize}
-        \item Modulare Architektur noch nicht ausreichend adressiert
-        \item Keine standardisierte Lösung für Integration verschiedener Verfahren
-        \item Fehlende Infrastruktur für kapselierte Rekonstruktion in VR
+        \item Verbesserung einzelner Rekonstruktionsalgorithmen
+        \item Qualität und Geschwindigkeit spezifischer Verfahren
+    \end{itemize}
+    
+    \bigskip
+    
+    \textbf{Unzureichend adressiert:}
+    \begin{itemize}
+        \item Wiederverwendbare Infrastruktur für VR-Integration
+        \item Systematischer Vergleich heterogener Verfahren
+        \item Deployment-Architekturen für praktischen Einsatz
     \end{itemize}
 \end{frame}
 
