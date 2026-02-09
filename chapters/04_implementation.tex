@@ -60,7 +60,7 @@
     \textbf{Vorteile gegenüber JSON:}
     \begin{itemize}
         \itemsep0.4em
-        \item ca. 33\% weniger Overhead durch Binaercodierung
+        \item ca. 33\% weniger Overhead durch Binärcodierung
         \item geringere Bandbreitennutzung
     \end{itemize}
 \end{frame}
@@ -69,7 +69,7 @@
     \textbf{Zwei WebSocket-Endpunkte}
     \begin{itemize}
         \itemsep0.4em
-        \item \textbf{/ws/client}: Unity-Clients verbinden sich, registrieren fuer Szenen
+        \item \textbf{/ws/client}: Unity-Clients verbinden sich, registrieren für Szenen
         \item \textbf{/ws/modelname}: Modell-Worker registrieren sich, erhalten Fragment-Queues
     \end{itemize}
     
@@ -97,7 +97,7 @@
     
     \vspace{0.8em}
     
-    \textbf{Spezialisierte Modell-Worker} \hfill \textit{\small Konkrete Unterklassen fuer jedes Modell}
+    \textbf{Spezialisierte Modell-Worker} \hfill \textit{\small Konkrete Unterklassen für jedes Modell}
     \begin{itemize}
         \itemsep0.4em
         \item NeuralRecon, VisFusion, MASt3R-SLAM, SLAM3R
@@ -122,7 +122,7 @@
         \itemsep0.4em
         \item \textbf{MetaQuestCaptureDevice}: Passthrough-Kamera des HMD
         \item \textbf{SmartphoneCaptureDevice}: ARFoundation (Android/iOS)
-        \item \textbf{EvalCaptureDevice}: Synthetische Szenen fuer Evaluation
+        \item \textbf{EvalCaptureDevice}: Synthetische Szenen für Evaluation
     \end{itemize}
 \end{frame}
 
@@ -162,7 +162,7 @@
         \textbf{Meshes}
         \begin{itemize}
             \itemsep0.4em
-            \item glTFast fuer GLB-Import
+            \item glTFast für GLB-Import
             \item Chunking-Verfahren (MeshUtils)
             \item Komplexe Geometrie effizient
         \end{itemize}
@@ -179,7 +179,7 @@
     \textbf{Nicht-invasive Erweiterung}
     \begin{itemize}
         \itemsep0.4em
-        \item RTReconstruct als eigenstaendiges Modul
+        \item RTReconstruct als eigenständiges Modul
         \item Vorfertigte Unity-Prefabs (ReconstructionManager, RoomReconstructor, ReconstructionClient)
         \item Keine Aenderung bestehender Szenenlogik
     \end{itemize}
@@ -190,7 +190,7 @@
     \begin{itemize}
         \itemsep0.4em
         \item \textbf{Host}: Initiiert Datenerfassung und Uebertragung
-        \item \textbf{Visitor}: Empfaengt und visualisiert Rekonstruktionen
+        \item \textbf{Visitor}: Empfängt und visualisiert Rekonstruktionen
         \item Vollstaendige Rolle-Verwaltung in RTReconstruct-Prefabs
     \end{itemize}
 \end{frame}

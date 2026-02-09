@@ -1,4 +1,4 @@
-\section{Fazit}\sectionFrame
+\section{Diskussion \& Fazit}\sectionFrame
 
 \begin{frame}{Echtzeitfähigkeit und GPU-Engpässe}{}
     \begin{columns}[T]
@@ -6,8 +6,8 @@
         \textbf{Volumetrische Verfahren}
         \begin{itemize}
             \itemsep0.4em
-            \item Durchsatz: 0,30–0,62 fps
-            \item GPU-Auslastung: 43–56\%
+            \item Durchsatz: 0,30-0,62 fps
+            \item GPU-Auslastung: 43-56\%
             \item Detaillierte Oberflächenqualität
             \item Geschlossene Meshes
         \end{itemize}
@@ -16,42 +16,43 @@
         \textbf{SLAM-basierte Verfahren}
         \begin{itemize}
             \itemsep0.4em
-            \item Durchsatz: 0,03–0,13 fps
-            \item GPU-Auslastung: 98–100\%
-            \item VRAM-Bottleneck: 7,9–8,0 GB
+            \item Durchsatz: 0,03-0,13 fps
+            \item GPU-Auslastung: 98-100\%
+            \item VRAM-Bottleneck: 7,9-8,0 GB
             \item GTX 1070 Ti limitiert
         \end{itemize}
     \end{columns}
     
     \vfill
-    \textbf{Latenzcharakteristik}
+    \textbf{Architektur-Overhead minimal}
     \begin{itemize}
         \itemsep0.4em
-        \item Inferenz dominiert: 63–90\% der Gesamtlatenz
-        \item Netzwerk + Rendering: <1000ms (konstanter Overhead)
+        \item Inferenz dominiert Gesamtlatenz: 63-90\%
+        \item Netzwerk + Rendering konstant <1s
     \end{itemize}
 \end{frame}
 
-\begin{frame}{Architektur: Containerisierung und Modularität}{}
-    \textbf{Erfolgreiche Integration heterogener Verfahren} \hfill \textit{\small 4 Modelle, konfliktäre PyTorch-Versionen}
+\begin{frame}{Modularität: Containerisierung ermöglicht Integration}{}
+    \textbf{Erfolgreiche Integration heterogener Verfahren}
     \begin{itemize}
         \itemsep0.4em
-        \item 47–66 Zeilen Dockerfile, 205–401 Zeilen Worker-Code
-        \item Integrationsaufwand: 4–8 Stunden pro Modell
+        \item 4 Modelle mit konfliktären PyTorch-Versionen isoliert betrieben
+        \item Integrationsaufwand: 4-8 Stunden pro Modell
         \item BaseReconstructionModel kapselt WebSocket-Logik vollständig
+        \item Docker-Container: 47-66 Zeilen, Worker: 205-401 Zeilen
     \end{itemize}
     
     \vspace{0.8em}
     
-    \textbf{Standardisierte Schnittstellen} \hfill \textit{\small Framework-Heterogenität abstrahiert}
+    \textbf{Systemstabilität unter Produktionsbedingungen}
     \begin{itemize}
         \itemsep0.4em
-        \item Router-Overhead: 20\% CPU, 100 MB RAM
-        \item Fragment-Größen: 0,82–1,84 MB
-        \item Parallelbetrieb ohne Konflikte
-        \item Fan-Out stabil (2 Szenen, 4 Clients, 6h)
+        \item Router-Overhead minimal: 20\% CPU, 100 MB RAM
+        \item Multi-User-Stabilität: 2 Szenen, 4 Clients parallel über 6h
+        \item 0 Verbindungsabbrüche in 60 Testläufen
     \end{itemize}
 \end{frame}
+
 
 \begin{frame}{Rekonstruktionsqualität und SDK-Limitationen}{}
     \begin{columns}[T]
@@ -59,56 +60,78 @@
         \textbf{Synthetische Szenen}
         \begin{itemize}
             \itemsep0.4em
-            \item Volumetrisch stabil (F: 0,41–0,68)
-            \item VisFusion beste Performance in V3
-            \item SLAM-Verfahren mit Drift
-            \item SLAM3R: V1→V3 ↓31\%
+            \item Volumetrisch stabil (F: 0,41-0,68)
+            \item VisFusion konsistent (F: 0,54-0,62)
+            \item SLAM: Drift-Artefakte (F: 0,42-0,63)
+            \item SLAM3R: V1$\longrightarrow$V3 Rückgang 31\%
         \end{itemize}
         
         \column{0.5\textwidth}
         \textbf{Reale VR-Szenen}
         \begin{itemize}
             \itemsep0.4em
-            \item Leistungsumkehr: SLAM überlegen
+            \item \textbf{Leistungsumkehr}: SLAM überlegen
             \item Volumetrisch fragmentiert
-            \item MASt3R-SLAM trotz niedrigster fps Sieger
+            \item MASt3R-SLAM trotz 0,03-0,10 fps beste Vollständigkeit
         \end{itemize}
     \end{columns}
     
     \vfill
-    \begin{tcolorbox}[box5, boxsep=0.5em]
-        \textbf{Ursachen:}
+    \begin{tcolorbox}[box5, title={\textbf{Kernursachen}}]
+        Meta Quest 3 SDK liefert keine Frame-Timestamps
         \begin{itemize}
-            \item Meta Quest 3 fehlende Frame-Timestamps → zeitliche Inkonsistenzen (ms) → TSDF-Artefakte.
-            \item SLAM-Verfahren kompensieren durch Pose-Optimierung. 
-            \item SDK-Limitationen primär limitierend, nicht Algorithmen.
+            \item zeitliche Inkonsistenzen
+            \item TSDF-Artefakte
+        \end{itemize}
+        SLAM kompensiert durch Pose-Optimierung.
+        \begin{itemize}
+            \item SDK-Limitation, nicht Algorithmen-Schwäche.
         \end{itemize}
     \end{tcolorbox}
 \end{frame}
 
 \begin{frame}{Beantwortung der Forschungsfrage}{}
     \begin{center}
-        \textit{Wie gut eignet sich eine modulare, containerisierte Architektur zur Integration heterogener Rekonstruktionsverfahren in VR?        }
+        \textit{Wie gut eignet sich eine modulare, containerisierte Architektur zur\\Integration heterogener Rekonstruktionsverfahren in VR?}
     \end{center}
     
-    \vspace{0.6em}
+    \vfill
     
-    \textbf{Antwort: Sehr gut – empirisch validiert durch 4 Verfahren}
+    \textbf{Antwort: Sehr gut für Forschungs- und Evaluationskontexte}
     \begin{itemize}
         \itemsep0.4em
         \item Standardisierte Schnittstellen abstrahieren Framework-Heterogenität erfolgreich
         \item Asynchrone Streaming-Architektur reduziert Kopplungsgrad signifikant
-        \item Containerisierung ermöglicht flexible Hardware-Nutzung und Isolation
+        \item Flexible Hardware-Nutzung ohne Code-Anpassungen (Docker + GPU-Isolation)
         \item Kontextspezifische Verfahrenswahl ermöglicht (volumetrisch vs. SLAM)
-        \item Va.Si.Li-Lab: Additive Erweiterung ohne invasiven Eingriff
+        \item Va.Si.Li-Lab: Additive Integration ohne Mehrbenutzer-Eingriff
     \end{itemize}
     
     \vfill
     \begin{tcolorbox}[box5, boxsep=0.5em]
-        \small \textbf{Wissenschaftlich:} Systematische Vergleiche identifizieren SDK-bedingte Limitationen
-        
-        \textbf{Praktisch:} Wiederverwendbare Forschungsinfrastruktur mit minimalem Integrationsaufwand (4–8h)
+        \small
+        \textbf{Wissenschaftlich:} Systematische Vergleiche unter identischen Bedingungen\\
+        \textbf{Praktisch:} Wiederverwendbare Infrastruktur (4-8h Integrationsaufwand/Modell)
     \end{tcolorbox}
+\end{frame}
+
+\begin{frame}{Wissenschaftlicher Beitrag}{}
+    \textbf{Methodisch}
+    \begin{itemize}
+        \itemsep0.4em
+        \item Erste systematische Vergleichsstudie monokularer Rekonstruktion in VR-Headsets
+        \item Identifikation SDK-bedingter Limitationen (Quest 3 Timestamps)
+        \item Nachweis: Hardware-Einschränkungen dominieren über Algorithmen
+    \end{itemize}
+
+    \vfill
+
+    \textbf{Praktisch}
+    \begin{itemize}
+        \itemsep0.4em
+        \item Wiederverwendbare Infrastruktur (4-8h Integrationsaufwand/Modell)
+        \item Deployment-Referenzarchitektur für VR-Forschungsprototypen
+    \end{itemize}
 \end{frame}
 
 \begin{frame}{Limitationen}{}
@@ -117,18 +140,16 @@
         \textbf{Performance und Hardware}
         \begin{itemize}
             \itemsep0.4em
-            \item Durchsatz 0,03–0,62 fps unzureichend
-            \item Keine flüssige Echtzeitvisualisierung
-            \item GPU-Engpass: 8 GB VRAM
-            \item Parallelbetrieb limitiert
+            \item Durchsatz 0,03-0,62 fps unzureichend für Echtzeit-VR
+            \item GPU-Engpass: 8 GB VRAM limitiert Parallelbetrieb
+            \item SLAM: 98-100\% GPU-Auslastung
         \end{itemize}
         
         \column{0.5\textwidth}
-        \textbf{Architektur und SDK}
+        \textbf{System und SDK}
         \begin{itemize}
             \itemsep0.4em
-            \item Kein universales Modell
-            \item Container-Neustarts → Datenverlust
+            \item Keine Persistenz: Container-Neustarts verlieren Rekonstruktionszustand
             \item Manuelle SLAM-Skalierung erforderlich
             \item Meta Quest 3: Fehlende Timestamps
         \end{itemize}
@@ -136,38 +157,49 @@
     
     \vfill
     \begin{tcolorbox}[box5, boxsep=0.5em]
-        \textbf{Trade-off:} Geschwindigkeit vs. Robustheit – Kontextabhängige Verfahrenswahl notwendig
+        \textbf{Kern-Trade-off:} Geschwindigkeit vs. Robustheit - Kontextabhängige Verfahrenswahl notwendig
     \end{tcolorbox}
 \end{frame}
 
-\begin{frame}{Zukünftige Arbeiten}{}
+\begin{frame}{Zukünftige Arbeiten: Systemverbesserungen}{}
     \textbf{Architekturoptimierungen}
     \begin{itemize}
         \itemsep0.4em
-        \item PostgreSQL + PostGIS: Langfristige Zustandsverwaltung
-        \item GPU-Ressourcen-Management: Dynamische VRAM-Allokation
-        \item Adaptive Modell-Selektion: Automatische Verfahrenswahl
-        \item Kompression und inkrementelles Meshing
-        \item Automatische Kalibrierung: Selbständige Skalierung und Ausrichtung
+        \item Persistente Zustandsverwaltung (PostgreSQL + PostGIS)
+        \item Dynamisches GPU-Ressourcen-Management für Parallelbetrieb
+        \item Inkrementelle Mesh-Updates mit Kompression für Bandbreitenreduktion
+        \item Automatische Kalibrierung: Selbstständige Skalierung und Ausrichtung
     \end{itemize}
     
-    \vspace{0.4em}
+    \vspace{0.8em}
     
-    \textbf{Neue Repräsentationsverfahren}
+    \textbf{Neue Rekonstruktionsverfahren}
     \begin{itemize}
         \itemsep0.4em
-        \item Gaussian Splatting mit neuer Visualisierungs-Pipeline
+        \item Gaussian Splatting mit Unity-Visualisierungs-Pipeline
         \item NeRF-basierte Verfahren: Instant-NGP, TensoRF
-        \item Hybride Ansätze: Volumetrische Robustheit + SLAM-Pose-Optimierung
+        \item Hybride Ansätze: Volumetrische Fusion + SLAM-Pose-Optimierung
     \end{itemize}
-    
-    \vspace{0.4em}
-    
-    \textbf{Wissenschaftliche Perspektiven}
+\end{frame}
+
+
+
+\begin{frame}{Zukünftige Arbeiten: Forschungsperspektiven}{}
+    \textbf{Wissenschaftliche Erweiterungen}
     \begin{itemize}
         \itemsep0.4em
-        \item Standard VR-Rekonstruktions-Benchmark über Hardware und Szenen
-        \item User Studies: Wahrnehmung von Artefakten, akzeptable Update-Frequenzen
-        \item Multi-View-Fusion: Multi-Headset-Rekonstruktion für kollaborative Szenarien
+        \item Standard-Benchmark für VR-Rekonstruktion über Hardware und Szenen
+        \item User Studies: Artefaktwahrnehmung und akzeptable Update-Frequenzen
+        \item Multi-Headset-Rekonstruktion für kollaborative Szenarien
+    \end{itemize}
+    
+    \vspace{0.8em}
+    
+    \textbf{Hardwareoptimierung}
+    \begin{itemize}
+        \itemsep0.4em
+        \item Adaptive Modell-Selektion basierend auf Szenenkontext
+        \item VRAM-effiziente Varianten für mobile GPU-Architekturen
+        \item Quantisierung und Pruning für höheren Durchsatz
     \end{itemize}
 \end{frame}

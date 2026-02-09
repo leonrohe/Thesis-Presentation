@@ -86,6 +86,27 @@
     \end{figure}
 \end{frame}
 
+\begin{frame}{Messverfahren und Metriken}{}
+    \textbf{Quantitative Rekonstruktionsqualität (Virtuelle Szenen):}
+    \begin{itemize}
+        \item \textbf{Precision:} Anteil korrekt rekonstruierter Punkte an allen generierten Punkten
+        \item \textbf{Recall:} Anteil erfasster Ground-Truth-Punkte an allen tatsächlichen Punkten
+        \item \textbf{F-Score:} Harmonisches Mittel aus Precision und Recall
+        \begin{equation*}
+            F = 2 \cdot \frac{\text{Precision} \cdot \text{Recall}}{\text{Precision} + \text{Recall}}
+        \end{equation*}
+        \item Schwellwert: 10 cm Abstand zwischen Rekonstruktion und Ground-Truth
+    \end{itemize}
+    
+    \vspace{0.5em}
+    
+    \textbf{Performance-Metriken:}
+    \begin{itemize}
+        \item \textbf{Latenz:} Gesamtzeit von Fragmentübertragung bis Visualisierung
+        \item \textbf{Durchsatz:} Verarbeitete Fragmente pro Sekunde (fps)
+    \end{itemize}
+\end{frame}
+
 \begin{frame}{Funktionale Validierung - Ergebnisse}{}
     \textbf{1. End-to-End-Kommunikation:}
     \begin{itemize}
@@ -180,14 +201,14 @@
     
     \begin{table}[h]
         \centering
-        \resizebox{0.95\textwidth}{!}{
+        \resizebox{\textwidth}{!}{
             \begin{tabular}{l|cc|cc}
-                \textbf{Modell} & \textbf{GPU-Auslastung} & \textbf{Max. VRAM (GB)} & \textbf{CPU} & \textbf{RAM (GB)} \\
+                \textbf{Modell} & \textbf{GPU-Auslastung (\%)} & \textbf{Max. VRAM (GB)} & \textbf{CPU (\%)} & \textbf{RAM (GB)} \\
                 \hline
-                NeuralRecon & 43--48\% & 3,8--8,0 & 250 & 1,8 \\
-                VisFusion & 49--56\% & 4,4--6,0 & 100 & 1,8 \\
-                SLAM3R & 98--99\% & 7,6--8,0 & 100 & 1,9 \\
-                MASt3R-SLAM & 100\% & 7,9--8,0 & 100 & 2,8
+                NeuralRecon & 43 - 48 & 3,8 - 8,0 & 250 & 1,8 \\
+                VisFusion & 49 - 56 & 4,4 - 6,0 & 100 & 1,8 \\
+                SLAM3R & 98 - 99 & 7,6 - 8,0 & 100 & 1,9 \\
+                MASt3R-SLAM & 100 & 7,9 - 8,0 & 100 & 2,8
             \end{tabular}
         }
     \end{table}
@@ -205,19 +226,19 @@
 
 \begin{frame}{Rekonstruktionsqualität: Quantitative Ergebnisse}{}    
     \begin{table}[h]
-    \centering
-    \resizebox{\textwidth}{!}{
-    \begin{tabular}{l|ccc|ccc|ccc}
-    \textbf{Modell} & \multicolumn{3}{c|}{\textbf{V1}} & \multicolumn{3}{c|}{\textbf{V2}} & \multicolumn{3}{c}{\textbf{V3}} \\
-    & Prec. & Rec. & F & Prec. & Rec. & F & Prec. & Rec. & F \\
-    \hline
-    NeuralRecon & 0,45 & 0,39 & 0,41 & 0,69 & 0,67 & \textbf{0,68} & 0,59 & 0,59 & 0,59 \\
-    VisFusion & 0,57 & 0,52 & 0,54 & 0,57 & 0,65 & 0,61 & 0,57 & 0,68 & \textbf{0,62} \\
-    SLAM3R & \textbf{0,66} & 0,56 & \textbf{0,61} & 0,67 & 0,59 & 0,63 & 0,41 & 0,43 & 0,42 \\
-    MASt3R-SLAM & 0,52 & 0,48 & 0,50 & 0,47 & 0,53 & 0,50 & 0,43 & 0,48 & 0,45
-    \end{tabular}
-    }
-    \caption{F-Score, Schwellwert von 10cm}
+        \centering
+        \resizebox{\textwidth}{!}{
+            \begin{tabular}{l|ccc|ccc|ccc}
+                \textbf{Modell} & \multicolumn{3}{c|}{\textbf{V1}} & \multicolumn{3}{c|}{\textbf{V2}} & \multicolumn{3}{c}{\textbf{V3}} \\
+                & Prec. & Rec. & F & Prec. & Rec. & F & Prec. & Rec. & F \\
+                \hline
+                NeuralRecon & 0,45 & 0,39 & 0,41 & 0,69 & 0,67 & \textbf{0,68} & 0,59 & 0,59 & 0,59 \\
+                VisFusion & 0,57 & 0,52 & 0,54 & 0,57 & 0,65 & 0,61 & 0,57 & 0,68 & \textbf{0,62} \\
+                SLAM3R & \textbf{0,66} & 0,56 & \textbf{0,61} & 0,67 & 0,59 & 0,63 & 0,41 & 0,43 & 0,42 \\
+                MASt3R-SLAM & 0,52 & 0,48 & 0,50 & 0,47 & 0,53 & 0,50 & 0,43 & 0,48 & 0,45
+            \end{tabular}
+        }
+        % \caption{F-Score, Schwellwert von 10cm}
     \end{table}
 
     \vspace{1em}
