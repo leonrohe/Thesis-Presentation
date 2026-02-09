@@ -53,7 +53,6 @@
     \end{itemize}
 \end{frame}
 
-
 \begin{frame}{Rekonstruktionsqualität und SDK-Limitationen}{}
     \begin{columns}[T]
         \column{0.5\textwidth}
@@ -78,7 +77,7 @@
     
     \vfill
     \begin{tcolorbox}[box5, title={\textbf{Kernursachen}}]
-        Meta Quest 3 SDK liefert keine Frame-Timestamps
+        Meta Quest 3 SDK liefert keine Frame-Timestamps~\textbf{(behoben in neuer Version)}
         \begin{itemize}
             \item zeitliche Inkonsistenzen
             \item TSDF-Artefakte
@@ -97,14 +96,14 @@
     
     \vfill
     
-    \textbf{Antwort: Sehr gut für Forschungs- und Evaluationskontexte}
+    \textbf{Antwort: Ja - für Forschungs- und Evaluationskontexte}
     \begin{itemize}
         \itemsep0.4em
-        \item Standardisierte Schnittstellen abstrahieren Framework-Heterogenität erfolgreich
-        \item Asynchrone Streaming-Architektur reduziert Kopplungsgrad signifikant
-        \item Flexible Hardware-Nutzung ohne Code-Anpassungen (Docker + GPU-Isolation)
-        \item Kontextspezifische Verfahrenswahl ermöglicht (volumetrisch vs. SLAM)
-        \item Va.Si.Li-Lab: Additive Integration ohne Mehrbenutzer-Eingriff
+        \item Standardisierte Schnittstellen abstrahieren Framework-Heterogenität
+        \item Asynchrone Architektur reduziert Kopplungsgrad signifikant
+        \item Flexible Hardware-Nutzung (Docker + GPU-Isolation)
+        \item Kontextspezifische Verfahrenswahl (volumetrisch vs. SLAM)
+        \item Va.Si.Li-Lab: Additive Integration ohne Eingriff in bestehende Mehrbenutzerlogik
     \end{itemize}
     
     \vfill
@@ -140,8 +139,8 @@
         \textbf{Performance und Hardware}
         \begin{itemize}
             \itemsep0.4em
-            \item Durchsatz 0,03-0,62 fps unzureichend für Echtzeit-VR
-            \item GPU-Engpass: 8 GB VRAM limitiert Parallelbetrieb
+            \item Durchsatz 0,03-0,62 fps (nicht echtzeittauglich)
+            \item VRAM-Bottleneck: 8 GB limitieren Parallelbetrieb
             \item SLAM: 98-100\% GPU-Auslastung
         \end{itemize}
         
@@ -151,7 +150,7 @@
             \itemsep0.4em
             \item Keine Persistenz: Container-Neustarts verlieren Rekonstruktionszustand
             \item Manuelle SLAM-Skalierung erforderlich
-            \item Meta Quest 3: Fehlende Timestamps
+            \item Meta Quest 3: Fehlende Frame-Timestamps
         \end{itemize}
     \end{columns}
     
@@ -181,8 +180,6 @@
         \item Hybride Ansätze: Volumetrische Fusion + SLAM-Pose-Optimierung
     \end{itemize}
 \end{frame}
-
-
 
 \begin{frame}{Zukünftige Arbeiten: Forschungsperspektiven}{}
     \textbf{Wissenschaftliche Erweiterungen}
