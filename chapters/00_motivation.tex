@@ -21,68 +21,46 @@
 
     \begin{tcolorbox}[box5]
         \centering
-        \textbf{Idee:}~Rekonstruktion mithilfe von Echtzeit 3D-Rekonstruktion
+        \textbf{Idee:}~Rekonstruktion mithilfe von Photogrammetrie
     \end{tcolorbox}
 \end{frame}
 
-% \begin{frame}{Bestehende Ansätze zur 3D-Rekonstruktion}
-%     \textbf{Klassische Photogrammetrie (Offline/Batch):}
-%     \begin{itemize}
-%         \item Hochauflösende Ergebnisse
-%         \item Umfangreiche Bildaufnahmen, lange Verarbeitungszeiten
-%         \item Nicht geeignet für interaktive VR-Szenarien
-%     \end{itemize}
-    
-%     \vfill
-    
-%     \textbf{RGB-D-basierte Online-Rekonstruktion:}
-%     \begin{itemize}
-%         \item Echtzeitfähig durch Tiefensensoren
-%         \item Hardware-Abhängigkeit (bei Consumer-VR oft nicht verfügbar)
-%     \end{itemize}
-    
-%     \vfill
-    
-%     {
-%         \Large
-%         \textbf{$\Longrightarrow$ Monokulare Echtzeitverfahren}
-%     }
-% \end{frame}
-
-\begin{frame}{Motivation: Monokulare Echtzeit-Rekonstruktion}{(\cite{sun2021neuralreconrealtimecoherent3d,gao2023visfusionvisibilityawareonline3d,liu2025slam3rrealtimedensescene, murai2025mast3rslamrealtimedenseslam})}
-    \textbf{Vorteile:}
+\begin{frame}{Bestehende Ansätze zur 3D-Rekonstruktion}
+    \textbf{Klassische Photogrammetrie (Offline/Batch):}
     \begin{itemize}
-        \item Keine zusätzliche Hardware erforderlich (nur RGB-Kamera)
-        \item Direkte Nutzung von VR-Headset-Frontkameras
-        \item Inkrementelle Rekonstruktion während der Bewegung
-        \item Verschiedene Ansätze verfügbar (SLAM, volumetrisch, lernbasiert)
-    \end{itemize}
-    
-    \bigskip
-    
-    \textbf{Aber: Praktische Integration in VR kaum etabliert}
-    \begin{itemize}
-        \item Modelle in isolierten Forschungskontexten entwickelt
-        \item Heterogene Laufzeitumgebungen und Frameworks
-        \item Nicht auf interaktive Multi-User-VR ausgelegt
-    \end{itemize}
-\end{frame}
-
-\begin{frame}{Herausforderungen der Integration}{(\cite{sun2021neuralreconrealtimecoherent3d,gao2023visfusionvisibilityawareonline3d,liu2025slam3rrealtimedensescene, murai2025mast3rslamrealtimedenseslam})}
-    \textbf{Was die Integration erschwert:}
-    \begin{itemize}
-        \item Eigene Laufzeitumgebungen, Frameworks und Pipelines
-        \item Fehlende Streaming-Infrastruktur für kontinuierliche Updates
-        \item Unterschiedliche Schnittstellen und Ausgabeformate
-        \item Pose-Anforderungen variieren (intern vs.\ extern)
+        \item Hochauflösende Ergebnisse
+        \item Umfangreiche Bildaufnahmen, lange Verarbeitungszeiten
+        \item Nicht geeignet für interaktive VR-Szenarien
     \end{itemize}
     
     \vfill
     
-    \textbf{Folge:}
+    \textbf{RGB-D-basierte Online-Rekonstruktion:}
     \begin{itemize}
-        \item Hoher manueller Integrationsaufwand pro Verfahren
-        \item Kein systematischer Vergleich unter identischen Bedingungen
+        \item Echtzeitfähig durch Tiefensensoren
+        \item Hardware-Abhängigkeit (bei Consumer-VR oft nicht verfügbar)
+    \end{itemize}
+    
+    \vfill
+    
+    \textbf{$\Longrightarrow$ Monokulare Echtzeitverfahren}
+\end{frame}
+
+\begin{frame}{Monokulare Echtzeit-Rekonstruktion: Potenzial und Herausforderungen}{(\cite{sun2021neuralreconrealtimecoherent3d,gao2023visfusionvisibilityawareonline3d,liu2025slam3rrealtimedensescene, murai2025mast3rslamrealtimedenseslam})}
+    \textbf{Potenzial:}
+    \begin{itemize}
+        \item Keine zusätzliche Hardware erforderlich (nur RGB-Kamera)
+        \item Direkte Nutzung von VR-Headset-Frontkameras
+        \item Verschiedene Ansätze verfügbar (SLAM, volumetrisch, lernbasiert)
+    \end{itemize}
+    
+    \vfill
+    
+    \textbf{Herausforderungen für VR-Integration:}
+    \begin{itemize}
+        \item Heterogene Laufzeitumgebungen und Frameworks
+        \item Fehlende Streaming-Infrastruktur für Multi-User-VR
+        \item Unterschiedliche Schnittstellen und Pose-Anforderungen
     \end{itemize}
 \end{frame}
 
@@ -96,22 +74,22 @@
 %     \end{itemize}
 % \end{frame}
 
-\begin{frame}{Motivation: Forschungslücke}{(\cite{sun2021neuralreconrealtimecoherent3d,gao2023visfusionvisibilityawareonline3d,liu2025slam3rrealtimedensescene, murai2025mast3rslamrealtimedenseslam})}
-    \textbf{Bisherige Forschung fokussiert auf:}
-    \begin{itemize}
-        \item Verbesserung einzelner Rekonstruktionsalgorithmen
-        \item Qualität und Geschwindigkeit spezifischer Verfahren
-    \end{itemize}
+% \begin{frame}{Motivation: Forschungslücke}{(\cite{sun2021neuralreconrealtimecoherent3d,gao2023visfusionvisibilityawareonline3d,liu2025slam3rrealtimedensescene, murai2025mast3rslamrealtimedenseslam})}
+%     \textbf{Bisherige Forschung fokussiert auf:}
+%     \begin{itemize}
+%         \item Verbesserung einzelner Rekonstruktionsalgorithmen
+%         \item Qualität und Geschwindigkeit spezifischer Verfahren
+%     \end{itemize}
     
-    \bigskip
+%     \bigskip
     
-    \textbf{Unzureichend adressiert:}
-    \begin{itemize}
-        \item Wiederverwendbare Infrastruktur für VR-Integration
-        \item Systematischer Vergleich heterogener Verfahren
-        \item Deployment-Architekturen für praktischen Einsatz
-    \end{itemize}
-\end{frame}
+%     \textbf{Unzureichend adressiert:}
+%     \begin{itemize}
+%         \item Wiederverwendbare Infrastruktur für VR-Integration
+%         \item Systematischer Vergleich heterogener Verfahren
+%         \item Deployment-Architekturen für praktischen Einsatz
+%     \end{itemize}
+% \end{frame}
 
 \begin{frame}{Motivation: Forschungsfrage}{}
     \vfill

@@ -1,6 +1,6 @@
 \section{Stand der Technik}\sectionFrame
 
-\begin{frame}{Stand der Technik: Echtzeit 3D-Rekonstruktion}{\small \cite{7a99ce8940e943c39152b8da3bdfb568, kinectfusion, niessner2013hashing, dynamicfusion, dtam,zhu2022niceslamneuralimplicitscalable}}
+\begin{frame}{Stand der Technik: Bestehende Rekonstruktion Pipelines}{\small \cite{7a99ce8940e943c39152b8da3bdfb568, kinectfusion, niessner2013hashing, dynamicfusion, dtam,zhu2022niceslamneuralimplicitscalable}}
     \begin{columns}[T]
         \column{0.5\textwidth}
         \textbf{\large RGB-D-basiert}
@@ -20,7 +20,7 @@
             \item DeepVideoMVS, NICE-SLAM
         \end{itemize}
         \vspace{0.3cm}
-        {\small \color{gray} Framework-abhängig}
+        {\small \color{gray} Framework-abhängig, monolitisch}
     \end{columns}
     
     \vspace{0.8cm}
@@ -60,8 +60,8 @@
     \begin{itemize}
         \item[\color{red}$\times$] Modellunabhängige Schnittstellen
         \item[\color{red}$\times$] Standardisierte Streaming-Protokolle
+        \item[\color{red}$\times$] Flexible Posen-Verwaltung (intern, extern)
         \item[\color{red}$\times$] Einheitliche Behandlung von Ausgabeformaten
-        \item[\color{red}$\times$] Flexible Pose-Verwaltung (parallel, heterogen)
     \end{itemize}
     
     \vspace{0.6cm}

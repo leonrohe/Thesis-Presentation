@@ -1,6 +1,6 @@
 \section{Implementierung}\sectionFrame
 
-\begin{frame}{Implementierung: Technologie-Stack}{\small \cite{ramirez2023fastapi, 10.5555/2600239.2600241, NVIDIAContainerToolkitDocs, endel2024nativewebsocket, atteneder2024gltfast}}
+\begin{frame}{Implementierung: Technologie-Stack}{\small \cite{ramirez2023fastapi, 10.5555/2600239.2600241, NVIDIAContainerToolkitDocs, endel2024nativewebsocket, atteneder2024gltfast, MetaPassthrough2021}}
     \begin{columns}[T]
         \column{0.5\textwidth}
         \textbf{Backend (Python)}
@@ -18,7 +18,7 @@
         \begin{itemize}
             \itemsep0.4em
             \item Unity Engine
-            \item Unity VFX-Graph
+            \item MetaSDK
             \item NativeWebSocket
             \item glTFast
             \item C\# Scripting
@@ -31,17 +31,17 @@
     \begin{itemize}
         \itemsep0.4em
         \item \textbf{/ws/client}: Unity-Clients verbinden sich, registrieren für Szenen
-        \item \textbf{/ws/modelname}: Modell-Worker registrieren sich, erhalten Fragment-Queues
+        \item \textbf{/ws/model}: Modell-Worker registrieren sich, erhalten Fragment-Queues
     \end{itemize}
     
     \vspace{0.8em}
     
-    \textbf{Asynchrones Routing und Fan-Out}
+    \textbf{Aufgaben:}
     \begin{itemize}
         \itemsep0.4em
         \item Fragment Validierung und Deserialisierung
         \item Verteilung in Modell-spezifische Warteschlangen
-        \item Parallelisierte Ergebnis-Verteilung an alle Szenen-Clients
+        \item Ergebnis-Verteilung an alle Szenen-Clients
         \item Persistierung in SQLite Datenbank
     \end{itemize}
 \end{frame}
@@ -171,7 +171,7 @@
     \vfill
     \begin{tcolorbox}[box5, boxsep=0.5em]
         \centering
-        Beide Formate ohne externe Abhaengigkeiten, WebGL + Android (Meta Quest) kompatibel
+        Beide Formate ohne externe Abhängigkeiten, WebGL + Android (Meta Quest) kompatibel
     \end{tcolorbox}
 \end{frame}
 
@@ -200,5 +200,4 @@
     \begin{itemize}
         \item Mehrere Beispiele zur Nachnutzung gegeben im Projekt
     \end{itemize}
-
 \end{frame}
