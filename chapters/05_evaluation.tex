@@ -198,7 +198,7 @@
             \begin{tabular}{l|cc|cc}
                 \textbf{Komponente} & \textbf{GPU-Auslastung (\%)} & \textbf{Max. VRAM (GB)} & \textbf{CPU (\%)} & \textbf{RAM (GB)} \\
                 \hline
-                Router & - & - & 2,5 & 0,1 \\
+                Router & - & - & 25 & 0,1 \\
                 \hline
                 NeuralRecon & 43 - 48 & 3,8 - 8,0 & 250 & 1,8 \\
                 VisFusion & 49 - 56 & 4,4 - 6,0 & 100 & 1,8 \\
@@ -226,10 +226,10 @@
                 \textbf{Modell} & \multicolumn{3}{c|}{\textbf{V1}} & \multicolumn{3}{c|}{\textbf{V2}} & \multicolumn{3}{c}{\textbf{V3}} \\
                 & Prec. & Rec. & F & Prec. & Rec. & F & Prec. & Rec. & F \\
                 \hline
-                NeuralRecon & 0,45 & 0,39 & 0,41 & 0,69 & 0,67 & 0,68 & 0,59 & 0,59 & 0,59 \\
-                VisFusion & 0,57 & 0,52 & 0,54 & 0,57 & 0,65 & 0,61 & 0,57 & 0,68 & 0,62 \\
-                SLAM3R & 0,66 & 0,56 & 0,61 & 0,67 & 0,59 & 0,63 & 0,41 & 0,43 & 0,42 \\
-                MASt3R-SLAM & 0,52 & 0,48 & 0,50 & 0,47 & 0,53 & 0,50 & 0,43 & 0,48 & 0,45
+                NeuralRecon & 0,45 & 0,39 & \textbf{0,41} & 0,69 & 0,67 & \textbf{0,68} & 0,59 & 0,59 & \textbf{0,59} \\
+                VisFusion   & 0,57 & 0,52 & \textbf{0,54} & 0,57 & 0,65 & \textbf{0,61} & 0,57 & 0,68 & \textbf{0,62} \\
+                SLAM3R      & 0,66 & 0,56 & \textbf{0,61} & 0,67 & 0,59 & \textbf{0,63} & 0,41 & 0,43 & \textbf{0,42} \\
+                MASt3R-SLAM & 0,52 & 0,48 & \textbf{0,50} & 0,47 & 0,53 & \textbf{0,50} & 0,43 & 0,48 & \textbf{0,45}
             \end{tabular}
         }
         % \caption{F-Score, Schwellwert von 10cm}
@@ -239,8 +239,8 @@
 
 \textbf{Skalierung mit Szenenkomplexität:}
 \begin{itemize}
-    \item Volumetrische Verfahren stabil bis leicht steigend (V1→V3)
-    \item SLAM-basierte Verfahren zeigen Einbruch in komplexen Szenen (SLAM3R: 0,61→0,42)
+    \item Volumetrische Verfahren relativ stabil
+    \item SLAM-basierte Verfahren zeigen Einbruch in komplexen Szenen (SLAM3R: 0,61$\rightarrow$0,42)
 \end{itemize}
 \end{frame}
 

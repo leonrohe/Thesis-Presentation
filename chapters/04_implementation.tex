@@ -8,19 +8,19 @@
             \itemsep0.4em
             \item FastAPI + Uvicorn
             \item Asynchrone Verarbeitung (asyncio)
-            \item Docker Compose Orchestrierung
-            \item NVIDIA Container Toolkit
+            \item Docker Compose
             \item SQLite Persistierung
+            \item NVIDIA Container Toolkit
         \end{itemize}
         
         \column{0.5\textwidth}
         \textbf{Frontend (Unity)}
         \begin{itemize}
             \itemsep0.4em
-            \item Unity 6000.2.12f1
-            \item Visual Effect Graph
+            \item Unity Engine
+            \item Unity VFX-Graph
             \item NativeWebSocket
-            \item glTFast Import
+            \item glTFast
             \item C\# Scripting
         \end{itemize}
     \end{columns}
@@ -163,7 +163,7 @@
         \begin{itemize}
             \itemsep0.4em
             \item glTFast für GLB-Import
-            \item Chunking-Verfahren (MeshUtils)
+            \item Chunking-Verfahren
             \item Komplexe Geometrie effizient
         \end{itemize}
     \end{columns}
@@ -180,17 +180,25 @@
     \begin{itemize}
         \itemsep0.4em
         \item RTReconstruct als eigenständiges Modul
-        \item Vorfertigte Unity-Prefabs (ReconstructionManager, RoomReconstructor, ReconstructionClient)
-        \item Keine Aenderung bestehender Szenenlogik
+        \item Integration durch Vorgefertigte Unity-Prefabs
+        \item Keine Änderungen bestehender Szenenlogik
     \end{itemize}
     
-    \vspace{0.8em}
+    \vfill
     
     \textbf{Rollen- und Szenenkonzept}
     \begin{itemize}
         \itemsep0.4em
         \item \textbf{Host}: Initiiert Datenerfassung und Uebertragung
         \item \textbf{Visitor}: Empfängt und visualisiert Rekonstruktionen
-        \item Vollstaendige Rolle-Verwaltung in RTReconstruct-Prefabs
+        \item Vollständige Rollen-Verwaltung in RTReconstruct-Prefabs
     \end{itemize}
+
+    \vfill
+
+    \textbf{Einfache Nachnutzung}
+    \begin{itemize}
+        \item Mehrere Beispiele zur Nachnutzung gegeben im Projekt
+    \end{itemize}
+
 \end{frame}

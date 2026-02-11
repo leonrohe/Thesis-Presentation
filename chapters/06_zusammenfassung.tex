@@ -22,7 +22,7 @@
     \end{itemize}    
     \textbf{Architektur}:
     \begin{itemize}
-        \item Inferenz dominiert Latenz (63--90\%), Netzwerk <1s
+        \item Inferenz dominiert Latenz (63--90\%), Netzwerk + Rendering <1s
     \end{itemize}
 \end{frame}
 
@@ -33,7 +33,7 @@
         \begin{itemize}
             \item Integration inkompatibler Dependencies
             \item Standardisierte Schnittstellen
-            \item 4--8h Aufwand pro Modell
+            \item 2-8h Aufwand pro Modell
         \end{itemize}
         
         \column{0.48\textwidth}
@@ -41,7 +41,7 @@
         \begin{itemize}
             \item Multi-User-Betrieb problemlos
             \item 0/60 Verbindungsabbrüche, 6h Betrieb
-            \item geringer Overhead (20\% CPU, 200 MB RAM)
+            \item geringer Overhead (25\% CPU, 100 MB RAM)
         \end{itemize}
     \end{columns}
     
@@ -96,7 +96,7 @@
     \vspace{2cm}
     \begin{tcolorbox}[box5]
         \centering
-        \textbf{Antwort:}~Hohe Eignung – insbesondere für Forschungs- und Evaluationskontexte
+        \textbf{Antwort:}~Hohe Eignung - insbesondere für Forschungs- und Evaluationskontexte
     \end{tcolorbox} 
 \end{frame}
 
@@ -115,7 +115,7 @@
     \begin{itemize}
         \item Erfolgreiche Integration von 4 heterogenen Verfahren
         \item Deployment in Va.Si.Li-Lab ohne Änderungen an bestehender Mehrbenutzerlogik
-        \item Integrationsaufwand: 4--8 Stunden pro neuem Rekonstruktionsverfahren
+        \item Integrationsaufwand: 2--8 Stunden pro neuem Rekonstruktionsverfahren
         \item Systematische Vergleichbarkeit unter identischen Bedingungen nachgewiesen
     \end{itemize}
 \end{frame}
@@ -144,8 +144,8 @@
     \textbf{1. Performance-Limitationen (Kritisch)}
     \begin{itemize}
         \itemsep0.3em
-        \item Durchsatz: 0,03–0,62 fps → \textcolor{red}{nicht \textit{echtzeittauglich}}
-        \item SLAM-Verfahren: 98–100\% GPU-Auslastung
+        \item Durchsatz: 0,03-0,62 fps $\rightarrow$ nicht \lq wirklich\rq echtzeittauglich
+        \item SLAM-Verfahren: 98-100\% GPU-Auslastung
         \item VRAM-Bottleneck: 8 GB limitieren Parallelbetrieb
     \end{itemize}
     
@@ -171,39 +171,37 @@
     \textbf{Architekturoptimierungen}
     \begin{itemize}
         \itemsep0.4em
-        \item Persistente Zustandsverwaltung (PostgreSQL + PostGIS)
-        \item Dynamisches GPU-Ressourcen-Management für Parallelbetrieb
-        \item Inkrementelle Mesh-Updates mit Kompression für Bandbreitenreduktion
-        \item Automatische Kalibrierung: Selbstständige Skalierung und Ausrichtung
+        \item Persistente Zustandsverwaltung durch Checkpoint-Mechanik
+        \item Verteilte Rekonstruktion auf mehreren GPU-Servern
+        \item Inkrementelle Mesh-Updates statt vollständiger Übertragung
+        \item Automatische Koordinaten-Registrierung von SLAM-Rekonstruktionen
     \end{itemize}
     
     \vspace{0.8em}
     
-    \textbf{Neue Rekonstruktionsverfahren}
+    \textbf{Funktionale Erweiterungen}
     \begin{itemize}
         \itemsep0.4em
-        \item Gaussian Splatting mit Unity-Visualisierungs-Pipeline
-        \item NeRF-basierte Verfahren: Instant-NGP, TensoRF
-        \item Hybride Ansätze: Volumetrische Fusion + SLAM-Pose-Optimierung
+        \item Adaptive Punktwolken-Visualisierung mit Level-of-Detail
+        \item Echtzeit-Nutzerinteraktion: Annotationen und Geometriekorrektur
+        \item Kollaborative Rekonstruktions-Workflows für Va.Si.Li-Lab
     \end{itemize}
 \end{frame}
 
 \begin{frame}{Zukünftige Arbeiten: Forschungsperspektiven}{}
-    \textbf{Wissenschaftliche Erweiterungen}
+    \textbf{Modellintegration}
     \begin{itemize}
         \itemsep0.4em
-        \item Standard-Benchmark für VR-Rekonstruktion über Hardware und Szenen
-        \item User Studies: Artefaktwahrnehmung und akzeptable Update-Frequenzen
-        \item Multi-Headset-Rekonstruktion für kollaborative Szenarien
+        \item Gaussian Splatting für fotorealistischere Rekonstruktionen
+        \item NeRF-basierte Verfahren (Instant-NGP, TensoRF)
     \end{itemize}
     
     \vspace{0.8em}
     
-    \textbf{Hardwareoptimierung}
+    \textbf{Wissenschaftliche Perspektiven}
     \begin{itemize}
         \itemsep0.4em
-        \item Adaptive Modell-Selektion basierend auf Szenenkontext
-        \item VRAM-effiziente Varianten für mobile GPU-Architekturen
-        \item Quantisierung und Pruning für höheren Durchsatz
+        \item Systematische Benchmark-Suite über Hardware und Szenentypen
+        \item User Studies zu Artefaktwahrnehmung und Update-Frequenzen
     \end{itemize}
 \end{frame}
