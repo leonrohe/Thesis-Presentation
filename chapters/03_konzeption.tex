@@ -32,65 +32,71 @@
     \includesvg[width=0.9\textwidth]{figures/export/gesamtarchitektur}
 \end{frame}
 
-\begin{frame}{Backend-Architektur: Router \& Worker}{(\cite{10.5555/2600239.2600241})}
-    \begin{columns}[T]
-        \column{0.5\textwidth}
-        {\large \textbf{Router}}
-        \begin{itemize}
-            \itemsep0.6em
-            \item Empfängt Fragmente
-            \item Zuordnung zu Szenen
-            \item Caching aktueller Ergebnisse
-            \item Fan-Out-Verteilung
-        \end{itemize}
+% \begin{frame}{Backend-Architektur: Router \& Worker}{(\cite{10.5555/2600239.2600241})}
+%     \begin{columns}[T]
+%         \column{0.5\textwidth}
+%         {\large \textbf{Router}}
+%         \begin{itemize}
+%             \itemsep0.6em
+%             \item Empfängt Fragmente
+%             \item Zuordnung zu Szenen
+%             \item Caching aktueller Ergebnisse
+%             \item Fan-Out-Verteilung
+%         \end{itemize}
         
-        \column{0.5\textwidth}
-        {\large \textbf{Worker}}
-        \begin{itemize}
-            \itemsep0.6em
-            \item Eigenständige Dienste
-            \item Modellspezifische Logik
-            \item Async. Kommunikation
-            \item GPU-gekapselt in Container
-        \end{itemize}
-    \end{columns}
+%         \column{0.5\textwidth}
+%         {\large \textbf{Worker}}
+%         \begin{itemize}
+%             \itemsep0.6em
+%             \item Eigenständige Dienste
+%             \item Modellspezifische Logik
+%             \item Async. Kommunikation
+%             \item GPU-gekapselt in Container
+%         \end{itemize}
+%     \end{columns}
     
-    \vfill
-    \begin{tcolorbox}[box5, boxsep=0.5em]
-        \centering
-        \textbf{Entkoppelung:} Asynchrone Pufferung ermöglicht unabhängige Verarbeitung
-    \end{tcolorbox}
-\end{frame}
+%     \vfill
+%     \begin{tcolorbox}[box5, boxsep=0.5em]
+%         \centering
+%         \textbf{Entkoppelung:} Asynchrone Pufferung ermöglicht unabhängige Verarbeitung
+%     \end{tcolorbox}
+% \end{frame}
 
-\begin{frame}{Frontend-Architektur: Drei Aufgabenbereiche}{}
+% \begin{frame}{Frontend-Architektur: Drei Aufgabenbereiche}{}
     
-    {\large \textbf{1. Erfassung und Vorverarbeitung}}
-    \begin{itemize}
-        \itemsep0.4em
-        \item XR-Endgeräte (HMD, mobile Kameras)
-        \item RGB-Video + kontinuierliche Pose-Daten
-    \end{itemize}
+%     {\large \textbf{1. Erfassung und Vorverarbeitung}}
+%     \begin{itemize}
+%         \itemsep0.4em
+%         \item XR-Endgeräte (HMD, mobile Kameras)
+%         \item RGB-Video + kontinuierliche Pose-Daten
+%     \end{itemize}
     
-    \vspace{0.6em}
+%     \vspace{0.6em}
     
-    {\large \textbf{2. Clientseitige Steuerung \& Fragmentbildung}}
-    \begin{itemize}
-        \itemsep0.4em
-        \item Modellverwaltung pro Szene
-        \item Generische + modellspezifische Logik
-    \end{itemize}
+%     {\large \textbf{2. Clientseitige Steuerung \& Fragmentbildung}}
+%     \begin{itemize}
+%         \itemsep0.4em
+%         \item Modellverwaltung pro Szene
+%         \item Generische + modellspezifische Logik
+%     \end{itemize}
     
-    \vspace{0.6em}
+%     \vspace{0.6em}
     
-    {\large \textbf{3. Visualisierung \& Va.Si.Li-Lab-Integration}}
-    \begin{itemize}
-        \itemsep0.4em
-        \item Einbettung in laufende VR-Szene
-        \item Keine Anpassung der Basis-Szenlogik
-    \end{itemize}
-\end{frame}
+%     {\large \textbf{3. Visualisierung \& Va.Si.Li-Lab-Integration}}
+%     \begin{itemize}
+%         \itemsep0.4em
+%         \item Einbettung in laufende VR-Szene
+%         \item Keine Anpassung der Basis-Szenlogik
+%     \end{itemize}
+% \end{frame}
 
 \begin{frame}{Modul- und Schnittstellendesign}{}    
+    
+    \begin{center}
+        \Large
+        \textbf{Binäres Kommunikationsprotokoll:}
+    \end{center}
+    
     \begin{columns}[T]
         \column{0.33\textwidth}
         \begin{tcolorbox}[box1, boxsep=0.5em, height=3.5cm, title=\textbf{Anfrage}]
@@ -131,7 +137,7 @@
     \vfill
     \begin{tcolorbox}[box5, boxsep=0.5em]
         \centering
-        \textbf{Vorteil:} Vermittlungsschicht unabhängig von Modellimplementierungen
+        \textbf{Vorteil:} unabhängige Vermittlungsschicht, sehr geringer Overhead
     \end{tcolorbox}
 \end{frame}
 

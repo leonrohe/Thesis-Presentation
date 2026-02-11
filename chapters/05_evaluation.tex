@@ -1,6 +1,6 @@
 \section{Evaluation}\sectionFrame
 
-\begin{frame}{Evaluationsziele}{}
+\begin{frame}{Evaluation: Ziele}{}
     \textbf{1. Funktionale Validierung:}
     \begin{itemize}
         \item Modulare Architektur erfüllt Anforderungen
@@ -19,7 +19,7 @@
     \end{itemize}
 \end{frame}
 
-\begin{frame}{Evaluationsumgebung}{}
+\begin{frame}{Evaluation: Umgebung}{}
     \begin{columns}
         \column{0.5\textwidth}
             \begin{tcolorbox}[box1, boxsep=0.5em, height=3cm, title=\textbf{Backend-Hardware}]
@@ -48,66 +48,66 @@
     \end{tcolorbox}
 \end{frame}
 
-\begin{frame}{Testszenarien}{}
-    \textbf{Virtuelle Szenen (mit Ground-Truth):}
-    \begin{itemize}
-        \item V1 – Primitive: 5×5×5m, einfache Geometrie
-        \item V2 – Schlafzimmer: 6×5×3m, moderate Komplexität
-        \item V3 – Mehrzweckraum: 10×5×3m, hohe Komplexität
-    \end{itemize}
-    \textbf{Reale Szenen:}
-    \begin{itemize}
-        \item R1 – Schlafzimmer: Kontraste, Details, Okklusionen
-        \item R2 – Wohnzimmer: Glas, Reflexionen, große Flächen
-    \end{itemize}
-    \textbf{Fenstergröße:} 9 Frames pro Fragment
-\end{frame}
+% \begin{frame}{Testszenarien}{}
+%     \textbf{Virtuelle Szenen (mit Ground-Truth):}
+%     \begin{itemize}
+%         \item V1 – Primitive: 5×5×5m, einfache Geometrie
+%         \item V2 – Schlafzimmer: 6×5×3m, moderate Komplexität
+%         \item V3 – Mehrzweckraum: 10×5×3m, hohe Komplexität
+%     \end{itemize}
+%     \textbf{Reale Szenen:}
+%     \begin{itemize}
+%         \item R1 – Schlafzimmer: Kontraste, Details, Okklusionen
+%         \item R2 – Wohnzimmer: Glas, Reflexionen, große Flächen
+%     \end{itemize}
+%     \textbf{Fenstergröße:} 9 Frames pro Fragment
+% \end{frame}
 
-\begin{frame}{Testszenarien}{}
+\begin{frame}{Evaluation: Szenen}{}
     \begin{figure}
         \begin{subfigure}{0.33\textwidth}
-            \includegraphics[width=\textwidth]{images/room00.png}
+            \imgwithlabel[]{images/room00.png}{V1}
         \end{subfigure}
         \hfill
         \begin{subfigure}{0.33\textwidth}
-            \includegraphics[width=\textwidth]{images/Room01.png}
+            \imgwithlabel[]{images/Room01.png}{V2}
         \end{subfigure}
         \hfill
         \begin{subfigure}{0.33\textwidth}
-            \includegraphics[width=\textwidth]{images/Room02.png}
+            \imgwithlabel[]{images/Room02.png}{V3}
         \end{subfigure}
         
         \begin{subfigure}{0.33\textwidth}
-            \includegraphics[width=\textwidth, trim=0 0 0 20cm, clip]{images/room03.jpg}
+            \imgwithlabel[trim=0 0 0 20cm, clip]{images/room03.jpg}{R1}
         \end{subfigure}
         \begin{subfigure}{0.33\textwidth}
-            \includegraphics[width=\textwidth, trim=0 0 0 20cm, clip]{images/room04.jpg}
+            \imgwithlabel[trim=0 0 0 20cm, clip]{images/room04.jpg}{R2}
         \end{subfigure}
     \end{figure}
 \end{frame}
 
-\begin{frame}{Messverfahren und Metriken}{}
-    \textbf{Quantitative Rekonstruktionsqualität (Virtuelle Szenen):}
-    \begin{itemize}
-        \item \textbf{Precision:} Anteil korrekt rekonstruierter Punkte an allen generierten Punkten
-        \item \textbf{Recall:} Anteil erfasster Ground-Truth-Punkte an allen tatsächlichen Punkten
-        \item \textbf{F-Score:} Harmonisches Mittel aus Precision und Recall
-        \begin{equation*}
-            F = 2 \cdot \frac{\text{Precision} \cdot \text{Recall}}{\text{Precision} + \text{Recall}}
-        \end{equation*}
-        \item Schwellwert: 10 cm Abstand zwischen Rekonstruktion und Ground-Truth
-    \end{itemize}
+% \begin{frame}{Messverfahren und Metriken}{}
+%     \textbf{Quantitative Rekonstruktionsqualität (Virtuelle Szenen):}
+%     \begin{itemize}
+%         \item \textbf{Precision:} Anteil korrekt rekonstruierter Punkte an allen generierten Punkten
+%         \item \textbf{Recall:} Anteil erfasster Ground-Truth-Punkte an allen tatsächlichen Punkten
+%         \item \textbf{F-Score:} Harmonisches Mittel aus Precision und Recall
+%         \begin{equation*}
+%             F = 2 \cdot \frac{\text{Precision} \cdot \text{Recall}}{\text{Precision} + \text{Recall}}
+%         \end{equation*}
+%         \item Schwellwert: 10 cm Abstand zwischen Rekonstruktion und Ground-Truth
+%     \end{itemize}
     
-    \vspace{0.5em}
+%     \vspace{0.5em}
     
-    \textbf{Performance-Metriken:}
-    \begin{itemize}
-        \item \textbf{Latenz:} Gesamtzeit von Fragmentübertragung bis Visualisierung
-        \item \textbf{Durchsatz:} Verarbeitete Fragmente pro Sekunde (fps)
-    \end{itemize}
-\end{frame}
+%     \textbf{Performance-Metriken:}
+%     \begin{itemize}
+%         \item \textbf{Latenz:} Gesamtzeit von Fragmentübertragung bis Visualisierung
+%         \item \textbf{Durchsatz:} Verarbeitete Fragmente pro Sekunde (fps)
+%     \end{itemize}
+% \end{frame}
 
-\begin{frame}{Funktionale Validierung - Ergebnisse}{}
+\begin{frame}{Evaluation: Funktionale Validierung}{}
     \textbf{1. End-to-End-Kommunikation:}
     \begin{itemize}
         \item 60 Testläufe (6h), 0 Verbindungsabbrüche
@@ -126,7 +126,7 @@
     \end{itemize}
 \end{frame}
 
-\begin{frame}{Performance-Analyse: Gesamtlatenz}{}
+\begin{frame}{Evaluation: Gesamtlatenz}{}
     \begin{itemize}
         \item Stabile, reproduzierbare Latenzwerte mit niedriger Varianz
         \item Trend: Komplexität $\uparrow$ $\longrightarrow$ Latenz $\uparrow$
@@ -152,58 +152,53 @@
     \end{figure}
 \end{frame}
 
-\begin{frame}{Performance-Analyse: Latenz-Zusammensetzung}{}
-    \begin{itemize}
-        \item \textbf{$L_{inference}$:} Dominierender Anteil (variiert stark mit Szenenkomplexität)
-        \item \textbf{$L_{network}$ und $L_{render}$:} Relativ konstant, prozentual kleiner bei komplexeren Szenen
-        \item Netzwerklatenz abhängig von Datengröße und verfügbarer Bandbreite
-    \end{itemize}
-    
+\begin{frame}{Evaluation: Latenz-Zusammensetzung}{}
     \begin{figure}
         \includegraphics[width=\textwidth]{images/latency_split.png}
     \end{figure}
-\end{frame}
-
-\begin{frame}{Performance-Analyse: Durchsatz}{} 
-    \begin{table}[h]
-    \centering
-    \resizebox{0.7\textwidth}{!}{
-        \begin{tabular}{l|ccccc}
-        \textbf{Modell} & \textbf{V1} & \textbf{V2} & \textbf{V3} & \textbf{R1} & \textbf{R2} \\
-        \hline
-        NeuralRecon & 0,62 & 0,45 & 0,32 & 0,48 & 0,45 \\
-        VisFusion & 0,38 & 0,35 & 0,30 & 0,38 & 0,31 \\
-        SLAM3R & 0,13 & 0,12 & 0,12 & 0,12 & 0,12 \\
-        MASt3R-SLAM & 0,07 & 0,06 & 0,03 & 0,10 & 0,09
-        \end{tabular}
-    }
-    \end{table}
     
-    \vspace{1em}
-
-    \textbf{Beobachtungen:}
+    \textbf{Zentrale Erkenntnisse:}
     \begin{itemize}
-        \item Volumetrische Verfahren deutlich schneller
-        \item SLAM-Verfahren rechenintensiver durch Feature-Matching
-        \item Reale Szenen teilweise performanter als virtuelle
+        \item $L_{inference}$ ist dominierender Faktor (70 - 90\% der Gesamtlatenz)
+        \item Szenenkomplexität beeinflusst primär Inferenzzeit
+        \item $L_{network}$ und $L_{render}$ bleiben relativ konstant
     \end{itemize}
 \end{frame}
 
-\begin{frame}{Performance-Analyse: Ressourcenauslastung}{}
-    \textbf{Backend (Server):}
-    \begin{itemize}
-        \itemsep0.4em
-        \item Router: Minimaler Overhead (2,5\% CPU, 100 MB RAM)
-        \item Worker zeigen deutliche Unterschiede:
-    \end{itemize}
+% \begin{frame}{Evaluation: Durchsatz}{} 
+%     \begin{table}[h]
+%     \centering
+%     \resizebox{0.7\textwidth}{!}{
+%         \begin{tabular}{l|ccccc}
+%         \textbf{Modell} & \textbf{V1} & \textbf{V2} & \textbf{V3} & \textbf{R1} & \textbf{R2} \\
+%         \hline
+%         NeuralRecon & 0,62 & 0,45 & 0,32 & 0,48 & 0,45 \\
+%         VisFusion & 0,38 & 0,35 & 0,30 & 0,38 & 0,31 \\
+%         SLAM3R & 0,13 & 0,12 & 0,12 & 0,12 & 0,12 \\
+%         MASt3R-SLAM & 0,07 & 0,06 & 0,03 & 0,10 & 0,09
+%         \end{tabular}
+%     }
+%     \end{table}
     
-    \vfill
-    
+%     \vspace{1em}
+
+%     \textbf{Beobachtungen:}
+%     \begin{itemize}
+%         \item Volumetrische Verfahren deutlich schneller
+%         \item SLAM-Verfahren rechenintensiver durch Feature-Matching
+%         \item Reale Szenen teilweise performanter als virtuelle
+%     \end{itemize}
+% \end{frame}
+
+\begin{frame}{Evaluation: Ressourcenauslastung}{}
+    \textbf{Backend-Performance (Server):}
     \begin{table}[h]
         \centering
         \resizebox{\textwidth}{!}{
             \begin{tabular}{l|cc|cc}
-                \textbf{Modell} & \textbf{GPU-Auslastung (\%)} & \textbf{Max. VRAM (GB)} & \textbf{CPU (\%)} & \textbf{RAM (GB)} \\
+                \textbf{Komponente} & \textbf{GPU-Auslastung (\%)} & \textbf{Max. VRAM (GB)} & \textbf{CPU (\%)} & \textbf{RAM (GB)} \\
+                \hline
+                Router & - & - & 2,5 & 0,1 \\
                 \hline
                 NeuralRecon & 43 - 48 & 3,8 - 8,0 & 250 & 1,8 \\
                 VisFusion & 49 - 56 & 4,4 - 6,0 & 100 & 1,8 \\
@@ -215,16 +210,15 @@
     
     \vfill
     
-    \textbf{Frontend (Meta Quest 3):}
-    \begin{itemize}
-        \itemsep0.4em
-        \item Baseline: 72 FPS
-        \item NeuralRecon: 72 FPS, VisFusion: 58 FPS
-        \item SLAM3R, MASt3R-SLAM: 38 FPS
-    \end{itemize}
+    \textbf{Frontend-Performance (Meta Quest 3):}\\\\\\
+    \begin{tabular}{l@{\hskip 0.5cm}r@{\hskip 0.5cm}l}
+        NeuralRecon:  & 72 FPS & \textcolor{green!70!black}{\rule{3.6cm}{0.3cm}} \\[0.4em]
+        VisFusion:    & 58 FPS & \textcolor{orange!80!black}{\rule{2.9cm}{0.3cm}} \\[0.4em]
+        SLAM-basiert: & 38 FPS & \textcolor{red!70!black}{\rule{1.9cm}{0.3cm}}
+    \end{tabular}
 \end{frame}
 
-\begin{frame}{Rekonstruktionsqualität: Quantitative Ergebnisse}{}    
+\begin{frame}{Evaluation: Quantitative Ergebnisse}{}    
     \begin{table}[h]
         \centering
         \resizebox{\textwidth}{!}{
@@ -232,158 +226,169 @@
                 \textbf{Modell} & \multicolumn{3}{c|}{\textbf{V1}} & \multicolumn{3}{c|}{\textbf{V2}} & \multicolumn{3}{c}{\textbf{V3}} \\
                 & Prec. & Rec. & F & Prec. & Rec. & F & Prec. & Rec. & F \\
                 \hline
-                NeuralRecon & 0,45 & 0,39 & 0,41 & 0,69 & 0,67 & \textbf{0,68} & 0,59 & 0,59 & 0,59 \\
-                VisFusion & 0,57 & 0,52 & 0,54 & 0,57 & 0,65 & 0,61 & 0,57 & 0,68 & \textbf{0,62} \\
-                SLAM3R & \textbf{0,66} & 0,56 & \textbf{0,61} & 0,67 & 0,59 & 0,63 & 0,41 & 0,43 & 0,42 \\
+                NeuralRecon & 0,45 & 0,39 & 0,41 & 0,69 & 0,67 & 0,68 & 0,59 & 0,59 & 0,59 \\
+                VisFusion & 0,57 & 0,52 & 0,54 & 0,57 & 0,65 & 0,61 & 0,57 & 0,68 & 0,62 \\
+                SLAM3R & 0,66 & 0,56 & 0,61 & 0,67 & 0,59 & 0,63 & 0,41 & 0,43 & 0,42 \\
                 MASt3R-SLAM & 0,52 & 0,48 & 0,50 & 0,47 & 0,53 & 0,50 & 0,43 & 0,48 & 0,45
             \end{tabular}
         }
         % \caption{F-Score, Schwellwert von 10cm}
     \end{table}
 
-    \vspace{1em}
+    \vfill
 
-    \textbf{Szenenabhängige Leistung:}
-    \begin{itemize}
-        \item V2 (Schlafzimmer) zeigt beste Ergebnisse für NeuralRecon
-        \item V3 (Mehrzweckraum) mehr Variabilität zwischen Verfahren
-    \end{itemize}
+\textbf{Skalierung mit Szenenkomplexität:}
+\begin{itemize}
+    \item Volumetrische Verfahren stabil bis leicht steigend (V1→V3)
+    \item SLAM-basierte Verfahren zeigen Einbruch in komplexen Szenen (SLAM3R: 0,61→0,42)
+\end{itemize}
 \end{frame}
 
-\begin{frame}{Rekonstruktionsqualität: Qualitative Bewertung}{}
-    \textbf{Bewertungskriterien:}
-    \begin{itemize}
-        \item Vollständigkeit: Erfassungsrate der Szene
-        \item Detailtreue: Feine Strukturen und Kanten
-        \item Artefaktfreiheit: Löcher, Flimmern, Fehlgeometrie
-        \item Oberflächenqualität: Glattheit und Konsistenz
-    \end{itemize}
+% \begin{frame}{Evaluation: Qualitative Bewertung}{}
+%     \textbf{Bewertungskriterien:}
+%     \begin{itemize}
+%         \item Vollständigkeit: Erfassungsrate der Szene
+%         \item Detailtreue: Feine Strukturen und Kanten
+%         \item Artefaktfreiheit: Löcher, Flimmern, Fehlgeometrie
+%         \item Oberflächenqualität: Glattheit und Konsistenz
+%     \end{itemize}
     
-    \vfill
+%     \vfill
     
-    \begin{table}[h]
-    \centering
-    \resizebox{0.95\textwidth}{!}{
-    \begin{tabular}{l|cccc}
-    \textbf{Kriterium} & \textbf{NeuralRecon} & \textbf{VisFusion} & \textbf{SLAM3R} & \textbf{MASt3R} \\
-    \hline
-    Vollständigkeit & mittel & hoch & sehr hoch & hoch \\
-    Detailtreue & gering & mittel & sehr hoch & sehr hoch \\
-    Artefaktfreiheit & sehr hoch & sehr hoch & niedrig & niedrig \\
-    Oberflächenqualität & sehr hoch & sehr hoch & mittel & mittel
-    \end{tabular}
-    }
-    \end{table}
-\end{frame}
+%     \begin{table}[h]
+%     \centering
+%     \resizebox{0.95\textwidth}{!}{
+%     \begin{tabular}{l|cccc}
+%     \textbf{Kriterium} & \textbf{NeuralRecon} & \textbf{VisFusion} & \textbf{SLAM3R} & \textbf{MASt3R} \\
+%     \hline
+%     Vollständigkeit & mittel & hoch & sehr hoch & hoch \\
+%     Detailtreue & gering & mittel & sehr hoch & sehr hoch \\
+%     Artefaktfreiheit & sehr hoch & sehr hoch & niedrig & niedrig \\
+%     Oberflächenqualität & sehr hoch & sehr hoch & mittel & mittel
+%     \end{tabular}
+%     }
+%     \end{table}
+% \end{frame}
 
-\begin{frame}{Rekonstruktionsqualität: V1}{}
-    \centering
-
-    % Row 1
-    \begin{minipage}[t]{0.45\textwidth}
-        \centering
-        \imgwithlabel{images/ReconsTransparent/room00/neucon00.png}{NeuralRecon}
-    \end{minipage}
-    \hspace{0.1cm}
-    \begin{minipage}[t]{0.45\textwidth}
-        \centering
-        \imgwithlabel{images/ReconsTransparent/room00/visfusion00.png}{VisFusion}
-    \end{minipage}
-
-    % Row 2
-    \begin{minipage}[t]{0.45\textwidth}
-        \centering
-        \imgwithlabel{images/ReconsTransparent/room00/slam3r00.png}{SLAM3R}
-    \end{minipage}
-    \hspace{0.1cm}
-    \begin{minipage}[t]{0.45\textwidth}
-        \centering
-        \imgwithlabel{images/ReconsTransparent/room00/mast3r0.png}{MASt3R}
-    \end{minipage}
-\end{frame}
-
-\begin{frame}{Rekonstruktionsqualität: V2}{}
+\begin{frame}{Evaluation: Qualität V1}{}
     \centering
 
     % Row 1
     \begin{minipage}[t]{0.45\textwidth}
         \centering
-        \imgwithlabel{images/ReconsTransparent/room01/neucon00.png}{NeuralRecon}
+        \imgwithlabel[]{images/ReconsTransparent/room00/neucon00.png}{NeuralRecon}
     \end{minipage}
     \hspace{0.1cm}
     \begin{minipage}[t]{0.45\textwidth}
         \centering
-        \imgwithlabel{images/ReconsTransparent/room01/visfusion00.png}{VisFusion}
+        \imgwithlabel[]{images/ReconsTransparent/room00/visfusion00.png}{VisFusion}
     \end{minipage}
 
     % Row 2
     \begin{minipage}[t]{0.45\textwidth}
         \centering
-        \imgwithlabel{images/ReconsTransparent/room01/slam3r00.png}{SLAM3R}
+        \imgwithlabel[]{images/ReconsTransparent/room00/slam3r00.png}{SLAM3R}
     \end{minipage}
     \hspace{0.1cm}
     \begin{minipage}[t]{0.45\textwidth}
         \centering
-        \imgwithlabel{images/ReconsTransparent/room01/mast3r00.png}{MASt3R}
+        \imgwithlabel[]{images/ReconsTransparent/room00/mast3r0.png}{MASt3R}
     \end{minipage}
 \end{frame}
 
-\begin{frame}{Rekonstruktionsqualität: V3}{}
+% \begin{frame}{Rekonstruktionsqualität: V2}{}
+%     \centering
+
+%     % Row 1
+%     \begin{minipage}[t]{0.45\textwidth}
+%         \centering
+%         \imgwithlabel[]{images/ReconsTransparent/room01/neucon00.png}{NeuralRecon}
+%     \end{minipage}
+%     \hspace{0.1cm}
+%     \begin{minipage}[t]{0.45\textwidth}
+%         \centering
+%         \imgwithlabel[]{images/ReconsTransparent/room01/visfusion00.png}{VisFusion}
+%     \end{minipage}
+
+%     % Row 2
+%     \begin{minipage}[t]{0.45\textwidth}
+%         \centering
+%         \imgwithlabel[]{images/ReconsTransparent/room01/slam3r00.png}{SLAM3R}
+%     \end{minipage}
+%     \hspace{0.1cm}
+%     \begin{minipage}[t]{0.45\textwidth}
+%         \centering
+%         \imgwithlabel[]{images/ReconsTransparent/room01/mast3r00.png}{MASt3R}
+%     \end{minipage}
+% \end{frame}
+
+\begin{frame}{Evaluation: Qualität V3}{}
     \centering
 
     % Row 1
     \begin{minipage}[t]{0.45\textwidth}
         \centering
-        \imgwithlabel{images/ReconsTransparent/room02/neucon00.png}{NeuralRecon}
+        \imgwithlabel[]{images/ReconsTransparent/room02/neucon00.png}{NeuralRecon}
     \end{minipage}
     \hspace{0.1cm}
     \begin{minipage}[t]{0.45\textwidth}
         \centering
-        \imgwithlabel{images/ReconsTransparent/room02/visfusion00.png}{VisFusion}
+        \imgwithlabel[]{images/ReconsTransparent/room02/visfusion00.png}{VisFusion}
     \end{minipage}
 
     % Row 2
     \begin{minipage}[t]{0.45\textwidth}
         \centering
-        \imgwithlabel{images/ReconsTransparent/room02/slam3r00.png}{SLAM3R}
+        \imgwithlabel[]{images/ReconsTransparent/room02/slam3r00.png}{SLAM3R}
     \end{minipage}
     \hspace{0.1cm}
     \begin{minipage}[t]{0.45\textwidth}
         \centering
-        \imgwithlabel{images/ReconsTransparent/room02/mast3r00.png}{MASt3R}
+        \imgwithlabel[]{images/ReconsTransparent/room02/mast3r00.png}{MASt3R}
     \end{minipage}
 \end{frame}
 
-\begin{frame}{Rekonstruktionsqualität: R1}{}
+% \begin{frame}{Rekonstruktionsqualität: R1}{}
+%     \centering
+
+%     \vfill
+%     % Row 1
+%     \begin{minipage}[t]{0.45\textwidth}
+%         \centering
+%         \imgwithlabel[]{images/ReconsTransparent/room03/neucon00.png}{NeuralRecon}
+%     \end{minipage}
+%     \hspace{0.1cm}
+%     \begin{minipage}[t]{0.45\textwidth}
+%         \centering
+%         \imgwithlabel[]{images/ReconsTransparent/room03/visfusion00.png}{VisFusion}
+%     \end{minipage}
+%     \vfill
+% \end{frame}
+
+\begin{frame}{Evaluation: Qualität R2}{}
     \centering
+
+    % Row 1
+    \begin{minipage}[t]{0.45\textwidth}
+        \centering
+        \imgwithlabel[]{images/ReconsTransparent/room04/room04_neucon.png}{NeuralRecon}
+    \end{minipage}
+    \hspace{0.1cm}
+    \begin{minipage}[t]{0.45\textwidth}
+        \centering
+        \imgwithlabel[]{images/ReconsTransparent/room04/room04_visfusion.png}{VisFusion}
+    \end{minipage}
 
     \vfill
-    % Row 1
-    \begin{minipage}[t]{0.45\textwidth}
-        \centering
-        \imgwithlabel{images/ReconsTransparent/room03/neucon00.png}{NeuralRecon}
-    \end{minipage}
-    \hspace{0.1cm}
-    \begin{minipage}[t]{0.45\textwidth}
-        \centering
-        \imgwithlabel{images/ReconsTransparent/room03/visfusion00.png}{VisFusion}
-    \end{minipage}
-    \vfill
-\end{frame}
-
-\begin{frame}{Rekonstruktionsqualität: R2}{}
-    \centering
-
-    \vfill
     % Row 2
     \begin{minipage}[t]{0.45\textwidth}
         \centering
-        \imgwithlabel{images/ReconsTransparent/room04/slam3r00.png}{SLAM3R}
+        \imgwithlabel[]{images/ReconsTransparent/room04/room04_slam3r.png}{SLAM3R}
     \end{minipage}
     \hspace{0.1cm}
     \begin{minipage}[t]{0.45\textwidth}
         \centering
-        \imgwithlabel{images/ReconsTransparent/room04/mast3r00.png}{MASt3R}
+        \imgwithlabel[]{images/ReconsTransparent/room04/room04_mast3r.png}{MASt3R}
     \end{minipage}
     \vfill
 \end{frame}

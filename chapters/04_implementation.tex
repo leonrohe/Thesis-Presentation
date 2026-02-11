@@ -1,6 +1,6 @@
 \section{Implementierung}\sectionFrame
 
-\begin{frame}{Technologie-Stack}{\small \cite{ramirez2023fastapi, 10.5555/2600239.2600241, NVIDIAContainerToolkitDocs, endel2024nativewebsocket, atteneder2024gltfast}}
+\begin{frame}{Implementierung: Technologie-Stack}{\small \cite{ramirez2023fastapi, 10.5555/2600239.2600241, NVIDIAContainerToolkitDocs, endel2024nativewebsocket, atteneder2024gltfast}}
     \begin{columns}[T]
         \column{0.5\textwidth}
         \textbf{Backend (Python)}
@@ -26,46 +26,7 @@
     \end{columns}
 \end{frame}
 
-\begin{frame}{Binäres Kommunikationsprotokoll}{\cite{josefsson2006rfc4648}}
-    \begin{columns}[T]
-        \column{0.33\textwidth}
-        \begin{tcolorbox}[box1, boxsep=0.4em, height=2cm, title=\textbf{ModelFragment}]
-            \small
-            \centering
-            \vspace{0.2em}
-            Client $\to$ Server\\
-            (Anfrage)
-        \end{tcolorbox}
-        
-        \column{0.33\textwidth}
-        \begin{tcolorbox}[box2, boxsep=0.4em, height=2cm, title=\textbf{ModelResult}]
-            \small
-            \centering
-            \vspace{0.2em}
-            Server $\to$ Client\\
-            (Ergebnis)
-        \end{tcolorbox}
-        
-        \column{0.33\textwidth}
-        \begin{tcolorbox}[box3, boxsep=0.4em, height=2cm, title=\textbf{TransformFragment}]
-            \small
-            \centering
-            \vspace{0.2em}
-            Client $\to$ Server\\
-            (Korrektur)
-        \end{tcolorbox}    
-    \end{columns}
-    
-    \vfill
-    \textbf{Vorteile gegenüber JSON:}
-    \begin{itemize}
-        \itemsep0.4em
-        \item ca. 33\% weniger Overhead durch Binärcodierung
-        \item geringere Bandbreitennutzung
-    \end{itemize}
-\end{frame}
-
-\begin{frame}{Backend-Implementierung: Router}{}
+\begin{frame}{Implementierung: Router}{}
     \textbf{Zwei WebSocket-Endpunkte}
     \begin{itemize}
         \itemsep0.4em
@@ -85,69 +46,108 @@
     \end{itemize}
 \end{frame}
 
-\begin{frame}{Backend-Implementierung: Modell-Worker}{}
-    \textbf{BaseReconstructionModel} \hfill \textit{\small Abstrakte Basisklasse, die alle Worker erweitern}
-    \begin{itemize}
-        \itemsep0.4em
-        \item Verbindung zum Router etablieren
-        \item Fragment-Schleife starten
-        \item Deserialisierung und Inferenz
-        \item Ergebnis-Rueckmeldung
-    \end{itemize}
+% \begin{frame}{Implementierung: Binäres Kommunikationsprotokoll}{\cite{josefsson2006rfc4648}}
+%     \begin{columns}[T]
+%         \column{0.33\textwidth}
+%         \begin{tcolorbox}[box1, boxsep=0.4em, height=2cm, title=\textbf{ModelFragment}]
+%             \small
+%             \centering
+%             \vspace{0.2em}
+%             Client $\to$ Server\\
+%             (Anfrage)
+%         \end{tcolorbox}
+        
+%         \column{0.33\textwidth}
+%         \begin{tcolorbox}[box2, boxsep=0.4em, height=2cm, title=\textbf{ModelResult}]
+%             \small
+%             \centering
+%             \vspace{0.2em}
+%             Server $\to$ Client\\
+%             (Ergebnis)
+%         \end{tcolorbox}
+        
+%         \column{0.33\textwidth}
+%         \begin{tcolorbox}[box3, boxsep=0.4em, height=2cm, title=\textbf{TransformFragment}]
+%             \small
+%             \centering
+%             \vspace{0.2em}
+%             Client $\to$ Server\\
+%             (Korrektur)
+%         \end{tcolorbox}    
+%     \end{columns}
     
-    \vspace{0.8em}
-    
-    \textbf{Spezialisierte Modell-Worker} \hfill \textit{\small Konkrete Unterklassen für jedes Modell}
-    \begin{itemize}
-        \itemsep0.4em
-        \item NeuralRecon, VisFusion, MASt3R-SLAM, SLAM3R
-        \item Modellspezifische handleFragment Implementierung
-        \item Automatische Registrierung bei Containerstart
-    \end{itemize}
-\end{frame}
+%     \vfill
+%     \textbf{Vorteile gegenüber JSON:}
+%     \begin{itemize}
+%         \itemsep0.4em
+%         \item ca. 33\% weniger Overhead durch Binärcodierung
+%         \item geringere Bandbreitennutzung
+%     \end{itemize}
+% \end{frame}
 
-\begin{frame}{Frontend-Implementierung: Hardware-Abstraktion}{}
-    \textbf{ICaptureDevice Interface} \hfill \textit{\small Generisches Interface für Kamerafunktionen}
-    \begin{itemize}
-        \itemsep0.4em
-        \item \texttt{GetFrame()}: RGB-Bild abrufen
-        \item \texttt{GetIntrinsics()}: Kameraparameter
-        \item \texttt{GetExtrinsics()}: Pose (Position, Rotation)
-    \end{itemize}
+% \begin{frame}{Backend-Implementierung: Modell-Worker}{}
+%     \textbf{BaseReconstructionModel} \hfill \textit{\small Abstrakte Basisklasse, die alle Worker erweitern}
+%     \begin{itemize}
+%         \itemsep0.4em
+%         \item Verbindung zum Router etablieren
+%         \item Fragment-Schleife starten
+%         \item Deserialisierung und Inferenz
+%         \item Ergebnis-Rueckmeldung
+%     \end{itemize}
     
-    \vspace{0.8em}
+%     \vspace{0.8em}
     
-    \textbf{Implementierungen} \hfill \textit{\small Hardware spezifische Implementierungen}
-    \begin{itemize}
-        \itemsep0.4em
-        \item \textbf{MetaQuestCaptureDevice}: Passthrough-Kamera des HMD
-        \item \textbf{SmartphoneCaptureDevice}: ARFoundation (Android/iOS)
-        \item \textbf{EvalCaptureDevice}: Synthetische Szenen für Evaluation
-    \end{itemize}
-\end{frame}
+%     \textbf{Spezialisierte Modell-Worker} \hfill \textit{\small Konkrete Unterklassen für jedes Modell}
+%     \begin{itemize}
+%         \itemsep0.4em
+%         \item NeuralRecon, VisFusion, MASt3R-SLAM, SLAM3R
+%         \item Modellspezifische handleFragment Implementierung
+%         \item Automatische Registrierung bei Containerstart
+%     \end{itemize}
+% \end{frame}
 
-\begin{frame}{Frontend-Implementierung: Fragmentsammlung}{}
-    \textbf{IModelCollector Interface} \hfill \textit{\small Verwaltet pro Szene aktive Rekonstruktionsverfahren}
-    \begin{itemize}
-        \itemsep0.4em
-        \item \texttt{ShouldCollect()}: Überprüft ob ein Frame gültig ist
-        \item \texttt{Collect()}: Sammelt Frame und Kameraparameter
-        \item \texttt{Consume()}: Erstellt ModelFragment aus gesammelten Daten
-        \item \dots
-    \end{itemize}
+% \begin{frame}{Frontend-Implementierung: Hardware-Abstraktion}{}
+%     \textbf{ICaptureDevice Interface} \hfill \textit{\small Generisches Interface für Kamerafunktionen}
+%     \begin{itemize}
+%         \itemsep0.4em
+%         \item \texttt{GetFrame()}: RGB-Bild abrufen
+%         \item \texttt{GetIntrinsics()}: Kameraparameter
+%         \item \texttt{GetExtrinsics()}: Pose (Position, Rotation)
+%     \end{itemize}
     
-    \vspace{0.8em}
+%     \vspace{0.8em}
     
-    \textbf{Implementierungen} \hfill \textit{\small Modell spezifische Implementierungen}
-    \begin{itemize}
-        \itemsep0.4em
-        \item \textbf{NeuralReconCollector}: NeuralRecon spezifischer Collector
-        \item \textbf{SLAM3RCollector}: SLAM3R spezifischer Collector
-        \item \textbf{DefaultCollector}: Standard Collector
-    \end{itemize}
-\end{frame}
+%     \textbf{Implementierungen} \hfill \textit{\small Hardware spezifische Implementierungen}
+%     \begin{itemize}
+%         \itemsep0.4em
+%         \item \textbf{MetaQuestCaptureDevice}: Passthrough-Kamera des HMD
+%         \item \textbf{SmartphoneCaptureDevice}: ARFoundation (Android/iOS)
+%         \item \textbf{EvalCaptureDevice}: Synthetische Szenen für Evaluation
+%     \end{itemize}
+% \end{frame}
 
-\begin{frame}{Frontend-Visualisierung}{\cite{atteneder2024gltfast}}
+% \begin{frame}{Frontend-Implementierung: Fragmentsammlung}{}
+%     \textbf{IModelCollector Interface} \hfill \textit{\small Verwaltet pro Szene aktive Rekonstruktionsverfahren}
+%     \begin{itemize}
+%         \itemsep0.4em
+%         \item \texttt{ShouldCollect()}: Überprüft ob ein Frame gültig ist
+%         \item \texttt{Collect()}: Sammelt Frame und Kameraparameter
+%         \item \texttt{Consume()}: Erstellt ModelFragment aus gesammelten Daten
+%         \item \dots
+%     \end{itemize}
+    
+%     \vspace{0.8em}
+    
+%     \textbf{Implementierungen} \hfill \textit{\small Modell spezifische Implementierungen}
+%     \begin{itemize}
+%         \itemsep0.4em
+%         \item \textbf{NeuralReconCollector}: NeuralRecon spezifischer Collector
+%         \item \textbf{SLAM3RCollector}: SLAM3R spezifischer Collector
+%         \item \textbf{DefaultCollector}: Standard Collector
+%     \end{itemize}
+% \end{frame}
+
+\begin{frame}{Implementierung: Frontend-Visualisierung}{\cite{atteneder2024gltfast}}
     \begin{columns}[T]
         \column{0.5\textwidth}
         \textbf{Punktwolken}
@@ -175,7 +175,7 @@
     \end{tcolorbox}
 \end{frame}
 
-\begin{frame}{Integration in Va.Si.Li-Lab}{}
+\begin{frame}{Implementierung: Integration in Va.Si.Li-Lab}{}
     \textbf{Nicht-invasive Erweiterung}
     \begin{itemize}
         \itemsep0.4em

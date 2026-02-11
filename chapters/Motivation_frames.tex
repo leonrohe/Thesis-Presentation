@@ -1,0 +1,127 @@
+\begin{frame}
+\frametitle{Relevanz: Warum 3D-Rekonstruktion in VR?}
+
+\begin{itemize}
+  \item Moderne VR-Systeme ermöglichen natürliche Interaktion
+  \begin{itemize}
+    \item Präzise Hand-, Körper- und Blickerfassung
+    \item Stereoskopische Bilddarstellung mit hoher Bildwiederholrate
+  \end{itemize}
+  
+  \item Viele VR-Anwendungen benötigen Bezug zur physischen Umgebung
+  \begin{itemize}
+    \item Kollaboratives Arbeiten
+    \item Simulationsbasiertes Lernen
+    \item Räumliche Analysewerkzeuge
+  \end{itemize}
+  
+  \item Virtuelle Räume wirken glaubwürdiger, wenn sie realen Szenen entsprechen
+  \begin{itemize}
+    \item Erhöhte Immersion und Präsenz
+    \item Spontane Erfassung ohne manuelle Modellierung
+  \end{itemize}
+\end{itemize}
+
+\end{frame}
+
+\begin{frame}
+\frametitle{Das Problem: Unzureichende bisherige Lösungen}
+
+\begin{itemize}
+  \item Künstlich erstellte Szenen
+  \begin{itemize}
+    \item Passen schlecht zu realen Umgebungen
+    \item Hoher Aufwand für manuelle Modellierung
+  \end{itemize}
+  
+  \item Klassische Photogrammetrie
+  \begin{itemize}
+    \item Hochauflösende Ergebnisse
+    \item Aber: Extensive Bildaufnahmen und lange Verarbeitungszeiten
+    \item Ungeeignet für dynamische/interaktive VR-Anwendungen
+  \end{itemize}
+  
+  \item Neue monokulare Rekonstruktionsverfahren existieren
+  \begin{itemize}
+    \item Nutzen fortlaufende RGB-Videodaten
+    \item Ermöglichen schrittweise Geometrierekonstruktion
+    \item Problem: Praktische Integration ist schwierig und nicht etabliert
+  \end{itemize}
+\end{itemize}
+
+\end{frame}
+
+\begin{frame}
+\frametitle{Bestehendes Angebot und Forschungslücke}
+
+\begin{itemize}
+  \item Monokulare Verfahren passen ideal zu moderner VR-Hardware
+  \begin{itemize}
+    \item Benötigen nur RGB-Kameras (keine Tiefensensoren)
+    \item VR-Headsets haben typischerweise Frontkameras
+  \end{itemize}
+  
+  \item Aber: Verfahren entwickeln sich in isolierten Forschungskontexten
+  \begin{itemize}
+    \item Eigene Laufzeitumgebungen und Frameworks
+    \item Unterschiedliche Datenpipelines und Ausgabeformate
+    \item Nicht ausgelegt für interaktive Echtzeit-Systeme
+  \end{itemize}
+  
+  \item Fehlende praktische Integration
+  \begin{itemize}
+    \item Kein stabiler, strukturierter Datenfluss für VR
+    \item Keine standardisierten Schnittstellen zwischen Verfahren
+    \item \textbf{Forschungslücke:} Modulare Architektur zur Integration heterogener Verfahren fehlt
+  \end{itemize}
+\end{itemize}
+
+\end{frame}
+
+\begin{frame}
+\frametitle{Zielsetzung dieser Arbeit}
+
+\textbf{Ziel:} Modulares System zur Echtzeit-3D-Rekonstruktion in VR-Umgebung
+
+\bigskip
+
+\begin{itemize}
+  \item \textbf{Nicht:} Einzelne Rekonstruktionsmodelle analysieren oder verbessern
+  
+  \item \textbf{Sondern:} Skalierbare Architektur entwickeln, die
+  \begin{itemize}
+    \item verschiedene Rekonstruktionsverfahren kapselt
+    \item über standardisierte Schnittstelle kommuniziert
+    \item mit Unity-basiertem VR-Frontend arbeitet
+  \end{itemize}
+  
+  \item \textbf{Zielumgebung:} Va.Si.Li-Lab der Goethe-Universität Frankfurt
+  \begin{itemize}
+    \item Bestehende mehrbenutzerfähige VR-Plattform
+    \item Modulare, erweiterbare Infrastruktur
+    \item Ideale Testumgebung für dynamische 3D-Rekonstruktion
+  \end{itemize}
+\end{itemize}
+
+\end{frame}
+
+\begin{frame}
+\frametitle{Forschungsfrage}
+
+\Large
+\centering
+
+\textit{Wie gut eignet sich eine modulare, containerisierte Systemarchitektur zur Integration verschiedener Echtzeit-3D-Rekonstruktionsverfahren in eine bestehende Virtual-Reality-Umgebung?}
+
+\vspace{2cm}
+
+\normalsize
+\textbf{Kernfragen der Evaluation:}
+\begin{itemize}
+  \item Funktioniert die modulare Integration heterogener Verfahren?
+  \item Welche Performance-Charakteristiken ergeben sich?
+  \item Welche Rekonstruktionsqualität wird erreicht?
+  \item Ist das System für praktische VR-Anwendungen geeignet?
+\end{itemize}
+
+\end{frame}

@@ -1,163 +1,170 @@
 \section{Diskussion \& Fazit}\sectionFrame
 
-\begin{frame}{Echtzeitfähigkeit und GPU-Engpässe}{}
-    \begin{columns}[T]
-        \column{0.5\textwidth}
-        \textbf{Volumetrische Verfahren}
-        \begin{itemize}
-            \itemsep0.4em
-            \item Durchsatz: 0,30-0,62 fps
-            \item GPU-Auslastung: 43-56\%
-            \item Detaillierte Oberflächenqualität
-            \item Geschlossene Meshes
-        \end{itemize}
-        
-        \column{0.5\textwidth}
-        \textbf{SLAM-basierte Verfahren}
-        \begin{itemize}
-            \itemsep0.4em
-            \item Durchsatz: 0,03-0,13 fps
-            \item GPU-Auslastung: 98-100\%
-            \item VRAM-Bottleneck: 7,9-8,0 GB
-            \item GTX 1070 Ti limitiert
-        \end{itemize}
-    \end{columns}
-    
-    \vfill
-    \textbf{Architektur-Overhead minimal}
-    \begin{itemize}
-        \itemsep0.4em
-        \item Inferenz dominiert Gesamtlatenz: 63-90\%
-        \item Netzwerk + Rendering konstant <1s
-    \end{itemize}
-\end{frame}
-
-\begin{frame}{Modularität: Containerisierung ermöglicht Integration}{}
-    \textbf{Erfolgreiche Integration heterogener Verfahren}
-    \begin{itemize}
-        \itemsep0.4em
-        \item 4 Modelle mit konfliktären PyTorch-Versionen isoliert betrieben
-        \item Integrationsaufwand: 4-8 Stunden pro Modell
-        \item BaseReconstructionModel kapselt WebSocket-Logik vollständig
-        \item Docker-Container: 47-66 Zeilen, Worker: 205-401 Zeilen
-    \end{itemize}
-    
-    \vspace{0.8em}
-    
-    \textbf{Systemstabilität unter Produktionsbedingungen}
-    \begin{itemize}
-        \itemsep0.4em
-        \item Router-Overhead minimal: 20\% CPU, 100 MB RAM
-        \item Multi-User-Stabilität: 2 Szenen, 4 Clients parallel über 6h
-        \item 0 Verbindungsabbrüche in 60 Testläufen
-    \end{itemize}
-\end{frame}
-
-\begin{frame}{Rekonstruktionsqualität und SDK-Limitationen}{}
-    \begin{columns}[T]
-        \column{0.5\textwidth}
-        \textbf{Synthetische Szenen}
-        \begin{itemize}
-            \itemsep0.4em
-            \item Volumetrisch stabil (F: 0,41-0,68)
-            \item VisFusion konsistent (F: 0,54-0,62)
-            \item SLAM: Drift-Artefakte (F: 0,42-0,63)
-            \item SLAM3R: V1$\longrightarrow$V3 Rückgang 31\%
-        \end{itemize}
-        
-        \column{0.5\textwidth}
-        \textbf{Reale VR-Szenen}
-        \begin{itemize}
-            \itemsep0.4em
-            \item \textbf{Leistungsumkehr}: SLAM überlegen
-            \item Volumetrisch fragmentiert
-            \item MASt3R-SLAM trotz 0,03-0,10 fps beste Vollständigkeit
-        \end{itemize}
-    \end{columns}
-    
-    \vfill
-    \begin{tcolorbox}[box5, title={\textbf{Kernursachen}}]
-        Meta Quest 3 SDK liefert keine Frame-Timestamps~\textbf{(behoben in neuer Version)}
-        \begin{itemize}
-            \item zeitliche Inkonsistenzen
-            \item TSDF-Artefakte
-        \end{itemize}
-        SLAM kompensiert durch Pose-Optimierung.
-        \begin{itemize}
-            \item SDK-Limitation, nicht Algorithmen-Schwäche.
-        \end{itemize}
-    \end{tcolorbox}
-\end{frame}
-
-\begin{frame}{Beantwortung der Forschungsfrage}{}
+\begin{frame}{Echtzeitfähigkeit und Engpässe}
     \begin{center}
-        \textit{Wie gut eignet sich eine modulare, containerisierte Architektur zur\\Integration heterogener Rekonstruktionsverfahren in VR?}
+    \renewcommand{\arraystretch}{1.4}
+    \begin{tabular}{l>{\centering}p{3.5cm}>{\centering\arraybackslash}p{3.5cm}}
+        \toprule
+        \textbf{Metrik} & \textbf{Volumetrisch} & \textbf{SLAM-basiert} \\
+        \midrule
+        Durchsatz & 0,30--0,62 fps & 0,03--0,13 fps \\
+        GPU-Auslastung & 43--56\% & 98--100\% \\
+        VRAM-Nutzung & 3,8--8,0 GB & 8,0 GB (Limit) \\
+        \bottomrule
+    \end{tabular}
     \end{center}
     
     \vfill
     
-    \textbf{Antwort: Ja - für Forschungs- und Evaluationskontexte}
+    \textbf{Bottleneck}:
     \begin{itemize}
-        \itemsep0.4em
-        \item Standardisierte Schnittstellen abstrahieren Framework-Heterogenität
-        \item Asynchrone Architektur reduziert Kopplungsgrad signifikant
-        \item Flexible Hardware-Nutzung (Docker + GPU-Isolation)
-        \item Kontextspezifische Verfahrenswahl (volumetrisch vs. SLAM)
-        \item Va.Si.Li-Lab: Additive Integration ohne Eingriff in bestehende Mehrbenutzerlogik
-    \end{itemize}
-    
-    \vfill
-    \begin{tcolorbox}[box5, boxsep=0.5em]
-        \small
-        \textbf{Wissenschaftlich:} Systematische Vergleiche unter identischen Bedingungen\\
-        \textbf{Praktisch:} Wiederverwendbare Infrastruktur (4-8h Integrationsaufwand/Modell)
-    \end{tcolorbox}
-\end{frame}
-
-\begin{frame}{Wissenschaftlicher Beitrag}{}
-    \textbf{Methodisch}
+        \item Hardware (GTX 1070 Ti) limitiert SLAM-Verfahren
+    \end{itemize}    
+    \textbf{Architektur}:
     \begin{itemize}
-        \itemsep0.4em
-        \item Erste systematische Vergleichsstudie monokularer Rekonstruktion in VR-Headsets
-        \item Identifikation SDK-bedingter Limitationen (Quest 3 Timestamps)
-        \item Nachweis: Hardware-Einschränkungen dominieren über Algorithmen
-    \end{itemize}
-
-    \vfill
-
-    \textbf{Praktisch}
-    \begin{itemize}
-        \itemsep0.4em
-        \item Wiederverwendbare Infrastruktur (4-8h Integrationsaufwand/Modell)
-        \item Deployment-Referenzarchitektur für VR-Forschungsprototypen
+        \item Inferenz dominiert Latenz (63--90\%), Netzwerk <1s
     \end{itemize}
 \end{frame}
 
-\begin{frame}{Limitationen}{}
+\begin{frame}{Modularität: Containerisierung ermöglicht Integration}
     \begin{columns}[T]
-        \column{0.5\textwidth}
-        \textbf{Performance und Hardware}
+        \column{0.48\textwidth}
+        \textbf{Integration}
         \begin{itemize}
-            \itemsep0.4em
-            \item Durchsatz 0,03-0,62 fps (nicht echtzeittauglich)
-            \item VRAM-Bottleneck: 8 GB limitieren Parallelbetrieb
-            \item SLAM: 98-100\% GPU-Auslastung
+            \item Integration inkompatibler Dependencies
+            \item Standardisierte Schnittstellen
+            \item 4--8h Aufwand pro Modell
         \end{itemize}
         
-        \column{0.5\textwidth}
-        \textbf{System und SDK}
+        \column{0.48\textwidth}
+        \textbf{Stabilität}
         \begin{itemize}
-            \itemsep0.4em
-            \item Keine Persistenz: Container-Neustarts verlieren Rekonstruktionszustand
-            \item Manuelle SLAM-Skalierung erforderlich
-            \item Meta Quest 3: Fehlende Frame-Timestamps
+            \item Multi-User-Betrieb problemlos
+            \item 0/60 Verbindungsabbrüche, 6h Betrieb
+            \item geringer Overhead (20\% CPU, 200 MB RAM)
         \end{itemize}
     \end{columns}
     
     \vfill
+    
     \begin{tcolorbox}[box5, boxsep=0.5em]
-        \textbf{Kern-Trade-off:} Geschwindigkeit vs. Robustheit - Kontextabhängige Verfahrenswahl notwendig
+        \centering
+        Modulare Architektur ermöglicht produktiven Forschungsbetrieb
     \end{tcolorbox}
+\end{frame}
+
+\begin{frame}{Rekonstruktionsqualität und SDK-Limitationen}
+    \begin{columns}[T]
+        \column{0.48\textwidth}
+        \textbf{Synthetische Szenen}
+        \begin{itemize}
+            \item Volumetrisch stabil\\
+            {\small \textit{(F-Score: 0,41--0,68)}}
+            \item VisFusion am konsistentesten\\
+            {\small \textit{(F-Score: 0,54--0,62)}}
+            \item SLAM mit Drift-Artefakten
+        \end{itemize}
+        
+        \column{0.48\textwidth}
+        \textbf{Reale VR-Szenen}
+        \begin{itemize}
+            \item \textbf{Leistungsumkehr}: SLAM überlegen
+            \item Volumetrisch fragmentiert
+            \item MASt3R-SLAM trotz niedriger fps beste Vollständigkeit
+        \end{itemize}
+    \end{columns}
+    
+    \vfill
+    
+    \begin{tcolorbox}[box5, boxsep=0.5em, title={\textbf{Kernursache: SDK-Limitation}}]
+        Meta Quest 3 SDK lieferte keine Frame-Timestamps
+        \begin{itemize}
+            \item Zeitliche Inkonsistenzen führten zu TSDF-Artefakten
+            \item SLAM kompensierte durch Pose-Optimierung
+        \end{itemize} 
+    \end{tcolorbox}
+\end{frame}
+
+\begin{frame}{Beantwortung der Forschungsfrage}{}
+    \vfill
+    \begin{center}
+        \large
+        \textit{Wie gut eignet sich eine modulare, containerisierte Systemarchitektur zur\\
+        Integration verschiedener Echtzeit-3D-Rekonstruktionsverfahren\\
+        in eine bestehende Virtual-Reality-Umgebung?}
+    \end{center}
+    \vspace{2cm}
+    \begin{tcolorbox}[box5]
+        \centering
+        \textbf{Antwort:}~Hohe Eignung – insbesondere für Forschungs- und Evaluationskontexte
+    \end{tcolorbox} 
+\end{frame}
+
+\begin{frame}{Beantwortung der Forschungsfrage}{}
+    \textbf{Begründung:}
+    \begin{enumerate}
+        \item Standardisierte Schnittstellen ermöglichen Framework-unabhängige Integration
+        \item Asynchrone Architektur minimiert Abhängigkeiten zwischen Komponenten
+        \item Container-Isolation erlaubt parallele GPU-Nutzung unterschiedlicher Verfahren
+        \item Modularer Aufbau ermöglicht flexible Verfahrenswahl je Anwendungsfall
+    \end{enumerate}
+    
+    \vfill
+    
+    \textbf{Validierung:}
+    \begin{itemize}
+        \item Erfolgreiche Integration von 4 heterogenen Verfahren
+        \item Deployment in Va.Si.Li-Lab ohne Änderungen an bestehender Mehrbenutzerlogik
+        \item Integrationsaufwand: 4--8 Stunden pro neuem Rekonstruktionsverfahren
+        \item Systematische Vergleichbarkeit unter identischen Bedingungen nachgewiesen
+    \end{itemize}
+\end{frame}
+
+\begin{frame}{Wissenschaftlicher Beitrag}{}
+    \textbf{Methodisch:}
+    \begin{itemize}
+        \itemsep0.4em
+        \item Erste systematische Vergleichsstudie monokularer Rekonstruktion in VR-Headsets
+        \item Identifikation SDK-bedingter Limitationen (Quest 3: fehlerhafte Timestamps)
+        \item Etablierung reproduzierbarer Evaluationsbedingungen (virtuelle + reale Szenen)
+    \end{itemize}
+    
+    \vfill
+    
+    \textbf{Praktisch:}
+    \begin{itemize}
+        \itemsep0.4em
+        \item Wiederverwendbare Infrastruktur für zukünftige VR-Rekonstruktionsforschung
+        \item Referenzarchitektur für containerisierte VR-Forschungsprototypen
+        \item Open-Source-Bereitstellung zur Nachnutzung
+    \end{itemize}
+\end{frame}
+
+\begin{frame}{Limitationen}
+    \textbf{1. Performance-Limitationen (Kritisch)}
+    \begin{itemize}
+        \itemsep0.3em
+        \item Durchsatz: 0,03–0,62 fps → \textcolor{red}{nicht \textit{echtzeittauglich}}
+        \item SLAM-Verfahren: 98–100\% GPU-Auslastung
+        \item VRAM-Bottleneck: 8 GB limitieren Parallelbetrieb
+    \end{itemize}
+    
+    \vspace{0.8em}
+    
+    \textbf{2. Architektur-Limitationen}
+    \begin{itemize}
+        \itemsep0.3em
+        \item Keine Persistenz bei Container-Neustarts
+        \item SLAM-Modelle: Manuelle Skalierungsanpassung erforderlich
+    \end{itemize}
+    
+    \vspace{0.8em}
+    
+    \textbf{3. Hardware-/SDK-Limitationen}
+    \begin{itemize}
+        \itemsep0.3em
+        \item Meta Quest 3: Fehlende Frame-Timestamps erschweren Synchronisation
+    \end{itemize}
 \end{frame}
 
 \begin{frame}{Zukünftige Arbeiten: Systemverbesserungen}{}

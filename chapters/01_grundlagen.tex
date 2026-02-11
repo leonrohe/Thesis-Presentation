@@ -1,21 +1,21 @@
 \section{Grundlagen}\sectionFrame
 
-\begin{frame}{Grundlagen: Virtual Reality}{\cite{bozkir2025eyetrackedvirtualrealitycomprehensive, MetaPassthrough2021}}
-    \textbf{Was ist Virtual Reality?}
-    \begin{itemize}
-        \item Computergenerierte 3D-Umgebung mit vollständiger Immersion
-        \item Head-Mounted Displays (HMDs): Stereoskopische Darstellung + präzises Tracking
-        \item Echtzeit-Interaktion durch Kopf-, Hand- und Körpererfassung
-    \end{itemize}
+% \begin{frame}{Grundlagen: Virtual Reality}{\cite{bozkir2025eyetrackedvirtualrealitycomprehensive, MetaPassthrough2021}}
+%     \textbf{Was ist Virtual Reality?}
+%     \begin{itemize}
+%         \item Computergenerierte 3D-Umgebung mit vollständiger Immersion
+%         \item Head-Mounted Displays (HMDs): Stereoskopische Darstellung + präzises Tracking
+%         \item Echtzeit-Interaktion durch Kopf-, Hand- und Körpererfassung
+%     \end{itemize}
     
-    \vspace{0.8em}
-    \textbf{Moderne VR-Hardware (z.B. Meta Quest 3):}
-    \begin{itemize}
-        \item Inside-Out-Tracking: Kameras erfassen Umgebung $\rightarrow$ Position/Orientierung
-        \item Passthrough-Funktionalität: RGB-Kameras ermöglichen Mixed Reality
-        \item \textbf{Wichtig:} Keine Tiefensensoren $\Rightarrow$ monokulare Rekonstruktion nötig
-    \end{itemize}
-\end{frame}
+%     \vspace{0.8em}
+%     \textbf{Moderne VR-Hardware (z.B. Meta Quest 3):}
+%     \begin{itemize}
+%         \item Inside-Out-Tracking: Kameras erfassen Umgebung $\rightarrow$ Position/Orientierung
+%         \item Passthrough-Funktionalität: RGB-Kameras ermöglichen Mixed Reality
+%         \item \textbf{Wichtig:} Keine Tiefensensoren $\Rightarrow$ monokulare Rekonstruktion nötig
+%     \end{itemize}
+% \end{frame}
 
 \begin{frame}{Grundlagen: 3D-Rekonstruktion}{\cite{HERRERAGRANDA2024e37356, sun2021neuralreconrealtimecoherent3d, gao2023visfusionvisibilityawareonline3d, murai2025mast3rslamrealtimedenseslam, liu2025slam3rrealtimedensescene}}
     \textbf{Der Prozess:}
@@ -27,42 +27,48 @@
     \vspace{0.8em}
     \textbf{Zentrale Unterscheidung nach Pose-Anforderung:}
     \begin{itemize}
-        \item \textbf{Externe Posen} (z.\,B. NeuralRecon, VisFusion): System liefert Kameraposen
-        \item \textbf{Interne Pose-Schätzung} (z.\,B. MASt3R-SLAM, SLAM3R): Modell schätzt Posen selbst
+        \item \textbf{Externe Posen:} System liefert Kameraposen
+        \item \textbf{Interne Pose-Schätzung:} Modell schätzt Posen selbst
     \end{itemize}
     
     \vspace{0.8em}
-    \textbf{Implikation für RTReconstruct:}
+    % \textbf{Implikation für RTReconstruct:}
+    % \begin{itemize}
+    %     \item Diese Heterogenität erfordert flexible System-Architektur
+    %     \item Beide Kategorien müssen über einheitliche Schnittstelle integrierbar sein
+    % \end{itemize}
+    \textbf{Zentrale Unterscheidung nach Ausgabeformat}
     \begin{itemize}
-        \item Diese Heterogenität erfordert flexible System-Architektur
-        \item Beide Kategorien müssen über einheitliche Schnittstelle integrierbar sein
+        \item \textbf{Mesh:} Vertices, Faces
+        \item \textbf{Punktwolke:} Vertices
+        \item \dots
     \end{itemize}
 \end{frame}
 
-\begin{frame}{Grundlagen: 3D-Repräsentationsformate}{\cite{khronos2017gltf, 10.1145/37402.37422, Curless1996AVM}}
-    \begin{columns}[T]
-        \column{0.5\textwidth}
-        \textbf{Punktwolken}
-        \begin{itemize}
-            \item Ungeordnete 3D-Punkte
-            \item Speichereffizient
-            \item Schnelle Visualisierung
-        \end{itemize}
+% \begin{frame}{Grundlagen: 3D-Repräsentationsformate}{\cite{khronos2017gltf, 10.1145/37402.37422, Curless1996AVM}}
+%     \begin{columns}[T]
+%         \column{0.5\textwidth}
+%         \textbf{Punktwolken}
+%         \begin{itemize}
+%             \item Ungeordnete 3D-Punkte
+%             \item Speichereffizient
+%             \item Schnelle Visualisierung
+%         \end{itemize}
         
-        \column{0.5\textwidth}
-        \textbf{Meshes}
-        \begin{itemize}
-            \item Explizite Oberflächengeometrie
-            \item GLB-Format (binär, kompakt)
-            \item Besser für Kollisionen
-        \end{itemize}
-    \end{columns}
-    \vfill
-    \begin{tcolorbox}[box5, boxsep=0.5em]
-        \centering
-        \textbf{RTReconstruct muss beide Formate handhaben!} 
-    \end{tcolorbox}
-\end{frame}
+%         \column{0.5\textwidth}
+%         \textbf{Meshes}
+%         \begin{itemize}
+%             \item Explizite Oberflächengeometrie
+%             \item GLB-Format (binär, kompakt)
+%             \item Besser für Kollisionen
+%         \end{itemize}
+%     \end{columns}
+%     \vfill
+%     \begin{tcolorbox}[box5, boxsep=0.5em]
+%         \centering
+%         \textbf{RTReconstruct muss beide Formate handhaben!} 
+%     \end{tcolorbox}
+% \end{frame}
 
 \begin{frame}{Grundlagen: Zielumgebung Va.Si.Li-Lab}{\cite{10.1145/3489849.3489871, Mehler:et:al:2023:a}}
     \textbf{Multi-User VR-Plattform:}

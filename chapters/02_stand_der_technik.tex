@@ -1,6 +1,6 @@
 \section{Stand der Technik}\sectionFrame
 
-\begin{frame}{Stand der Technik: 3D-Rekonstruktion}{\small \cite{7a99ce8940e943c39152b8da3bdfb568, kinectfusion, niessner2013hashing, dynamicfusion, dtam,zhu2022niceslamneuralimplicitscalable}}
+\begin{frame}{Stand der Technik: Echtzeit 3D-Rekonstruktion}{\small \cite{7a99ce8940e943c39152b8da3bdfb568, kinectfusion, niessner2013hashing, dynamicfusion, dtam,zhu2022niceslamneuralimplicitscalable}}
     \begin{columns}[T]
         \column{0.5\textwidth}
         \textbf{\large RGB-D-basiert}
@@ -30,27 +30,48 @@
     \end{tcolorbox}
 \end{frame}
 
-\begin{frame}{End-to-End-Pipelines: Zentrale Limitationen}{\cite{sun2021neuralreconrealtimecoherent3d, gao2023visfusionvisibilityawareonline3d, murai2025mast3rslamrealtimedenseslam, liu2025slam3rrealtimedensescene}}
-    \vspace{0.2cm}
+% \begin{frame}{Stand der Technik: Zentrale Limitationen monokularer Verfahren}{\cite{sun2021neuralreconrealtimecoherent3d, gao2023visfusionvisibilityawareonline3d, murai2025mast3rslamrealtimedenseslam, liu2025slam3rrealtimedensescene}}
+%     \vspace{0.2cm}
     
-    \begin{tcolorbox}[box1, boxsep=6pt, title={\textbf{1. Monolithische Architektur}}]
-        Rekonstruktionslogik fest gekoppelt, schwer austauschbar
-    \end{tcolorbox}
+%     \begin{tcolorbox}[box1, boxsep=6pt, title={\textbf{1. Monolithische Architektur}}]
+%         Rekonstruktionslogik fest gekoppelt, schwer austauschbar
+%     \end{tcolorbox}
+    
+%     \vspace{0.4cm}
+    
+%     \begin{tcolorbox}[box2, boxsep=6pt, title={\textbf{2. Fehlende Streaming-Infrastruktur}}]
+%         Batch-Processing statt Live-Datenfluss – keine Multi-User-Unterstützung
+%     \end{tcolorbox}
+    
+%     \vspace{0.4cm}
+    
+%     \begin{tcolorbox}[box3, boxsep=6pt, title={\textbf{3. Pose-Inflexibilität}}]
+%         Extern vs. intern: Heterogene Anforderungen können nicht parallel laufen
+%     \end{tcolorbox}
+% \end{frame}
+
+\begin{frame}{Stand der Technik: Forschungslücke}
+    \vspace{0.3cm}
+    \begin{center}
+        \Large \textbf{Was fehlt?}
+    \end{center}
     
     \vspace{0.4cm}
+    \begin{itemize}
+        \item[\color{red}$\times$] Modellunabhängige Schnittstellen
+        \item[\color{red}$\times$] Standardisierte Streaming-Protokolle
+        \item[\color{red}$\times$] Einheitliche Behandlung von Ausgabeformaten
+        \item[\color{red}$\times$] Flexible Pose-Verwaltung (parallel, heterogen)
+    \end{itemize}
     
-    \begin{tcolorbox}[box2, boxsep=6pt, title={\textbf{2. Fehlende Streaming-Infrastruktur}}]
-        Batch-Processing statt Live-Datenfluss – keine Multi-User-Unterstützung
-    \end{tcolorbox}
-    
-    \vspace{0.4cm}
-    
-    \begin{tcolorbox}[box3, boxsep=6pt, title={\textbf{3. Pose-Inflexibilität}}]
-        Extern vs. intern: Heterogene Anforderungen können nicht parallel laufen
+    \vspace{0.6cm}
+    \begin{tcolorbox}[box5, title={\textbf{Lösung}}]
+        \centering
+        \textbf{RTReconstruct:} Containerisierte, modulare Architektur für nahtlose VR-Integration
     \end{tcolorbox}
 \end{frame}
 
-\begin{frame}{Vier ausgewählte Rekonstruktionsverfahren}{\cite{sun2021neuralreconrealtimecoherent3d, gao2023visfusionvisibilityawareonline3d, murai2025mast3rslamrealtimedenseslam, liu2025slam3rrealtimedensescene}}
+\begin{frame}{Stand der Technik: Ausgewählte Verfahren}{\cite{sun2021neuralreconrealtimecoherent3d, gao2023visfusionvisibilityawareonline3d, murai2025mast3rslamrealtimedenseslam, liu2025slam3rrealtimedensescene}}
     \vspace{0.3cm}
     
     \begin{table}
@@ -78,25 +99,4 @@
     
     \vspace{0.3cm}
     \textit{\small Ausgeschlossen: Sparse-SLAM, NeRF, 3D Gaussian Splatting}
-\end{frame}
-
-\begin{frame}{Forschungslücke: Modulare Integration}
-    \vspace{0.3cm}
-    \begin{center}
-        \Large \textbf{Was fehlt?}
-    \end{center}
-    
-    \vspace{0.4cm}
-    \begin{itemize}
-        \item[\color{red}$\times$] Modellunabhängige Schnittstellen
-        \item[\color{red}$\times$] Standardisierte Streaming-Protokolle
-        \item[\color{red}$\times$] Einheitliche Behandlung von Ausgabeformaten
-        \item[\color{red}$\times$] Flexible Pose-Verwaltung (parallel, heterogen)
-    \end{itemize}
-    
-    \vspace{0.6cm}
-    \begin{tcolorbox}[box5, title={\textbf{Lösung}}]
-        \centering
-        \textbf{RTReconstruct:} Containerisierte, modulare Architektur für nahtlose VR-Integration
-    \end{tcolorbox}
 \end{frame}
