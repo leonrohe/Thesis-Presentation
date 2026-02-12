@@ -5,25 +5,28 @@
         \column{0.5\textwidth}
         {\large \textbf{Funktional}}
         \begin{itemize}
-            \itemsep0.6em
-            \item Echtzeitverarbeitung
+            \itemsep0.8em
             \item Kontinuierliche Datenerfassung
             \item Fensterbasierte Übertragung
+            \item Parallelbetrieb mehrerer Modelle
+            \item Multi-Client-Synchronisation
         \end{itemize}
         
         \column{0.5\textwidth}
         {\large \textbf{Nicht-funktional}}
         \begin{itemize}
-            \itemsep0.6em
-            \item Niedrige Latenz
-            \item Modularität
-            \item Stabilität \& Skalierbarkeit
+            \itemsep0.8em
+            \item Niedrige Latenz (VR-tauglich)
+            \item Modularität \& Skalierbarkeit
+            \item Stabilität bei Paketverlust
         \end{itemize}
     \end{columns}
+    
     \vfill
+    
     \begin{tcolorbox}[box5, boxsep=0.5em]
         \centering
-        \textbf{Ziel:} Heterogene Rekonstruktionsverfahren in einer gemeinsamen Architektur
+        \textbf{Leitkriterien:} Echtzeitfähigkeit • Modularität • Integrationsfähigkeit
     \end{tcolorbox}
 \end{frame}
 
@@ -141,7 +144,7 @@
 %     \end{tcolorbox}
 % \end{frame}
 
-\begin{frame}{Konzeption: Kommunikations- und Datenfluss}{}    
+\begin{frame}{Konzeption: Kommunikations- und Datenfluss}{}
     \begin{columns}[T]
         \column{0.25\textwidth}
         \begin{tcolorbox}[box1, height=2.75cm, boxsep=0.2em]

@@ -6,7 +6,7 @@
     \begin{tabular}{l|>{\centering}p{3.5cm}|>{\centering\arraybackslash}p{3.5cm}}
         \textbf{Metrik} & \textbf{Volumetrisch} & \textbf{SLAM-basiert} \\
         \midrule
-        Durchsatz & 0,30--0,62 fps & 0,03--0,13 fps \\
+        Durchsatz & 0,30--0,62 FPS & 0,03--0,13 FPS \\
         GPU-Auslastung & 43--56\% & 98--100\% \\
         VRAM-Nutzung & 3,8--8,0 GB & 8,0 GB (Limit) \\
     \end{tabular}
@@ -29,7 +29,7 @@
         \column{0.48\textwidth}
         \textbf{Integration}
         \begin{itemize}
-            \item Integration inkompatibler Dependencies
+            \item Integration inkompatibler Modelle
             \item Standardisierte Schnittstellen
             \item 2-8h Aufwand pro Modell
         \end{itemize}
@@ -68,7 +68,7 @@
         \begin{itemize}
             \item \textbf{Leistungsumkehr}: SLAM überlegen
             \item Volumetrisch fragmentiert
-            \item MASt3R-SLAM trotz niedriger fps beste Vollständigkeit
+            \item MASt3R-SLAM trotz niedriger FPS beste Vollständigkeit
         \end{itemize}
     \end{columns}
     
@@ -122,9 +122,9 @@
     \textbf{Methodisch:}
     \begin{itemize}
         \itemsep0.4em
-        \item Erste systematische Vergleichsstudie monokularer Rekonstruktion in VR-Headsets
+        \item Systematischer Vergleich heterogener Verfahren unter identischen Bedingungen
         \item Identifikation SDK-bedingter Limitationen (Quest 3: fehlerhafte Timestamps)
-        \item Etablierung reproduzierbarer Evaluationsbedingungen (virtuelle + reale Szenen)
+        \item Trade-off-Analyse: volumetrisch (schnell, hardware-sensitiv) vs. SLAM (langsam, robust)
     \end{itemize}
     
     \vfill
@@ -132,31 +132,32 @@
     \textbf{Praktisch:}
     \begin{itemize}
         \itemsep0.4em
-        \item Wiederverwendbare Infrastruktur für zukünftige VR-Rekonstruktionsforschung
-        \item Referenzarchitektur für containerisierte VR-Forschungsprototypen
+        \item Wiederverwendbare Infrastruktur für VR-Rekonstruktionsforschung
+        \item Referenzarchitektur für containerisierte Forschungsprototypen
         \item Open-Source-Bereitstellung zur Nachnutzung
     \end{itemize}
 \end{frame}
 
 \begin{frame}{Fazit: Limitationen}
-    \textbf{1. Performance-Limitationen (Kritisch)}
+    \textbf{1. Performance-Limitationen}
     \begin{itemize}
-        \itemsep0.3em
-        \item Durchsatz: 0,03-0,62 fps $\rightarrow$ nicht \lq wirklich\rq echtzeittauglich
+        \itemsep0.4em
+        \item Durchsatz: 0,03-0,62 FPS $\rightarrow$ nicht \lq wirklich\rq ~echtzeittauglich
         \item SLAM-Verfahren: 98-100\% GPU-Auslastung
         \item VRAM-Bottleneck: 8 GB limitieren Parallelbetrieb
     \end{itemize}
     
-    \vspace{0.8em}
+    \vfill
     
     \textbf{2. Architektur-Limitationen}
     \begin{itemize}
-        \itemsep0.3em
+        \itemsep0.4em
         \item Keine Persistenz bei Container-Neustarts
-        \item SLAM-Modelle: Manuelle Skalierungsanpassung erforderlich
+        \item Rekonstruktionen werden nicht inkrementell gesendet
+        \item SLAM-Rekonstruktionen benötigen manuelle Registrierung
     \end{itemize}
     
-    \vspace{0.8em}
+    \vfill
     
     \textbf{3. Hardware-/SDK-Limitationen}
     \begin{itemize}
@@ -170,36 +171,45 @@
     \begin{itemize}
         \itemsep0.4em
         \item Persistente Zustandsverwaltung durch Checkpoint-Mechanik
-        \item Verteilte Rekonstruktion auf mehreren GPU-Servern
+        % \item Verteilte Rekonstruktion auf mehreren GPU-Servern
         \item Inkrementelle Mesh-Updates statt vollständiger Übertragung
         \item Automatische Koordinaten-Registrierung von SLAM-Rekonstruktionen
     \end{itemize}
     
-    \vspace{0.8em}
+    \vfill
     
     \textbf{Funktionale Erweiterungen}
     \begin{itemize}
         \itemsep0.4em
-        \item Adaptive Punktwolken-Visualisierung mit Level-of-Detail
+        % \item Adaptive Punktwolken-Visualisierung mit Level-of-Detail
         \item Echtzeit-Nutzerinteraktion: Annotationen und Geometriekorrektur
         \item Kollaborative Rekonstruktions-Workflows für Va.Si.Li-Lab
     \end{itemize}
-\end{frame}
 
-\begin{frame}{Zukünftige Arbeiten: Forschungsperspektiven}{}
+    \vfill
+
     \textbf{Modellintegration}
     \begin{itemize}
         \itemsep0.4em
         \item Gaussian Splatting für fotorealistischere Rekonstruktionen
         \item NeRF-basierte Verfahren (Instant-NGP, TensoRF)
     \end{itemize}
-    
-    \vspace{0.8em}
-    
-    \textbf{Wissenschaftliche Perspektiven}
-    \begin{itemize}
-        \itemsep0.4em
-        \item Systematische Benchmark-Suite über Hardware und Szenentypen
-        \item User Studies zu Artefaktwahrnehmung und Update-Frequenzen
-    \end{itemize}
 \end{frame}
+
+% \begin{frame}{Zukünftige Arbeiten: Forschungsperspektiven}{}
+%     \textbf{Modellintegration}
+%     \begin{itemize}
+%         \itemsep0.4em
+%         \item Gaussian Splatting für fotorealistischere Rekonstruktionen
+%         \item NeRF-basierte Verfahren (Instant-NGP, TensoRF)
+%     \end{itemize}
+    
+%     \vspace{0.8em}
+    
+%     \textbf{Wissenschaftliche Perspektiven}
+%     \begin{itemize}
+%         \itemsep0.4em
+%         \item Systematische Benchmark-Suite über Hardware und Szenentypen
+%         \item User Studies zu Artefaktwahrnehmung und Update-Frequenzen
+%     \end{itemize}
+% \end{frame}

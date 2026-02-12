@@ -42,8 +42,8 @@
 
     \begin{tcolorbox}[box3, boxsep=0.5em, title=\textbf{Netzwerk}]
         \begin{itemize}
-            \item WiFi 5 (802.11ac)
-            \item Durchschnittliche Bandbreite: 60 Mbit/s
+            \item WiFi 5
+            \item 60 Mbit Download, 38 Mbit Upload
         \end{itemize}
     \end{tcolorbox}
 \end{frame}
@@ -130,8 +130,8 @@
     \begin{itemize}
         \item Stabile, reproduzierbare Latenzwerte mit niedriger Varianz
         \item Trend: Komplexität $\uparrow$ $\longrightarrow$ Latenz $\uparrow$
-        \item SLAM-Verfahren zeigen robusteres Verhalten in realen Szenen
         \item Starke szenenabhängige Unterschiede beobachtet
+        \item MASt3R viel robuster in realen Szenen
     \end{itemize}
 
     \vfill
@@ -159,7 +159,7 @@
     
     \textbf{Zentrale Erkenntnisse:}
     \begin{itemize}
-        \item $L_{inference}$ ist dominierender Faktor (70 - 90\% der Gesamtlatenz)
+        \item $L_{inference}$ ist dominierender Faktor (56 - 98\% der Gesamtlatenz)
         \item Szenenkomplexität beeinflusst primär Inferenzzeit
         \item $L_{network}$ und $L_{render}$ bleiben relativ konstant
     \end{itemize}
@@ -234,16 +234,17 @@
                 MASt3R-SLAM & 0,52 & 0,48 & \textbf{0,50} & 0,47 & 0,53 & \textbf{0,50} & 0,43 & 0,48 & \textbf{0,45}
             \end{tabular}
         }
-        % \caption{F-Score, Schwellwert von 10cm}
     \end{table}
 
     \vfill
 
-\textbf{Skalierung mit Szenenkomplexität:}
-\begin{itemize}
-    \item Volumetrische Verfahren relativ stabil
-    \item SLAM-basierte Verfahren zeigen Einbruch in komplexen Szenen (SLAM3R: 0,61$\rightarrow$0,42)
-\end{itemize}
+    \textbf{Zentrale Beobachtungen:}
+    \begin{itemize}
+        \item \textbf{NeuralRecon}: Peak in mittlerer Komplexität (V2: 0,68)
+        \item \textbf{VisFusion}: Konsistent beste Skalierung (0,54$\rightarrow$0,62)
+        \item \textbf{SLAM3R}: Starker Einbruch in V3 (0,63$\rightarrow$0,42)
+        \item \textbf{MASt3R-SLAM}: Stabil, aber durchgehend niedriger (~0,48)
+    \end{itemize}
 \end{frame}
 
 % \begin{frame}{Evaluation: Qualitative Bewertung}{}
